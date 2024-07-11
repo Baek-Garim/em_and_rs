@@ -19,10 +19,8 @@ public class HomeController {
 	
 	@GetMapping("/")
 	public String home(Model model) {
-		log.debug("FFFFFFFFFFFFFFF");
 		TestDTO test = homeService.test();
 		model.addAttribute("test", test);
-		log.debug("FFFFFFFFFFFFFFF{}", test);
 		
 		return "home/home";
 	}
