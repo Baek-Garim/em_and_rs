@@ -1,0 +1,290 @@
+@import url('reset.css'); /* url 형식 */
+
+
+/* ===== main-banner ===== */
+.main-banner {
+  padding: 2rem 0 0 0%;
+  width: 100%;
+  height: 50vh;
+}
+
+.main-banner .container {
+  height: 100%;
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-color: #fff;
+}
+
+.main-banner .container .search-box {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: end;
+}
+
+.main-banner .container .search-box .search-from{
+  margin-bottom: 10rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10rem;
+  border: none;
+  padding: 1rem;
+  width: 40rem;
+  border-bottom: var(--border);
+
+}
+
+.main-banner .container .search-box .search-from input{
+  border: none;
+  background-color: #00000000;
+  width: 95%;
+  padding: 1rem 1rem 0 1rem;
+  font-size: 2rem;
+}
+
+
+.main-banner .container .search-box .search-from input:focus {
+  outline: 0;
+}
+
+.main-banner .container .search-box .search-from i{
+  width: 5%;
+  padding: 1rem 1rem 0 1rem;
+  cursor: pointer;
+
+}
+/* ===== main-banner end ===== */
+
+
+/* ===== myinfo ===== */
+
+/* 대여 불가, 연체 */
+#overdue{
+  color: var(--red);
+}
+
+/* 대여 가능 */
+#available{
+  color: var(--green);
+}
+
+
+
+.myinfo {
+  padding: 4rem;
+  background-color: var(--white);
+}
+
+.myinfo .container{
+  height: 100%;
+}
+
+.myinfo .container .title{
+  text-align: center;
+}
+
+.myinfo .container .sub-title{
+  text-align: center;
+  font-size: 2rem;
+  margin-top: 1rem;
+}
+
+.myinfo .container .sub-con{
+  margin: 3rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 유저 기본 정보 */
+.myinfo .container .sub-con .my-con{
+  margin: 2rem;
+  border: var(--border);
+  border-radius: 1rem;
+  padding: 2rem;
+  background-color: #fff;
+  display: flex;
+  justify-content:center ;
+  width: 90%;
+}
+
+.myinfo .container .sub-con .my-con .con{
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.myinfo .container .sub-con .my-con .con .text-list{
+  display: flex;
+  align-items: end;
+}
+
+.myinfo .container .sub-con .my-con .con:first-child{
+  border-right: var(--border);
+}
+
+.myinfo .container .sub-con .my-con .con p{
+  font-size: 2rem;
+  line-height: 3rem;
+  margin: 0 .5rem;
+}
+
+.myinfo .container .sub-con .my-con .con a{
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 2rem;
+  line-height: 3rem;
+  margin: 0 .5rem;
+}
+
+
+.myinfo .container .sub-con .my-con .con a#user-name{
+  line-height: 4rem;
+  font-size: 3rem;
+  color: var(--main-color);
+  font-weight: 600;
+}
+
+.myinfo .container .sub-con .my-con .con a{
+  color: var(--main-color);
+  font-weight: 600;
+}
+
+.myinfo .container .sub-con .my-con .con a span{
+  color: var(--black);
+}
+
+
+
+
+/* 대여 / 예약 박스 */
+
+.myinfo .container .sub-con .box-container{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.myinfo .container .sub-con .box-container .box{
+  width: 45%;
+  background-color: #fff;
+  border: var(--border);
+  border-radius: 1rem;
+  margin: 1rem;
+}
+
+.myinfo .container .sub-con .box-container .box .top{
+ border-bottom: var(--border);
+ padding: 1rem;
+}
+
+.myinfo .container .sub-con .box-container .box .top .sub-title{
+  font-size: 2.5rem;
+  font-weight: 600;
+  text-align: left;
+}
+ 
+.myinfo .container .sub-con .box-container .box .top .sub-title .eq-count{
+  margin-left: 1rem;
+  color: var(--main-color);  
+}
+
+
+.myinfo .container .sub-con .box-container .box .content table{
+  width: 100%;
+  table-layout: fixed;
+}
+
+.myinfo .container .sub-con .box-container .box .content table tr{
+  border-bottom: var(--border);
+}
+
+.myinfo .container .sub-con .box-container .box .content table tr td{
+  cursor: pointer;
+  font-size: 2rem;
+  padding: 2rem;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.myinfo .container .sub-con .box-container .box .content table tr:last-child{
+  border-bottom: none;
+}
+
+.myinfo .container .sub-con .box-container .box .content table td:last-child{
+  color: var(--main-color);
+  font-weight: 600;
+  border-bottom: none;
+}
+
+/* ===== myinfo end ===== */
+
+
+/* ===== eq-list ===== */
+.eq-list {
+  padding: 8rem 0;
+}
+
+.eq-list .container {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.eq-list .container .title{
+  text-align: center;
+}
+
+.eq-list .container .sub-title{
+  text-align: center;
+  font-size: 2rem;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
+
+.eq-list .container .sub-con{
+  border-radius: 1rem;
+  border: var(--border);
+  background-color: #fff;
+}
+
+.eq-list .container .sub-con #line{
+  height: 1.5rem;
+  box-shadow: var(--box-shadow);
+}
+
+/* 박스 */
+.eq-list .container .sub-con .box-container{
+  padding: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.eq-list .container .sub-con .box-container .box{
+  cursor: pointer;
+  margin: 2rem;
+  width: 20rem;
+  height: 20rem;
+  border: var(--border);
+  background-color: aliceblue;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 1rem;
+}
+
+.eq-list .container .sub-con .box-container .box p{
+  font-size: 2.5rem;
+}
+
+
+
+/* ============ eq-list end =============== */

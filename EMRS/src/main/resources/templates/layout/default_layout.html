@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" th:href="@{/css/reset.css}">
+<!--	<link rel="icon" href="/img/favicon.png"/>
+	<link rel="apple-touch-icon" href="/img/favicon.png"/>-->
+   <title>EMRS</title>
+</head>
+<body>
+	
+  <header th:replace="~{fragments/header :: headerFragment}"></header>
+
+  <div th:layout:fragment="content"></div>
+  
+  <footer th:replace="~{fragments/footer :: footerFragment}"></footer>
+  
+  
+
+	<script src="https://kit.fontawesome.com/194e6948f1.js" crossorigin="anonymous"></script>
+</body>
+</html>

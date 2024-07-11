@@ -1,0 +1,52 @@
+ <!-- hearder -->
+ <header th:fragment="headerFragment">
+   <div class="nav">
+     <div class="left-content">
+       <a class="main-btn" th:href="@{|/|}">
+         EMRS
+       </a>
+
+       <a class="list-btn" th:href="@{|/|}">
+         장비 목록
+       </a>       
+       
+     </div>
+
+     <div class="right-content">
+       <div class="search-box">
+         <form th:action="list" method="get" name="search" class="search-from">
+           <input type="text" name="content" id="content" th:value="${content}" placeholder="이곳에 장비를 검색해보세요." />
+           <i id="submit-btn" class="fa fa-search fa-3x" aria-hidden="true"></i>
+         </form>
+       </div>
+	   
+       <a th:if="${user_id} != null" class="mypage-btn" th:href="@{|/mypage|}">
+         <i class="fa-solid fa-user fa-4x"></i>
+         <p>My</p>
+       </a>
+       <a th:if="${user_id} == null" class="mypage-btn" th:href="@{|/login|}">
+         <i class="fa-regular fa-user fa-4x"></i>
+         <p>로그인</p>
+       </a>
+
+	  <a th:if="${user_id} != null" class="mypage-btn" th:href="@{|/logout|}">
+        <p th:text="|${nickname} 님|"></p>
+		<p>로그아웃</p>
+     </a>
+	   
+     </div>
+   </div>
+   <script>
+     const searchBtn = document.querySelector(".search-box");
+     searchBtn.addEventListener("click", function () {
+       document.querySelector("#content").focus();
+     });
+
+     const submitButton = document.querySelector("#submit-btn");
+     submitButton.addEventListener("click", function () {
+       const form = document.forms.search;
+       form.submit();
+     });
+   </script>
+ </header>
+ <!-- hearder End -->

@@ -2,10 +2,8 @@ package com.project.emrs.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.project.emrs.dto.TestDTO;
 import com.project.emrs.service.HomeService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -18,13 +16,9 @@ public class HomeController {
 	HomeService homeService;
 	
 	@GetMapping("/")
-	public String home(Model model) {
-		log.debug("FFFFFFFFFFFFFFF");
-		TestDTO test = homeService.test();
-		model.addAttribute("test", test);
-		log.debug("FFFFFFFFFFFFFFF{}", test);
-		
-		return "home/home";
+	public String home() {
+		log.debug("메인 화면");
+		return "home/index";
 	}
 	
 } // controller

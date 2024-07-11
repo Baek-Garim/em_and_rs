@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout/default_layout}" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+	<link rel="stylesheet" type="text/css" th:href="@{/css/login_style.css}"> 
+    <link rel="stylesheet" href="../../static/css/login_style.css">
+    <title>HOME</title>
+  </head>
+  <body>
+    <div layout:fragment="content">
+
+      <section class="singup">
+        
+        <div class="container">				
+          <p class="top-text"><a th:href="@{/login}">로그인</a> > 회원가입</p>
+          <h1>회원 가입</h1>
+        <form method="post" th:action="@{/user/insert}" id="signin-form">
+          <label>
+            <input type="text" name="email" id="email" placeholder="아이디 ex)abc12@gmail.com">
+            <p id="emailchk">아이디는 이메일 형식으로 입력해 주세요.</p>
+          </label>
+
+          <label>
+            <input type="password" id="password" name="password" placeholder="비밀 번호">
+            <p id="pwchk" >영문과 숫자를 포함한 8~16자</p>
+          </label>
+
+          <label>
+            <input type="password" id="password2" name="password2" placeholder="비밀 번호 확인">
+            <p id="pw2chk">비밀 번호를 한 번 더 입력해 주세요.</p>
+          </label>
+
+          <label>
+            <input type="text" id="nickname" name="nickname" placeholder="이름">
+            <p id="nicknamechk">이름을 입력해 주세요.(2~6자)</p>
+          </label>
+          <label>
+            <input type="text" id="phone" maxlength="11" name="phone" placeholder="010-xxxx-xxxx">
+              <p id="phonechk">핸드폰 번호를 입력해 주세요.</p>
+          </label>
+
+          <input type="submit" value="회원가입" class="btn" id="submit-btn" disabled>
+
+
+          </form>
+        </div>
+      </section>
+	
+    </div>
+  </body>
+</html>
