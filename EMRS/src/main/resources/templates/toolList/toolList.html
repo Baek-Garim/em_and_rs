@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>장비 목록</title>
+</head>
+<body>
+
+<h1>장비 목록</h1>
+
+<h2>카테고리별로 보기</h2>
+		
+<form method="get" th:action="@{/tool/sortCategory}">
+    <select id="category" name="category">
+        <option value="1" th:selected="${category == 1}">카메라</option>
+        <option value="2" th:selected="${category == 2}">현미경</option>
+        <option value="3" th:selected="${category == 3}">원심분리기</option>
+        <option value="4" th:selected="${category == 4}">분젠버너</option>
+    </select>
+    <input type="Submit" value="카테고리 선택">
+</form>
+
+<table style="border: 1px solid black;">
+    <tr>
+        <th>카테고리</th>
+        <th>장비명</th>
+        <th>사진</th>
+        <th>수량</th>
+        <th>상태</th>
+    </tr>
+    <tr th:each="tool : ${toolList}">
+	    <td th:text="${tool.tool_category}"></td>
+	    <td>
+            <a th:href="@{/tool/detail(toolId=${tool.id})}" th:text="${tool.tool_name}"></a>
+        </td>
+	    <td th:text="${tool.tool_image}"></td>
+	    <td th:text="${tool.tool_quantity}"></td>
+	    <td th:text="${tool.rentalable}"></td>
+	</tr>
+</table>
+
+</body>
+</html>

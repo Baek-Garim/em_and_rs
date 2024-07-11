@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  
+<mapper namespace="com.project.emrs.dao.ToolDAO">
+	<select id="toolList" resultType="Tool">
+		select * from TOOL
+	</select>
+	
+	<select id="toolDetail" resultType="Tool" parameterType="int">
+	    select * from TOOL
+	    where id like '%' || #{toolId} || '%'
+	</select>
+	
+	<select id="sortCategory" parameterType="int" resultType="Tool">
+	    SELECT * FROM TOOL
+	    <where>
+	        <if test="category != null">
+	            <if test="category == 1">
+	                AND TOOL_CATEGORY LIKE '%1%'
+	            </if>
+	            <if test="category == 2">
+	                AND TOOL_CATEGORY LIKE '%2%'
+	            </if>
+	            <if test="category == 3">
+	                AND TOOL_CATEGORY LIKE '%3%'
+	            </if>
+	            <if test="category == 4">
+	                AND TOOL_CATEGORY LIKE '%4%'
+	            </if>
+	        </if>
+	    </where>
+	</select>
+</mapper>
