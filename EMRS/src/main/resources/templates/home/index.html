@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout/default_layout}" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+		<link rel="stylesheet" type="text/css" href="../../static/css/index_style.css">
+		<link rel="stylesheet" type="text/css" th:href="@{/css/index_style.css}">
+    <title>HOME</title>
+  </head>
+  <body>
+    <div layout:fragment="content">
+
+			<section class="main-banner">
+				<div class="container">
+					
+					<div class="search-box">
+						<form th:action="list" method="get" name="main_search" class="search-from">
+							<input type="text" name="main_search" id="content" th:value="${content}" placeholder="찾고 있는 장비를 검색해보세요." />
+							<i id="submit-btn" class="fa fa-search fa-3x" aria-hidden="true"></i>
+						</form>
+					</div>
+
+				</div>
+			</section>
+
+			<section class="myinfo">
+				<div class="container">
+					<h1 class="title">내 대여·예약 정보</h1>
+					<p class="sub-title">나의 대여건과 예약 현황을 확인</p>
+	
+					<div class="sub-con">
+
+						<div class="my-con">
+							<div class="con">
+								<div class="text-list">
+									<a href="" id="user-name">이름 <span>님</span></a>
+									<p id="overdue">대여 불가</p>
+									<p>2023년 2월 23일 <span>까지</span></p>	
+								</div>
+							</div>
+
+							<div class="con">
+								<div>
+									<a href="">진행중인 대여 <span>5건</span></a><br/>
+									<a href="">진행중인 예약 <span>3건</span></a>	
+								</div>
+							</div>
+						</div>
+
+						<div class="box-container">
+							<div class="box">
+								<div class="top">
+									<p class="sub-title">대여<span class="eq-count">5</span></p>
+								</div>
+								<div class="content">
+									<table>
+										<colgroup>
+											<col width="5%" />
+											<col width="33%" />
+											<col width="30%" />
+											<col width="15%" />
+										</colgroup>
+										<tr>
+											<td>1.</td>
+											<td>장비이름</td>
+											<td>2023/12/31까지</td>
+											<td>정상</td>
+										</tr>
+										<tr>
+											<td>2.</td>
+											<td>장비이름</td>
+											<td>2023/12/31까지</td>
+											<td>정상</td>
+										</tr>
+										<tr>
+											<td>3.</td>
+											<td>장비이름3333333333333333333333333</td>
+											<td>2023/12/31까지</td>
+											<td id="overdue">연체</td>
+										</tr>
+										<tr>
+											<td>4.</td>
+											<td>장비이름</td>
+											<td>2023/12/31까지</td>
+											<td>정상</td>
+										</tr>
+										<tr>
+											<td>1.</td>
+											<td>장비이름</td>
+											<td>2023/12/31까지</td>
+											<td>정상</td>
+										</tr>
+									</table>
+								</div>
+							</div>
+	
+	
+							<div class="box">
+								<div class="top">
+									<p class="sub-title">예약<span class="eq-count">3</span></p>
+								</div>
+	
+								<div class="content">
+									<table>
+										<colgroup>
+											<col width="10%" />
+											<col width="40%" />
+											<col width="15%" />
+										</colgroup>
+										<tr>
+											<td>1.</td>
+											<td>장비이름22222222222222222222222222222</td>
+											<td>대기중</td>
+										</tr>
+										<tr>
+											<td>2.</td>
+											<td>장비이름</td>
+											<td id="available">대여가능</td>
+										</tr>
+										<tr>
+											<td>3.</td>
+											<td>장비이름</td>
+											<td>대기중</td>
+										</tr>
+									</table>
+	
+								</div>
+							</div>
+						</div>
+
+					</div>
+
+				</div>
+			</section>
+
+			<section class="eq-list">
+				<div class="container">
+					<h1 class="title">대여 가능 장비</h1>
+					<p class="sub-title">품목 별</p>
+					
+					<div class="sub-con">
+						<div id="line"></div>
+
+						<div class="box-container">
+							<div class="box">
+								<p>사무용품</p>
+							</div>
+							<div class="box">
+								<p>촬영</p>
+							</div>
+							<div class="box">
+								<p>의상</p>
+							</div>
+							<div class="box">
+								<p>기타소품</p>
+							</div>
+
+						</div>
+					</div>
+
+				</div>
+			</section>
+
+
+			
+      <script src="https://kit.fontawesome.com/194e6948f1.js" crossorigin="anonymous"></script>
+    </div>
+  </body>
+</html>

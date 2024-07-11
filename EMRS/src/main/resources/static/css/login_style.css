@@ -1,0 +1,142 @@
+@import url('reset.css');
+/* url 형식 */
+
+
+/* ============= login =============== */
+
+.login {
+	background-color: var(--white);
+  margin-top: 10rem;
+  height: 50rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login .container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  width: 50%;
+  padding: 3rem;
+  margin: 4rem 0;
+  background-color: #fff;
+  border-radius: 1rem;
+}
+
+.login .container form {
+  width: 60%;
+  margin: 2rem;
+  font-size: 1.5rem;
+}
+
+.login .container form label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1rem;
+}
+
+.login .container form label span {
+  padding: 0 10px;
+  height: 30px;
+  width: 20%;
+  margin-right: 2rem;
+  border: 0;
+  font-size: 1.5rem;
+}
+
+.login .container form label input {
+
+  padding: 2rem;
+  width: 80%;
+  font-size: 1.5rem;
+  border: var(--border);
+  border-radius: 1rem;
+}
+
+.login .container .btn {
+  width: 60%;
+  margin-top: -1rem;
+  margin-bottom: 1rem;
+}
+
+
+.login .container #signup-btn {
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+
+
+/* ============= login end =============== */
+
+
+/* ============= sign-up =============== */
+
+
+.singup{
+  margin-top: 10rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--white);
+}
+
+.singup .container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 5rem;
+
+  background-color: #fff;
+  border-radius: 1rem;
+  padding: 5rem 14rem;
+}
+
+.singup .container .top-text{
+  position: relative;
+  top: -1rem;
+  left: -25rem;
+  font-size: 1.3rem;
+}
+
+.singup .container .top-text a{
+  color: var(--balck);
+}
+
+.singup .container form{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  
+  font-size: 1.5rem;
+  padding: 1rem;
+}
+.singup .container form label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 1rem;
+}
+
+.singup .container form label input {
+  width: 30rem;
+  margin: 0 2rem;
+  border: var(--border);
+  padding: 2rem;
+  border-radius: 1rem;
+}
+
+.singup .container form label p {
+  margin-top: .4rem;
+}
+
+
+
+
+/* ============= sign-up end =============== */
