@@ -2,11 +2,11 @@ package com.project.emrs.dao;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.project.emrs.vo.Test;
+import com.project.emrs.dto.TestDTO;
 
 @Mapper
 public interface HomeDAO {
 
-	Test test();
+	TestDTO test();
 	
 } // DAO

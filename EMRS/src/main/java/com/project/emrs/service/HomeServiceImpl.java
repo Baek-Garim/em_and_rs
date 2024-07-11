@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.project.emrs.dao.HomeDAO;
+import com.project.emrs.dto.TestDTO;
 import com.project.emrs.service.HomeService;
-import com.project.emrs.vo.Test;
 
 @Service
 public class HomeServiceImpl implements HomeService{
@@ -14,8 +14,8 @@ public class HomeServiceImpl implements HomeService{
 	HomeDAO homeDAO;
 
 	@Override
-	public Test test() {
-		Test test = homeDAO.test();
+	public TestDTO test() {
+		TestDTO test = homeDAO.test();
 		
 		return test;
 	}

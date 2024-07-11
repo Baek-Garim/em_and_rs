@@ -1,8 +1,8 @@
 package com.project.emrs.service;
 
-import com.project.emrs.vo.Test;
+import com.project.emrs.dto.TestDTO;
 
 public interface HomeService {
-	Test test();
+	TestDTO test();
 	
 } // service
