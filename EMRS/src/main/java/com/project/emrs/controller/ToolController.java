@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.project.emrs.dto.TestDTO;
 import com.project.emrs.dto.Tool;
 import com.project.emrs.service.ToolService;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
@@ -24,9 +24,12 @@ public class ToolController {
 	ToolService toolService;
 	
 	@GetMapping("toolList")
-	public String home(Model model) {
+	public String home(Model model, HttpSession session) {
 		ArrayList<Tool> toolList = toolService.toolList();
 		model.addAttribute("toolList", toolList);
+		
+		model.addAttribute("user_id", session.getAttribute("user_id"));
+		model.addAttribute("user_name", session.getAttribute("user_name"));
 		
 		return "toolList/toolList";
 	}

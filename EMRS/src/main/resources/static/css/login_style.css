@@ -137,6 +137,13 @@
 }
 
 
+.singup .container form input:disabled {
+	cursor: not-allowed;
+	border: none;
+	background-color: #eeeeee;
+	color: #fff;
+}
+
 
 
 /* ============= sign-up end =============== */

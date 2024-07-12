@@ -11,7 +11,7 @@
       <section class="login">
         <div class="container">
           <h1>로그인</h1>
-          <div style="color:red" th:text="${errorMessage}"></div>
+          <div style="color:red; font-size: 1.5rem;" th:text="${errorMessage}"></div>
                   
           <form method="post" name="login_form" th:action="@{/login/result}" id="login-form">
             <label for="email">
@@ -29,6 +29,27 @@
           </div>		
         </div>
       </section>
+	
+	
+	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+	<script>
+		function checkValue(){
+			let value = $('#email').val().trim();
+			
+			if( value == "" || value == null || value == undefined || ( value != null && typeof value == "object" && !Object.keys(value).length ) ){
+				$("#email").focus();
+				return;
+			}
+			
+			value = $('#user_pw').val().trim();
+			if( value == "" || value == null || value == undefined || ( value != null && typeof value == "object" && !Object.keys(value).length ) ){
+				$("#user_pw").focus();
+				return;
+			}
+			document.login_form.submit();
+		}
+    </script>
+	
 	
     </div>
   </body>
