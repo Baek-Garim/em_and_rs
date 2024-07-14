@@ -1,57 +1,69 @@
 <!DOCTYPE html>
 <html layout:decorate="~{layout/default_layout}" lang="en"> <!--레이아웃 적용 1. html 부분 -->
 <head>
-<meta charset="UTF-8">
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/toolList.css}">
 <title>장비 목록</title>
-
-<!--임시 스타일 나중에 스타일 파일 따로 빼면 빼주세요!
-    헤더부분이 화면을 위에서 10rem정도 덮어서 위에 공백을 좀 주셔야 합니다 -->
-<style>
-	.con{
-		margin: 20rem;
-		font-size: 2rem;
-		line-height: 4rem;
-	}
-	table tr, th, td {
-		padding: 1rem;
-	}
-</style>
-<!-- 임시 스타일 끝 -->
-
 </head>
+
 <body>
-	
 <!--레이아웃 적용 2. <div layout:fragment="content"></div> << 이 div 안에 들어간 것만 화면에 나옵니다. js파일 불러오는 것도 이 안에 있어야 적용 됩니다.  -->
 <div layout:fragment="content">
-	<div class="con"> <!-- 임시 style 적용 때문에 만든 div 입니다 나중에 css 파일 만드실때 빼주세요 -->
-		<h1>장비 목록</h1>
-	
-		<h2>카테고리별로 보기</h2>
-				
-		<form method="get" th:action="@{/tool/sortCategory}">
-		    <select id="category" name="category">
-		        <option value="1" th:selected="${category == 1}">카메라</option>
-		        <option value="2" th:selected="${category == 2}">현미경</option>
-		        <option value="3" th:selected="${category == 3}">원심분리기</option>
-		        <option value="4" th:selected="${category == 4}">분젠버너</option>
-		    </select>
-		    <input type="Submit" value="카테고리 선택">
-		</form>
+	<div class="con">
+		<div class="cate">
+			<form method="get" th:action="@{/tool/sortCategory}">
+			    <select id="category" name="category" class="cateselec">
+			    	<option value="0" th:selected="${category == 0}">전체</option>
+			        <option value="1" th:selected="${category == 1}">사무용품</option>
+			        <option value="2" th:selected="${category == 2}">촬영</option>
+			        <option value="3" th:selected="${category == 3}">의상</option>
+			        <option value="4" th:selected="${category == 4}">기타소품</option>
+			    </select>
+			    <input type="Submit" value="카테고리 선택" class="catebtn">
+			</form>
+		</div>
 		
-		<table style="border: 1px solid black;">
-		    <tr th:each="tool : ${toolList}">
-			    <td th:text="${tool.tool_category}"></td>
-			    <td>
-		            <a th:href="@{/tool/detail(toolId=${tool.id})}" th:text="${tool.tool_name}"></a>
-		        </td>
-			    <td th:text="${tool.tool_image}"></td>
-			    <td th:text="${tool.tool_quantity}"></td>
-			    <td th:text="${tool.rentalable}"></td>
+		<table>
+			<tr class="container">
+				<td th:each="tool : ${toolList}">
+						<div class="card">
+							<img th:src="${tool.tool_image}" class="card-img-top">
+					    		<table class="card-table">
+					    			<tr>
+					    				<th class="card-th">
+					    					<h5 class="card-title" th:text="${tool.category_name}">카테고리</h5>
+					    				</th>
+					    				<td class="card-td">
+					    					<p class="card-name" th:text="${tool.tool_name}">장비명</p>
+					    				</td>
+					    			</tr>
+									<tr>
+										<td class="card-td" colspan="2">
+											<p class="card-text" th:text="${tool.tool_comment}">장비 설명</p>
+										</td>
+									</tr>
+									<tr>
+										<td class="card-td" colspan="2">
+											<p class="card-text">대여상태</p>
+										</td>
+									</tr>
+									<tr>
+										<td class="card-td" colspan="2">
+											<p class="card-text">대여일수</p>
+										</td>
+									</tr>
+									<tr>
+										<td class="card-td" colspan="2">
+											<a href="#" class="rebtn">예약 (대기 0인)</a>
+										</td>
+									</tr>
+					    		</table>
+						</div>
+				</td>
 			</tr>
 		</table>
 
-	</div><!-- 임시 스타일 적용 때문에 만든 div 닫는문 -->
-
+	</div>
 </div>
 
 </body>

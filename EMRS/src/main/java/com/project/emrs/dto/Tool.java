@@ -9,12 +9,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Tool {
 	
-	int id;
+	int tool_id;
+	String tool_code;
 	String tool_name;
 	String tool_image;
 	String tool_comment;
-	int tool_category;
-	int tool_quantity;
-	String rentalable;
+	int category_id;
+	String category_name;
 	
 } // tool

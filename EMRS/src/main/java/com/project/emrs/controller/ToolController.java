@@ -26,6 +26,9 @@ public class ToolController {
 	@GetMapping("toolList")
 	public String home(Model model, HttpSession session) {
 		ArrayList<Tool> toolList = toolService.toolList();
+		for(Tool i: toolList) {
+			i.setCategory_name(toolService.selectCate(i.getCategory_id()));
+		}
 		model.addAttribute("toolList", toolList);
 		
 		model.addAttribute("user_id", session.getAttribute("user_id"));
@@ -47,6 +50,9 @@ public class ToolController {
 	@GetMapping("sortCategory")
 	public String sortCategory(Model model, @RequestParam(name = "category") int category) {
 		ArrayList<Tool> toolList = toolService.sortCategory(category);
+		for(Tool i: toolList) {
+			i.setCategory_name(toolService.selectCate(i.getCategory_id()));
+		}
 		model.addAttribute("toolList", toolList);
 		
 		return "toolList/toolList";
