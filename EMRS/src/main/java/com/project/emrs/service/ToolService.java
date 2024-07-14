@@ -11,5 +11,7 @@ public interface ToolService {
 	Tool toolDetail(int toolId);
 
 	ArrayList<Tool> sortCategory(int category);
+
+	String selectCate(int category_id);
 	
 } // service

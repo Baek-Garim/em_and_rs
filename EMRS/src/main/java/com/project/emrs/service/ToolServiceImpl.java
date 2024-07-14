@@ -36,6 +36,12 @@ public class ToolServiceImpl implements ToolService{
 		ArrayList<Tool> sortToolList = toolDAO.sortCategory(category);
 		return sortToolList;
 	}
+
+	@Override
+	public String selectCate(int category_id) {
+		String category_name = toolDAO.selectCate(category_id);
+		return category_name;
+	}
 	
 	
 } // impl

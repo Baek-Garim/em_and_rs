@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Tool_category {
 	
-	int id;
+	int category_id;
 	String category_name;
 	
 } // category
