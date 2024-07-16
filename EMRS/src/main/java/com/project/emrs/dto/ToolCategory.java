@@ -7,9 +7,9 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Tool_category {
+public class ToolCategory {
 	
-	int category_id;
-	String category_name;
+	private int category_id;
+	private String category_name;
 	
 } // category
