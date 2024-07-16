@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout/admin_layout}" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" th:href="@{/css/admin_style.css}">
+  <link rel="stylesheet" href="../../static/css/admin_style.css">
+   <title>EMRS</title>
+</head>
+<body>
+	
+  <div class="content" layout:fragment="content">
+    <h1 class="title"><span th:onclick="|location.href='@{/admin/tool}'|">장비 관리</span>>장비 등록</h1>
+    <hr/>
+    <button class="btn" onclick="" >등록</button>
+
+    <form class="tool-form" action="">
+      <label for="">
+        <span>카테고리</span>
+        <select name="" id="">
+          <option disabled selected>카테고리</option>
+          <option value="카테고리1">apple</option>
+          <option value="카테고리2">orange</option>  
+        </select>
+      </label>
+
+      <label for="">
+        <span>이미지</span>
+        <input type="file" name="" id="">
+      </label>
+
+      <label for="">
+        <span>장비코드</span>
+        <input id="tool-code" name="" type="text" value="">
+      </label>
+
+      <label for="">
+        <span>장비이름</span>
+        <input type="text" value="">
+      </label>
+
+      <label for="">
+        <span>장비 설명</span>
+        <textarea name="" id=""></textarea>
+      </label>
+
+
+    </form>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+
+  </div>
+
+</body>
+</html>

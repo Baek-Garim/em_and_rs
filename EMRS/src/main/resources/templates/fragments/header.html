@@ -20,10 +20,17 @@
          </form>
        </div>
 	   
-       <a th:if="${user_id} != null" class="mypage-btn" th:href="@{|/|}">
+	   
+       <a th:if="${user_id} != null and ${#strings.equals(user_grant, 'USER')}" class="mypage-btn" th:href="@{|/|}">
          <i class="fa-solid fa-user fa-4x"></i>
          <p>My</p>
        </a>
+ 
+       <a th:if="${user_id} != null and ${#strings.equals(user_grant, 'ADMIN')}" class="mypage-btn" th:href="@{|/admin/tool|}">
+         <i class="fa-solid fa-user fa-4x"></i>
+         <p>관리</p>
+       </a>
+       
        <a th:if="${user_id} == null" class="mypage-btn" th:href="@{|/login|}">
          <i class="fa-regular fa-user fa-4x"></i>
          <p>로그인</p>

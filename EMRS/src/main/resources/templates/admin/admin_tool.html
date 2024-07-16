@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout/admin_layout}" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" th:href="@{/css/admin_style.css}">
+  <link rel="stylesheet" href="../../static/css/admin_style.css">
+   <title>EMRS</title>
+</head>
+<body>
+	
+  <div class="content" layout:fragment="content">
+    <h1 class="title">장비 관리</h1>
+    <hr/>
+    <button class="btn" th:onclick="|location.href='@{/admin/tool/form}'|" >새 장비 등록</button>
+    <button class="btn" onclick="modal()">새 카테고리 등록</button>    
+	
+    <div class="new-item">
+      <div class="top">
+        <h2>카테고리 등록</h2>
+        <span class="close" onclick="modal()">&times;</span>
+      </div>
+      <div class="middle">
+        <form action="">
+          <span>카테고리 명 </span>
+          <input type="text" value="">
+          <input type="submit" class="btn" value="등록">
+        </form>
+
+        <ul class="category-list">
+          <p>등록된 카테고리</p>
+          <li>1. 카테고리1 <button onclick="deleteCate(1)">삭제</button></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tool-area">
+      <h2>전체 장비 목록</h2>
+		
+      <ul>
+        <li>
+          <div class="info">
+            <p class="item1">1.</p>
+            <div class="item2 imgbox"><img src="" alt=""></div>
+            <p class="item3">카테고리</p>
+            <p class="item4">TRE-001</p>
+            <p class="item5">이름3232321323</p>
+            <p class="item6">장비설명---------------------------------------</p>  
+          </div>
+          <div class="btns">
+            <button class="btn">수정</button>
+            <button class="btn">삭제</button>
+          </div>
+        </li>
+
+
+      </ul>
+  
+    </div>
+        
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script>
+      function modal(){
+        $('.new-item').toggleClass('active');
+      }
+
+    </script>
+  </div>
+
+</body>
+</html>

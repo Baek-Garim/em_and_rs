@@ -4,19 +4,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" th:href="@{/css/reset.css}">
-<!--	<link rel="icon" href="/img/favicon.png"/>
-	<link rel="apple-touch-icon" href="/img/favicon.png"/>-->
    <title>EMRS</title>
 </head>
 <body>
 	
-  <header th:replace="~{fragments/header :: headerFragment}"></header>
+  <section th:replace="~{fragments/admin_header :: admin_header_frg}"></section>
 
-  <div th:layout:fragment="content"></div>
+  <div class="container">
+    <div th:replace="~{fragments/admin_sidebar :: admin_sidebar_frg}"></div>
+    
+    <div th:layout:fragment="content">
+      
+    </div>
+  </div>
+
   
-  <footer th:replace="~{fragments/footer :: footerFragment}"></footer>
-  
-  
+
 
 	<script src="https://kit.fontawesome.com/194e6948f1.js" crossorigin="anonymous"></script>
 </body>

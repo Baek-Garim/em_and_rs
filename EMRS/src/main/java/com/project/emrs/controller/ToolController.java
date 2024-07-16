@@ -33,7 +33,7 @@ public class ToolController {
 		
 		model.addAttribute("user_id", session.getAttribute("user_id"));
 		model.addAttribute("user_name", session.getAttribute("user_name"));
-		
+		model.addAttribute("user_grant", session.getAttribute("user_grant"));
 		return "toolList/toolList";
 	}
 
