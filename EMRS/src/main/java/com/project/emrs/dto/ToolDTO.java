@@ -7,14 +7,14 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Tool {
+public class ToolDTO {
 	
-	private int tool_id;
+	private Integer tool_id;
 	private String tool_code;
 	private String tool_name;
 	private String tool_image;
 	private String tool_comment;
-	private int category_id;
+	private Integer category_id;
 	private String category_name;
 	
 } // tool

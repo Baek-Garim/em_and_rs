@@ -4,16 +4,16 @@ import java.util.ArrayList;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.project.emrs.dto.Tool;
+import com.project.emrs.dto.ToolDTO;
 
 @Mapper
 public interface ToolDAO {
 
-	ArrayList<Tool> toolList();
+	ArrayList<ToolDTO> toolList();
 
-	Tool toolDetail(int toolId);
+	ToolDTO toolDetail(int toolId);
 
-	ArrayList<Tool> sortCategory(int category);
+	ArrayList<ToolDTO> sortCategory(int category);
 
 	String selectCate(int category_id);
 	

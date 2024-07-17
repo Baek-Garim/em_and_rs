@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.project.emrs.dto.Tool;
+import com.project.emrs.dto.ToolDTO;
 import com.project.emrs.service.ToolService;
 
 import jakarta.servlet.http.HttpSession;
@@ -25,8 +25,8 @@ public class ToolController {
 	
 	@GetMapping("toolList")
 	public String home(Model model, HttpSession session) {
-		ArrayList<Tool> toolList = toolService.toolList();
-		for(Tool i: toolList) {
+		ArrayList<ToolDTO> toolList = toolService.toolList();
+		for(ToolDTO i: toolList) {
 			i.setCategory_name(toolService.selectCate(i.getCategory_id()));
 		}
 		model.addAttribute("toolList", toolList);
@@ -40,7 +40,7 @@ public class ToolController {
 	@GetMapping("detail")
 	public String read(Model model, @RequestParam(name = "toolId") int toolId) {
 	    log.debug("detail:", toolId);
-	    Tool tool = toolService.toolDetail(toolId);
+	    ToolDTO tool = toolService.toolDetail(toolId);
 	    log.debug("detail", tool);
 	    model.addAttribute("tool", tool);
 	    
@@ -49,8 +49,8 @@ public class ToolController {
 	
 	@GetMapping("sortCategory")
 	public String sortCategory(Model model, @RequestParam(name = "category") int category) {
-		ArrayList<Tool> toolList = toolService.sortCategory(category);
-		for(Tool i: toolList) {
+		ArrayList<ToolDTO> toolList = toolService.sortCategory(category);
+		for(ToolDTO i: toolList) {
 			i.setCategory_name(toolService.selectCate(i.getCategory_id()));
 		}
 		model.addAttribute("toolList", toolList);

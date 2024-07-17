@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.project.emrs.dao.ToolDAO;
-import com.project.emrs.dto.Tool;
+import com.project.emrs.dto.ToolDTO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -18,22 +18,22 @@ public class ToolServiceImpl implements ToolService{
 	ToolDAO toolDAO;
 
 	@Override
-	public ArrayList<Tool> toolList() {
-		ArrayList<Tool> toolList = toolDAO.toolList();
+	public ArrayList<ToolDTO> toolList() {
+		ArrayList<ToolDTO> toolList = toolDAO.toolList();
 		
 		return toolList;
 	}
 
 	@Override
-	public Tool toolDetail(int toolId) {
-		Tool tool = toolDAO.toolDetail(toolId);
+	public ToolDTO toolDetail(int toolId) {
+		ToolDTO tool = toolDAO.toolDetail(toolId);
 		
 		return tool;
 	}
 
 	@Override
-	public ArrayList<Tool> sortCategory(int category) {
-		ArrayList<Tool> sortToolList = toolDAO.sortCategory(category);
+	public ArrayList<ToolDTO> sortCategory(int category) {
+		ArrayList<ToolDTO> sortToolList = toolDAO.sortCategory(category);
 		return sortToolList;
 	}
 

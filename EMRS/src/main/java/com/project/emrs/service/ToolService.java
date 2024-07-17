@@ -2,15 +2,15 @@ package com.project.emrs.service;
 
 import java.util.ArrayList;
 
-import com.project.emrs.dto.Tool;
+import com.project.emrs.dto.ToolDTO;
 
 public interface ToolService {
 
-	ArrayList<Tool> toolList();
+	ArrayList<ToolDTO> toolList();
 
-	Tool toolDetail(int toolId);
+	ToolDTO toolDetail(int toolId);
 
-	ArrayList<Tool> sortCategory(int category);
+	ArrayList<ToolDTO> sortCategory(int category);
 
 	String selectCate(int category_id);
 	
