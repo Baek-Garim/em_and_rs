@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.project.emrs.dto.Tool;
+import com.project.emrs.dto.ToolDTO;
 import com.project.emrs.user.service.MyPageService;
 
 import jakarta.servlet.http.HttpSession;

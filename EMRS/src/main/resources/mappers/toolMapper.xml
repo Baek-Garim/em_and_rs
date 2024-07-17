@@ -6,11 +6,11 @@
   
   
 <mapper namespace="com.project.emrs.dao.ToolDAO">
-	<select id="toolList" resultType="Tool">
+	<select id="toolList" resultType="ToolDTO">
 		select * from TOOL
 	</select>
 	
-	<select id="sortCategory" parameterType="int" resultType="Tool">
+	<select id="sortCategory" parameterType="Integer" resultType="ToolDTO">
 	    SELECT * FROM TOOL
 	    <where>
 	        <if test="category != null">
@@ -30,7 +30,7 @@
 	    </where>
 	</select>
 	
-	<select id="selectCate" parameterType="int" resultType="String">
+	<select id="selectCate" parameterType="Integer" resultType="String">
 		SELECT CATEGORY_NAME
 		FROM CATEGORY
 		WHERE
