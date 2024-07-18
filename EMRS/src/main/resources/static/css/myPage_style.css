@@ -163,8 +163,41 @@ hr{
 }
 
 
+/* 대여 */
 
+.container .content .listable {
+	padding: 2rem;
+	font-size: 1.5rem;
+}
 
+.container .content .listable th {
+	padding-top: 3rem;
+	font-size: 2rem;
+	font-weight: bold;
+	height: 1rem;
+	line-height: 0.1rem;
+	border-bottom: 0.2rem solid #c8c8c8;
+}
+
+.container .content .listable td {
+	padding: 2rem;
+	font-size: 2rem;
+	font-weight: bold;
+	height: 1rem;
+	line-height: 0.1rem;
+	border-bottom: 0.2rem solid #c8c8c8;
+}
+
+.container .content .listable .toolImg {
+	width: 6rem;
+	height: 6rem;
+}
+
+.container .content .listable .btn {
+	padding: 2rem;
+	font-size: 2rem;
+	font-weight: bold;
+}
 
 
 

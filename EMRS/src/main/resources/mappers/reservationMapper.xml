@@ -49,5 +49,11 @@
 		</if>
 	</insert>
 	
+	<select id="reservationList" resultType="ReservationDTO" parameterType="Integer">
+		select rsv.*, t.tool_name, tool_image
+		from reservation rsv, tool t
+	    where rsv.tool_code = t.tool_code
+	    	and USER_ID = #{user_id}
+	</select>
 	
 </mapper>

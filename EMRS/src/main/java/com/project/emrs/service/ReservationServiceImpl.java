@@ -77,6 +77,13 @@ public class ReservationServiceImpl implements ReservationService{
 
 		return temp;
 	}
+
+	@Override
+	public ArrayList<ReservationDTO> reservationList(Integer user_id) {
+		ArrayList<ReservationDTO> reservationList = reservationDAO.reservationList(user_id);
+		
+		return reservationList;
+	}
 	
 	
 	

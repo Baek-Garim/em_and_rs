@@ -22,4 +22,7 @@ public interface ReservationDAO {
 
 	Integer duplicateCheck(ReservationDTO reserve);
 
+
+	ArrayList<ReservationDTO> reservationList(Integer user_id);
+
 }

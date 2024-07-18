@@ -18,5 +18,7 @@ public interface RentalDAO {
 
 	Integer duplicateCheck(ReservationDTO reserve);
 
+	void rentalRenew(Integer rental_id);
+
 
 }

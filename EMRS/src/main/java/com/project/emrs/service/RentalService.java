@@ -10,5 +10,8 @@ public interface RentalService {
 
 	ArrayList<RentalDTO> rentalList(Integer user_id);
 
+	void rentalRenew(Integer rental_id);
+
+
 
 }

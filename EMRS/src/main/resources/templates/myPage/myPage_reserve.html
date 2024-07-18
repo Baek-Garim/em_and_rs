@@ -12,12 +12,29 @@
     <h1 class="title">예약 내역</h1>
     <hr>
     <br>
-    <div class="listRe">
+    <div>
 	    <table class="listable">
-<!--	    	<tr th:each="tool : ${toolList}">
-	    		<td th:text="${tool.category_name}"></td>
+	    	<tr>
+	    		<td>번호</td>
+	    		<td>사진</td>
+	    		<td>장비명</td>
+	    		<td>예약일자</td>
+	    		<td>만료일자</td>
+	    		<td>대기인수</td>
+	    		<td>상태</td>
 	    	</tr>
--->	    </table>
+	    	<tr th:each="reservation : ${reservationList}">
+	    		<td th:text="${reservation.reserve_id}">번호</td>
+	    		<th>
+					<img th:src="${reservation.tool_image}" class="toolImg">
+				</th>
+	    		<td th:text="${reservation.tool_name}">장비명</td>
+	    		<td th:text="${reservation.reserve_date_String}">예약일자</td>
+	    		<td th:text="${reservation.deadline_date_String}">만료일자</td>
+	    		<td th:text="${reservation.waiting} + 명">대기인원</td>
+	    		<td th:text="${reservation.reserve_state}">상태</td>
+	    	</tr>
+	    </table>
     </div>
     
   </div>

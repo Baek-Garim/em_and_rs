@@ -26,13 +26,18 @@
 	</select>
 	
 	<select id="rentalList" resultType="RentalDTO" parameterType="Integer">
-		select r.*, t.tool_name 
+		select r.*, t.tool_name, t.tool_image, t.tool_id
 		    from rental r, tool t 
 		    where r.tool_code = t.tool_code
 		    and user_id = #{user_id}
 	</select>
 
-
+	<update id="rentalRenew" parameterType="Integer">
+	   UPDATE RENTAL
+	      SET RETURN_DATE = RETURN_DATE + INTERVAL '4' DAY,
+	          RENEW = RENEW + 1
+	   WHERE RENTAL_ID = #{rental_id}
+	</update>
 
 
 	
