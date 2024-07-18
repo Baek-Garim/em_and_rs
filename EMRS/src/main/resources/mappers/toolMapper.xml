@@ -37,4 +37,58 @@
 			CATEGORY_ID = #{CATEGORY_ID}
 	</select>
 	
+	<!-- 장비 하나 가져옴 -->
+	<select id="toolDetail" resultType="ToolDTO">
+		 select t.*, c.category_name
+		   from tool t, category c
+		  where t.category_id = c.category_id and t.tool_id = #{tool_id}
+	</select>
+	
+	<!-- 모든 장비 가져옴 -->
+	<select id="getAllTool" resultType="ToolDTO">
+		 select t.*, c.category_name
+		   from tool t, category c
+		  where t.category_id = c.category_id
+	</select>
+	
+	
+	<!-- 모든 카테고리 가져옴 -->
+	<select id="getAllCategory" resultType="ToolCategoryDTO">
+	    SELECT * FROM CATEGORY	
+	</select>
+	
+	
+	<!-- 장비 추가, 장비 코드 체크 -->	
+	<select id="toolCodeCheck" resultType="int">
+		select count(*) from TOOL
+		where TOOL_CODE = #{code}
+	</select>
+
+
+	<!-- INSERT -->
+	<!-- 새로운 장비 추가 -->
+	<insert id="insertTool">
+		INSERT INTO TOOL(TOOL_ID, TOOL_CODE, TOOL_NAME, TOOL_IMAGE, TOOL_COMMENT, CATEGORY_ID)
+		VALUES (TOOL_SEQ.NEXTVAL, #{tool_code}, #{tool_name}, #{tool_image}, #{tool_comment}, #{category_id})
+	</insert>
+	
+	
+	<!-- UPDATE -->
+	<update id="updateTool">
+	   UPDATE TOOL
+	      SET TOOL_CODE = #{tool_code}, 
+	      	  TOOL_NAME = #{tool_name},
+	      	  TOOL_IMAGE = #{tool_image},
+	      	  TOOL_COMMENT = #{tool_comment},
+	      	  CATEGORY_ID = #{category_id}
+	       WHERE TOOL_ID = #{tool_id}
+	</update>	
+	
+	
+	<!-- DELETE -->
+	
+	<delete id="deleteTool">
+		delete from tool where tool_id = #{tool_id}
+	</delete>
+	
 </mapper>

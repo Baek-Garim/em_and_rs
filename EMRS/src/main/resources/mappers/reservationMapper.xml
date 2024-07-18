@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  
+<mapper namespace="com.project.emrs.dao.ReservationDAO">
+
+	<select id="chkReserveState" resultType="int">
+		select count(*)
+		    from rental r, reservation rsv
+		    where r.tool_code = #{tool_code}
+		        and rsv.tool_code = #{tool_code}
+		        and rsv.reserve_date > #{reserve_date}
+	
+	</select>
+	
+	<insert id="insertReserve">
+		INSERT INTO RESERVATION(reserve_id, tool_code,  user_id, reserve_date, deadline_date, reserve_state)
+		VALUES (RESERVATION_SEQ.NEXTVAL, #{tool_code}, #{user_id}, #{reserve_date}, #{deadline_date}, #{reserve_state})
+	</insert>
+	
+	
+	
+</mapper>

@@ -12,6 +12,13 @@ hr{
   margin-bottom: 2rem;
 }
 
+button:disabled {
+	cursor: not-allowed;
+	border: none;
+	background-color: #aaa;
+	color: #fff;
+}
+
 /* ===== 어드민 페이지 top nav 부분 ===== */
 .admin-top {
   padding: 2rem;
@@ -275,5 +282,30 @@ hr{
 }
 
 
+.content .tool-form label#file-input{
+	position: relative;
+}
+
+.content .tool-form label .cur-imgbox {
+	position: absolute;
+	width: 25rem;
+	height: 25rem;
+	top: 5rem;
+	left: 60rem;
+	background-color: var(--white);
+}
+
+.content .tool-form label .cur-imgbox img {
+	height: 100%;
+	width: 100%;
+	object-fit: contain;
+}
+
+.chkmsg{
+	display: block;
+	color: var(--main-color);
+	font-size: 1.5rem;
+	line-height: 1.7rem;
+}
 
 /* =========== 장비 등록 폼  END ============== */

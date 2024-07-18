@@ -38,18 +38,29 @@
       <h2>전체 장비 목록</h2>
 		
       <ul>
-        <li>
+      	<li>
           <div class="info">
-            <p class="item1">1.</p>
-            <div class="item2 imgbox"><img src="" alt=""></div>
+            <p class="item1">No</p>
+            <p class="item2">이미지</p>
             <p class="item3">카테고리</p>
-            <p class="item4">TRE-001</p>
-            <p class="item5">이름3232321323</p>
-            <p class="item6">장비설명---------------------------------------</p>  
+            <p class="item4">장비코드</p>
+            <p class="item5">장비명</p>
+            <p class="item6">장비설명</p>  
+          </div>
+        </li>
+		  
+        <li th:each="tool, toolStat : ${toolList}">
+          <div class="info">
+            <p class="item1" th:text="${toolStat.index+1}">1.</p>
+            <div class="item2 imgbox"><img th:src="${tool.tool_image}" alt=""></div>
+            <p class="item3" th:text="${tool.category_name}">카테고리</p>
+            <p class="item4" th:text="${tool.tool_code}">TRE-001</p>
+            <p class="item5" th:text="${tool.tool_name}">이름</p>
+            <p class="item6" th:text="${tool.tool_comment}">장비설명</p>  
           </div>
           <div class="btns">
-            <button class="btn">수정</button>
-            <button class="btn">삭제</button>
+            <button class="btn" th:onclick="|location.href='@{/admin/tool/form/}${tool.tool_id}'|">수정</button>
+            <button class="btn" th:onclick="|deleteTool(${tool.tool_id})|">삭제</button>
           </div>
         </li>
 
@@ -59,11 +70,18 @@
     </div>
         
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-    <script>
-      function modal(){
-        $('.new-item').toggleClass('active');
-      }
+	<script>
+		function modal(){
+		    $('.new-item').toggleClass('active');
+		}
 
+		function deleteTool(tool_id){
+			const temp = confirm("정말 삭제 하시겠습니까?\n대여 중인 장비는 삭제하실 수 없습니다.");
+			if (temp == true){
+				window.location.href = "http://localhost:9899/admin/tool/delete/"+tool_id;
+			}
+		}
+	
     </script>
   </div>
 

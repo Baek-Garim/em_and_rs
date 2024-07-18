@@ -12,43 +12,131 @@
   <div class="content" layout:fragment="content">
     <h1 class="title"><span th:onclick="|location.href='@{/admin/tool}'|">장비 관리</span>>장비 등록</h1>
     <hr/>
-    <button class="btn" onclick="" >등록</button>
+    <button class="btn" onclick="form_submit();">등록</button>
 
-    <form class="tool-form" action="">
+    <form class="tool-form" name="tool_form" th:action="${action}" method="post">
+		<input id="tool_id" name="tool_id" th:value="${tool.tool_id}" hidden>
+		
+  	  <!--카테고리 선택-->
       <label for="">
         <span>카테고리</span>
-        <select name="" id="">
-          <option disabled selected>카테고리</option>
-          <option value="카테고리1">apple</option>
-          <option value="카테고리2">orange</option>  
+        <select class="tool_value" name="category_id" id="">
+          <option value="" disabled>카테고리</option>
+          <option th:each="cate : ${category}" th:value="${cate.category_id}" th:text="${cate.category_name}"
+		          th:selected="${cate.category_id} == ${tool.category_id}"></option>
         </select>
       </label>
 
-      <label for="">
+	  <!-- 장비 이미지 -->
+      <label for="" id="file-input">
         <span>이미지</span>
-        <input type="file" name="" id="">
+        <input class="tool_value" name="tool_image" id="fileurl"type="text" th:value="${tool.tool_image}" placeholder="이미지의 링크 혹은 파일">       
+        <input type="file" id="selectedFile" style="display: none;" /> 
+        <input type="button" class="btn" value="파일추가" onclick="document.getElementById('selectedFile').click();" />
+        <div class="cur-imgbox">
+			<img id="cur-img" src="" onerror="this.onerror=null; this.src='https://cdn.icon-icons.com/icons2/270/PNG/512/Preview_29934.png';">
+		</div>
       </label>
 
+	  <!-- 장비코드 입력 -->
       <label for="">
         <span>장비코드</span>
-        <input id="tool-code" name="" type="text" value="">
+        <input class="tool_value" id="tool-code" maxlength="6" name="tool_code" type="text" th:value="${tool.tool_code}">
+        <p class="chkmsg" id="codechk">대문자3자+숫자 형식으로 작성.<br>예)AAA-001<br>하이픈(-)제외</p>
       </label>
+      
 
+	  <!-- 장비 이름 입력-->
       <label for="">
         <span>장비이름</span>
-        <input type="text" value="">
+        <input class="tool_value" type="text" name="tool_name" th:value="${tool.tool_name}">
       </label>
 
+	  <!-- 장비 설명 입력-->
       <label for="">
         <span>장비 설명</span>
-        <textarea name="" id=""></textarea>
+        <textarea class="tool_value" name="tool_comment" id="" th:value="${tool.tool_comment}" th:text="${tool.tool_comment}"></textarea>
       </label>
 
 
     </form>
 
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+	<script >
+		let originToolCode = $("#tool-code").val();
+		let toolCodePattern = /^[A-Z]{3}-\d{3}$/;
+		
+		$("#tool-code").on("propertychange change keyup paste input", function(){
+			$(this).val($(this).val().toUpperCase());
+			
+	    	$(this).val( $(this).val().replace(/[^a-zA-Z0-9]/, "")
+								      .replace(/(^[A-Z]{3})+(\d{3})$/,"$1-$2"));
+							
+									
+			if(!toolCodePattern.test($.trim($("#tool-code").val()))){
+				$('#codechk').html("대문자3자+숫자 형식으로 작성.<br>예)AAA-001<br>하이픈(-)제외").css('color','red');
 
+			} else {
+				var code = $("#tool-code").val();
+				$.ajax({
+					url: '/admin/toolCodeCheck',
+					method: 'post',
+					data : {
+							"code" : code,
+							"originToolCode":originToolCode							
+					},
+					dataType : 'text',
+					
+					success : function(data) {
+						if (data == "redundancy") {
+							$('#codechk').html("중복된 코드입니다").css('color', 'red');
+							
+						} else if (data == "noredundancy") {
+							$('#codechk').html("사용가능한 코드입니다").css('color', 'green');
+							
+						;
+						} else {
+							$('#codechk').html("대문자3자+숫자 형식으로 작성.<br>예)AAA-001<br>하이픈(-)제외").css('color', 'red');
+							
+						}
+					},
+					error: function (data, status, err) {
+						// 에러날때 확인하는 곳
+				    },
+				});
+			}
+			;
+			isSubmit();
+		});
+			
+		
+		function form_submit(){
+			var values = $(".tool_value");
+			var chk = 0;			
+			$('.tool_value').each(function (index, item) {
+			     if(item.value == null || item.value == ""){
+					 console.log("내용 없음");
+					 chk = 1;
+				 }
+			});	
+			
+			if(chk == 0){
+				document.tool_form.submit();				
+			}
+			else{
+				alert("모든 값을 입력해주세요.");
+			}
+		}
+		
+		$("input[type=file]").change(function(event) {
+				let tmpPath = URL.createObjectURL(event.target.files[0]);
+				$("#fileurl").val(tmpPath);
+				$("#cur-img").attr("src", tmpPath);
+
+		});
+
+	
+	</script>
   </div>
 
 </body>
