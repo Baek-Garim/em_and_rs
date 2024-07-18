@@ -1,7 +1,8 @@
 <div class="left-nav" th:fragment="admin_sidebar_frg">
   <ul >
     <li th:onclick="|location.href='@{/admin/tool}'|" class="menu" th:classappend="${(#strings.equals(barType, 'tool')) ? 'active': ''}">장비</li>
-    <li th:onclick="|location.href='@{/admin/rental}'|" class="menu" th:classappend="${(#strings.equals(barType, 'rental')) ? 'active': ''}">대여</li>
-    <li th:onclick="|location.href='@{/admin/user}'|" class="menu" th:classappend="${(#strings.equals(barType, 'user')) ? 'active': ''}">유저</li>
+    <li th:onclick="|location.href='@{/admin/rent-return}'|" class="menu" th:classappend="${(#strings.equals(barType, 'rent-return')) ? 'active': ''}">대여/반납</li>
+    <li th:onclick="|location.href='@{/admin/rental}'|" class="menu" th:classappend="${(#strings.equals(barType, 'rental')) ? 'active': ''}">대여 내역</li>    
+    <li th:onclick="|location.href='@{/admin/user}'|" class="menu" th:classappend="${(#strings.equals(barType, 'user')) ? 'active': ''}">회원 조회</li>
   </ul>
 </div>

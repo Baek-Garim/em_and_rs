@@ -33,5 +33,10 @@ public class UserServiceImpl implements UserService{
 	public UserDTO login(UserDTO user) {
 		return userDAO.login(user);
 	}
+
+	@Override
+	public UserDTO getUserInfo(Integer user_id) {
+		return userDAO.getUserInfo(user_id);
+	}
 	
 }

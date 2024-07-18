@@ -9,7 +9,6 @@ hr{
   font-size: 1.5rem;
   padding: 1rem;
   margin-top: 0rem;
-  margin-bottom: 2rem;
 }
 
 button:disabled {
@@ -45,15 +44,18 @@ button:disabled {
 
 /* ===== 사이드바 ===== */
 
+
 .container{
   display: flex;
-  width: 100%;
-  height: 100%;
 }
 
 .container .left-nav{
   background-color: var(--white);
-  height: 100%;
+}
+
+.container .left-nav ul{
+	position: sticky;
+	top: 0;
 }
 
 .container .left-nav ul .menu{
@@ -88,7 +90,6 @@ button:disabled {
 	font-size: 1.5rem;
 	padding: 1rem;
 	margin-top: 0rem;
-	margin-bottom: 2rem;
 }
 
 .container .content .title span{
@@ -154,12 +155,17 @@ button:disabled {
 /* ========= 장비 리스트 쪽 ============  */
 
 .tool-area {
-  
+	padding: 2rem;
+	margin-bottom: 5rem;
 }
 
 .tool-area h2{
   font-size: 2rem;
   font-weight: 600;
+}
+
+.tool-area ul{
+  margin: 3rem 0;
 }
 
 .tool-area ul li{
@@ -309,3 +315,97 @@ button:disabled {
 }
 
 /* =========== 장비 등록 폼  END ============== */
+
+
+
+/* =============== 장비 대여 항목 ============== */
+
+.rental{
+}
+
+.rental .sub-nav{
+  font-size: 2rem;
+}
+
+.rental .sub-nav h2{
+  font-size: 2.5rem;
+  font-weight: 600;
+  padding: 2rem;
+  margin: 0 4rem;
+  border-bottom: var(--border);
+}
+
+.rental .sub-nav input{
+  border-radius: 1rem;
+  border: var(--border);
+  padding: 1rem;
+  margin: .5rem;
+  font-size: 1.5rem;
+}
+
+.rental .sub-nav .sub-container form{
+  display: flex;
+  align-items: center;
+}
+
+.rental .sub-nav .sub-container form label{
+  margin: 2rem;
+}
+
+.rental .sub-nav .sub-container form label p{
+  margin-left: .5rem;
+}
+
+
+.rental .sub-nav .sub-container form .btn{
+  margin: 0rem;
+}
+
+
+.rental .sub-nav #reserve-title{
+  display: flex;
+  align-items: center;
+  margin-bottom: -2rem;
+}
+
+.rental .sub-nav #reserve-title h3{
+  font-weight: 600;
+  margin: 2rem;
+}
+
+
+.rental .sub-nav .reservation-box{
+  height: 35rem;
+  margin: 2rem;
+  border: var(--border);
+  padding: 2rem;
+  overflow: scroll;
+  overflow-x:hidden;
+}
+
+.rental .sub-nav .reservation-box table{
+  width: 100%;
+  text-align: center;
+  font-size: 1.7rem;
+}
+
+.rental .sub-nav .reservation-box table tr td .btn{
+  margin-bottom: 0rem;
+}
+
+.rental .sub-nav .reservation-box table tr{
+  border-bottom: var(--border);
+}
+
+.rental .sub-nav .reservation-box table tr th{
+  font-weight: 600;
+  padding: 1rem;
+}
+
+.rental .sub-nav .reservation-box table tr td{
+  padding: 1rem;
+}
+
+
+
+/* ============= 장비 대여 항목 END ============= */

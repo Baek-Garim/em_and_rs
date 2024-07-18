@@ -12,11 +12,19 @@ public interface RentalDAO {
 	
 	Integer chkRentalState(String tool_code);	
 	
-	ArrayList<RentalDTO> getAllRental(Integer user_id);
+	ArrayList<RentalDTO> getUserAllRental(Integer user_id);
 
 	ArrayList<RentalDTO> rentalList(Integer user_id);
 
 	Integer duplicateCheck(ReservationDTO reserve);
+
+	void insertRental(RentalDTO rental);
+
+	ArrayList<RentalDTO> getActivateRentalList();
+
+	void toolReturn(Integer rental_id);
+
+	Integer returnDateChk(Integer rental_id);
 
 
 }

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -54,6 +55,19 @@ public class ToolController {
 			i.setCategory_name(toolService.selectCate(i.getCategory_id()));
 		}
 		model.addAttribute("toolList", toolList);
+		model.addAttribute("category", category);
+		
+		return "toolList/toolList";
+	}
+	
+	@GetMapping("sortCategory/{category_id}")
+	public String sortCategoryUrl(Model model, @PathVariable("category_id") int category) {
+		ArrayList<ToolDTO> toolList = toolService.sortCategory(category);
+		for(ToolDTO i: toolList) {
+			i.setCategory_name(toolService.selectCate(i.getCategory_id()));
+		}
+		model.addAttribute("toolList", toolList);
+		model.addAttribute("category", category);
 		
 		return "toolList/toolList";
 	}

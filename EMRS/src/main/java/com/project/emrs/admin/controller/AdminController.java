@@ -15,9 +15,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.emrs.admin.service.AdminService;
+import com.project.emrs.dto.RentalDTO;
+import com.project.emrs.dto.ReservationDTO;
 import com.project.emrs.dto.ToolCategoryDTO;
 import com.project.emrs.dto.ToolDTO;
+import com.project.emrs.service.RentalService;
+import com.project.emrs.service.ReservationService;
 import com.project.emrs.service.ToolService;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 
 @Controller
@@ -30,7 +37,13 @@ public class AdminController {
 	@Autowired
 	ToolService toolService;
 	
+	@Autowired
+	ReservationService reserService;
 	
+	@Autowired
+	RentalService rentalService;
+	
+
 	
 	@GetMapping("/tool")
 	public String showAdminToolPage(Model model) {
@@ -55,6 +68,23 @@ public class AdminController {
 		return "admin/admin_tool_form";
 	}
 
+	// 대여 및 반납
+	@GetMapping("/rent-return")
+	public String showAdminRentalAndReturnPage(Model model) {
+		
+		// 대여 가능 상태인 예약 목록 불러오기
+		ArrayList<ReservationDTO> reservationList = reserService.getActivateReserveList();
+
+		// 대여 진행 중인 렌탈 목록 불러오기
+		ArrayList<RentalDTO> rentalList = rentalService.getActivateRentalList();
+		
+		model.addAttribute("reservationList", reservationList);
+		model.addAttribute("rentalList", rentalList);
+
+		model.addAttribute("barType", "rent-return");
+		return "admin/admin_rental_return";
+	}
+
 
 	@GetMapping("/rental")
 	public String showAdminRentalPage(Model model) {
@@ -62,6 +92,7 @@ public class AdminController {
 		model.addAttribute("barType", "rental");
 		return "admin/admin_rental";
 	}
+	
 
 	@GetMapping("/user")
 	public String showAdminUserPage(Model model) {
@@ -127,6 +158,45 @@ public class AdminController {
 		toolService.deleteTool(tool_id);
 
 		return "redirect:/admin/tool";
+	}
+
+	
+	// 대여 진행(목록에서 선택함)
+	@GetMapping("/rent-return/rent/{reserve_id}")
+	public String toolRental(HttpServletRequest request, HttpSession session, @PathVariable("reserve_id") Integer reserve_id) {
+		// 이전 페이지 URL
+		String prevURL = request.getHeader("referer").substring(22);
+		
+		if(!session.getAttribute("user_grant").equals("ADMIN")) {
+			return "redirect:/login";
+		}
+		
+		rentalService.insertRental(reserve_id);
+		
+    	request.setAttribute("msg", "대여 성공");
+        request.setAttribute("url", "/"+prevURL);
+		
+        return "fragments/alert";
+	}
+
+	
+	// 반납 진행(목록에서 선택함)
+	@GetMapping("/rent-return/return/{tool_code}/{rental_id}/{user_id}")
+	public String toolReturn(HttpServletRequest request, HttpSession session, @PathVariable("tool_code") String tool_code , 
+								@PathVariable("rental_id") Integer rental_id, @PathVariable("user_id") Integer user_id) {
+		// 이전 페이지 URL
+		String prevURL = request.getHeader("referer").substring(22);
+		
+		if(!session.getAttribute("user_grant").equals("ADMIN")) {
+			return "redirect:/login";
+		}
+		
+		rentalService.toolReturn(tool_code, rental_id, user_id);
+		
+    	request.setAttribute("msg", "반납 성공");
+        request.setAttribute("url", "/"+prevURL);
+		
+        return "fragments/alert";
 	}
 
 	

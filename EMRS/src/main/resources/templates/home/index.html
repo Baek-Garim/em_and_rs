@@ -38,16 +38,16 @@
 						<div class="my-con" th:if="${user_id} != null and ${#strings.equals(user_grant, 'USER')}">
 							<div class="con">
 								<div class="text-list">
-									<a href="" id="user-name" th:text="${user_name}">이름 <span>님</span></a>
-									<p id="overdue">대여 불가</p>
-									<p>2023년 2월 23일 <span>까지</span></p>	
+									<a th:href="@{/myPage/updateUser}" id="user-name" th:text="${user_name}">이름 <span>님</span></a>
+									<p th:classappend="${(#strings.equals(user.user_rentable, '대여 가능')) ? 'available': 'overdue'}" th:text="${user.user_rentable}">대여 불가</p>
+									<p class="overdue" th:if="${user.unavailable_date != null}" th:text="${#temporals.format(user.unavailable_date, 'yyyy년 MM월 dd일까지')}">2023년 2월 23일</p>	
 								</div>
 							</div>
 
 							<div class="con">
 								<div>
-									<a href="">진행중인 대여 <span th:text="|${rentalList.size}건|">5건</span></a><br/>
-									<a href="">진행중인 예약 <span th:text="|${reservationList.size}건|">3건</span></a>	
+									<a th:href="@{/myPage/rental}">진행중인 대여 <span th:text="|${rentalList.size}건|">5건</span></a><br/>
+									<a th:href="@{/myPage/reserve}">진행중인 예약 <span th:text="|${reservationList.size}건|">3건</span></a>	
 								</div>
 							</div>
 						</div>
@@ -66,6 +66,10 @@
 											<col width="30%" />
 											<col width="15%" />
 										</colgroup>
+										<tr th:if="${rentalList.size} <= 0">
+											<td colspan="4">현재 대여중인 장비가 없습니다.</td>
+											<td></td>
+										</tr>
 										<tr th:each="rental, rental_state : ${rentalList}">
 											<td th:text="${rental_state.index}+1">1.</td>
 											<td th:text="${rental.tool_name}">장비이름</td>
@@ -89,6 +93,10 @@
 											<col width="40%" />
 											<col width="15%" />
 										</colgroup>
+										<tr th:if="${reservationList.size} <= 0">
+											<td colspan="4">현재 예약중인 장비가 없습니다.</td>
+											<td></td>
+										</tr>
 										<tr th:each="rsv, rsv_state : ${reservationList}">
 											<td th:text="${rsv_state.index}+1">1.</td>
 											<td th:text="${rsv.tool_name}">장비이름</td>
@@ -115,18 +123,11 @@
 						<div id="line"></div>
 
 						<div class="box-container">
-							<div class="box">
-								<p>사무용품</p>
-							</div>
-							<div class="box">
-								<p>촬영</p>
-							</div>
-							<div class="box">
-								<p>의상</p>
-							</div>
-							<div class="box">
-								<p>기타소품</p>
-							</div>
+							<th:block th:each="cate : ${categoryList}">
+								<div class="box" th:onclick="|location.href='@{/tool/sortCategory/}${cate.category_id}'|">
+									<p th:text="${cate.category_name}">사무용품</p>
+								</div>								
+							</th:block>
 
 						</div>
 					</div>

@@ -27,8 +27,13 @@
 	    	and reserve_state != '대여완료'
 	</select>
 
+	<select id="findById" resultType="ReservationDTO">
+		select *
+			from reservation
+	    	where reserve_id = #{reserve_id}
+	</select>
 
-	<select id="getAllReservation" resultType="ReservationDTO">
+	<select id="getUserAllReservation" resultType="ReservationDTO">
 		select rsv.*, t.tool_name 
 			from reservation rsv, tool t
 	    	where rsv.tool_code = t.tool_code
@@ -36,6 +41,27 @@
         		and reserve_state != '대여완료'
 	</select>
 
+
+	<!-- 어드민에서 현재 대여 가능인 예약 목록 불러올 때 사용 -->
+	<select id="getActivateReserveList" resultType="ReservationDTO">
+		select rsv.*, u.user_name, u.email, u.phone
+			from reservation rsv, user_tb u
+	    	where rsv.user_id = u.user_id
+        		and reserve_state = '대여가능'
+	</select>
+	
+	<!-- 해당 장비의 가장 첫번째 예약 가져오기 -->
+	<select id="getFirstReservation" resultType="ReservationDTO">
+		SELECT * FROM
+		    (SELECT * FROM reservation 
+		        where tool_code = #{tool_code}
+		            and reserve_state = '대기중' 
+		        ORDER BY reserve_date)
+		    WHERE ROWNUM= 1
+	</select>
+
+
+	<!-- INSERT  -->
 	
 	<insert id="insertReserve">
 		<if test="deadline_date != null">
@@ -49,5 +75,21 @@
 		</if>
 	</insert>
 	
+	
+	<!-- UPDATE  -->
+	<update id="completeReservation">
+		update reservation
+			set reserve_state = '대여완료'
+			where reserve_id = #{reserve_id}
+	</update>
+	
+	<!-- 대여가능, 데드라인 변경  -->
+	<update id="updateActivateReservation">
+		update reservation
+			set reserve_state = #{reserve_state},
+				deadline_date = #{deadline_date}			
+			where reserve_id = #{reserve_id}
+	</update>
+
 	
 </mapper>

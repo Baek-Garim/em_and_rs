@@ -17,6 +17,10 @@ public class ReservationDTO {
 	
 	// 화면 출력용
 	private String tool_name;
+	private String user_name;
+	private String email;
+	private String phone;
+	
 
 	
 	

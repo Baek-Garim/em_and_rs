@@ -31,7 +31,7 @@ public class ReservationServiceImpl implements ReservationService{
 		
 		// 예약 가능 상태면
 		if(chkReserveState(reservation) == 0) {
-			reservation.setDeadline_date(reservation.getReserve_date().minusDays(3));
+			reservation.setDeadline_date(reservation.getReserve_date().plusDays(3));
 			reservation.setReserve_state("대여가능");			
 		} else {
 			reservation.setDeadline_date(null);
@@ -53,8 +53,8 @@ public class ReservationServiceImpl implements ReservationService{
 	}
 
 	@Override
-	public ArrayList<ReservationDTO> getAllReservation(Integer user_id) {
-		return reservationDAO.getAllReservation(user_id);
+	public ArrayList<ReservationDTO> getUserAllReservation(Integer user_id) {
+		return reservationDAO.getUserAllReservation(user_id);
 	}
 
 	@Override
@@ -76,6 +76,12 @@ public class ReservationServiceImpl implements ReservationService{
 		temp += reservationDAO.duplicateCheck(reserve);
 
 		return temp;
+	}
+
+	// 대여 가능인 예약 목록 불러오기
+	@Override
+	public ArrayList<ReservationDTO> getActivateReserveList() {
+		return reservationDAO.getActivateReserveList();
 	}
 	
 	

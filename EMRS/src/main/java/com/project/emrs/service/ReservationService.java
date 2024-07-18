@@ -11,10 +11,12 @@ public interface ReservationService {
 
 	Integer chkReserveState(ReservationDTO reservation);
 
-	ArrayList<ReservationDTO> getAllReservation(Integer user_id);
+	ArrayList<ReservationDTO> getUserAllReservation(Integer user_id);
 
 	Integer countMyReservation(Integer user_id);
 
 	Integer duplicateCheck(Integer user_id, String tool_code);
+
+	ArrayList<ReservationDTO> getActivateReserveList();
 	
 }

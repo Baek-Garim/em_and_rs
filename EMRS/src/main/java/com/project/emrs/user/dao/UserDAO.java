@@ -15,4 +15,8 @@ public interface UserDAO {
 
 	UserDTO login(UserDTO user);
 
+	UserDTO getUserInfo(Integer user_id);
+
+	void setOverdue(UserDTO user);
+
 }
