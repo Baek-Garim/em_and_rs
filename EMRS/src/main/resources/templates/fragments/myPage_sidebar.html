@@ -1,0 +1,7 @@
+<div class="left-nav" th:fragment="myPage_sidebar_frg">
+  <ul >
+    <li th:onclick="|location.href='@{/myPage/updateUser}'|" class="menu" th:classappend="${(#strings.equals(barType, 'updateUser')) ? 'active': ''}">내 정보</li>
+    <li th:onclick="|location.href='@{/admin/rental}'|" class="menu" th:classappend="${(#strings.equals(barType, 'rental')) ? 'active': ''}">대여 내역</li>
+    <li th:onclick="|location.href='@{/admin/reserve}'|" class="menu" th:classappend="${(#strings.equals(barType, 'reserve')) ? 'active': ''}">예약 내역</li>
+  </ul>
+</div>

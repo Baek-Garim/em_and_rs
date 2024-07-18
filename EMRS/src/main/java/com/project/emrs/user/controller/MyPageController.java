@@ -21,14 +21,34 @@ public class MyPageController {
 	
 	@Autowired
 	MyPageService myPageService;
-	@GetMapping("myPage")
-	public String home(Model model, HttpSession session) {
-		
+	
+	@GetMapping("/updateUser")
+	public String myPageUpadateUser(Model model, HttpSession session) {
 		model.addAttribute("user_id", session.getAttribute("user_id"));
 		model.addAttribute("user_name", session.getAttribute("user_name"));
 		
-		return "myPage/myPage";
+		model.addAttribute("barType", "updateUser");
+		
+		return "myPage/myPage_updateUser";
 	}
 	
+	@GetMapping("/rental")
+	public String myPageRental(Model model, HttpSession session) {
+		model.addAttribute("user_id", session.getAttribute("user_id"));
+		model.addAttribute("user_name", session.getAttribute("user_name"));
+		
+		model.addAttribute("barType", "rental");
+		
+		return "myPage/myPage_rental";
+	}
+
+	@GetMapping("/reserve")
+	public String myPageReserve(Model model, HttpSession session) {
+		model.addAttribute("user_id", session.getAttribute("user_id"));
+		model.addAttribute("user_name", session.getAttribute("user_name"));		
+		
+		model.addAttribute("barType", "user");
+		return "myPage/myPage_reserve";
+	}
 	
 } // controller
