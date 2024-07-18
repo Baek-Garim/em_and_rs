@@ -9,12 +9,17 @@
 <body>
 	
   <div class="content" layout:fragment="content">
-    <h1 class="title">대여 내역</h1>
+    <h1 class="title">내 정보</h1>
     <hr>
     <br>
-    <div class="listRe">
-	    <table class="listable">
-	    </table>
+    <div class="listForm">
+    	<form class="check" method="post" th:action="@{/myPage/updateUser_checkForm}">
+		    <span>비밀번호 입력</span>
+		        
+		    <input class="checkInput" name="userPw" id="userPw">
+			<br><br><br>
+    		<button class="btn" onclick="form_submit();">내 정보 수정</button>
+    	</form>
     </div>
     
   </div>
