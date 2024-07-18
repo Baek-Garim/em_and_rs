@@ -27,6 +27,7 @@ public class ReservationController {
 		// 동일 제품을 대여중이거나 예약중(대기중, 대여가능)이면 안됨.
 		Integer duplicateCheck = reserService.duplicateCheck(user_id, tool_code);
 		if(duplicateCheck > 0) {
+			
 			String prevURL = request.getHeader("referer").substring(22);
 			
 	    	request.setAttribute("msg", "이미 대여중이거나 예약중인 장비는 예약할 수 없습니다.");
