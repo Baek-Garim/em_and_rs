@@ -54,7 +54,7 @@
 									</tr>
 									<tr>
 										<td class="card-td" colspan="2">
-											<a th:href="|@{/reserve/}${tool.tool_code}|" class="rebtn">예약 (대기 0인)</a>
+											<a th:href="|@{/reserve/}${tool.tool_code}|" class="rebtn" th:text="|예약 (대기 ${tool.totalReservationNum}인)|">예약 (대기 0인)</a>
 										</td>
 									</tr>
 					    		</table>

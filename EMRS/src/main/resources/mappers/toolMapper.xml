@@ -7,11 +7,13 @@
   
 <mapper namespace="com.project.emrs.dao.ToolDAO">
 	<select id="toolList" resultType="ToolDTO">
-		select * from TOOL
+	    SELECT t.*, (SELECT COUNT(*) FROM reservation where tool_code = t.tool_code) as totalReservationNum
+    		FROM TOOL t
 	</select>
 	
 	<select id="sortCategory" parameterType="Integer" resultType="ToolDTO">
-	    SELECT * FROM TOOL
+	    SELECT t.*, (SELECT COUNT(*) FROM reservation where tool_code = t.tool_code) as totalReservationNum
+    		FROM TOOL t
 	    <where>
 	        <if test="category != null">
 	            <if test="category == 1">

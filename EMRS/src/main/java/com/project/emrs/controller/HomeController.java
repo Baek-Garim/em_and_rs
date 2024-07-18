@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import com.project.emrs.dto.RentalDTO;
 import com.project.emrs.dto.ReservationDTO;
 import com.project.emrs.dto.ToolCategoryDTO;
+import com.project.emrs.dto.ToolDTO;
 import com.project.emrs.service.RentalService;
 import com.project.emrs.service.ReservationService;
 import com.project.emrs.service.ToolService;
@@ -48,14 +49,20 @@ public class HomeController {
 			// 유저 정보
 			UserDTO user = userService.getUserInfo((Integer) session.getAttribute("user_id"));
 			
-			
 			model.addAttribute("user", user);
 			model.addAttribute("reservationList", reservationList);
 			model.addAttribute("rentalList", rentalList);
 		}
 		ArrayList<ToolCategoryDTO> categoryList = toolService.getAllCategory();
-		
 		model.addAttribute("categoryList", categoryList);
+		
+		ArrayList<ToolDTO> toolList = toolService.toolList();
+		for(ToolDTO i: toolList) {
+			i.setCategory_name(toolService.selectCate(i.getCategory_id()));
+		}
+		model.addAttribute("toolList", toolList);		
+		
+		
 		model.addAttribute("user_id", session.getAttribute("user_id"));
 		model.addAttribute("user_name", session.getAttribute("user_name"));
 		model.addAttribute("user_grant", session.getAttribute("user_grant"));

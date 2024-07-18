@@ -6,10 +6,14 @@
          EMRS
        </a>
 
-       <a class="list-btn" th:href="@{|/tool/toolList|}">
-         장비 목록
-       </a>       
-       
+       <div class="menu-box">
+        <a class="list-btn" th:href="@{|/tool/toolList|}">장비 목록</a>
+        <div class="sub-nav">
+		   <ul>
+			   <li th:each="cate : ${categoryList}" th:onclick="|location.href='@{/tool/sortCategory/}${cate.category_id}'|" th:text="${cate.category_name}">카테1</li>
+		   </ul>
+	   	</div>
+       </div>
      </div>
 
      <div class="right-content">

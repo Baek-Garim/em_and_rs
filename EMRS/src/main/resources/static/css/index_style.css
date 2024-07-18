@@ -236,8 +236,122 @@
 /* ===== myinfo end ===== */
 
 
+
+
+/* ====== 장비 목록 ======*/
+
+.tool-list{
+	margin-top: 2rem;
+	padding: 3rem;
+}
+
+.tool-list .title{
+  text-align: center;
+}
+
+.tool-list .sub-title{
+  text-align: center;
+  font-size: 2rem;
+  margin-top: 1rem;
+}
+
+.tool-list .con{
+	font-size: 2rem;
+	line-height: 4rem;
+}
+
+.tool-list .container {
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+}
+
+.tool-list .card {
+	margin: 2rem;
+	border: 0.1rem solid #c8c8c8;
+	border-radius: 1rem;
+	padding: 1rem;
+	background-color: #fff;
+	width: 30rem;
+	height: 36rem;
+	justify-content: center;	
+	box-shadow: var(--box-shadow);
+}
+
+.tool-list .card-table{
+	width: 30rem;
+	height: 14rem;	
+}
+
+.tool-list .card-th{
+	width: 10rem;
+	height: 1rem;
+	border: var(--border);
+	padding: 0 1rem 1rem 1rem;
+}
+
+.tool-list .card-td{
+	width: 30rem;
+	height: 1rem;
+}
+
+.tool-list .card-img-top {
+	width: 30rem;
+	height: 16rem;
+	border-radius: 1rem;
+}
+
+.tool-list .rebtn {
+  width: 89%;
+  margin-top: 1rem;
+  cursor: pointer;
+  padding: 0.2rem 1.5rem;
+
+  display: inline-block;
+  background-color: var(--main-color);
+  border: var(--border);
+  border-radius: 1rem;
+
+  color: var(--white);
+  font-size: 1.8rem;
+  font-weight: 500;
+  text-align: center;
+  box-shadow: var(--box-shadow);
+}
+
+.tool-list .card-table .card-title{
+	margin: 0 auto;
+	width: 10rem;
+	height: 1rem;
+	font-size: 2rem;
+	font-weight: bold;
+	color: var(--main-color);
+	text-align: center;
+}
+
+.tool-list .card-table .card-name{
+	margin-left: 1rem;
+	font-size: 2rem;
+	color: black;
+	text-align: left;
+}
+
+.tool-list .card-table .card-text{
+	margin-left: 1rem;
+	font-size: 1.5rem;
+	height: 3rem;
+	color: black;
+}
+
+
+
+/* ========= 장비 목록 END =========== */
+
+
+
 /* ===== eq-list ===== */
 .eq-list {
+	background-color: var(--white);
   padding: 8rem 0;
 }
 

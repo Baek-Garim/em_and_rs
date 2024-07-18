@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.project.emrs.dto.ToolCategoryDTO;
 import com.project.emrs.dto.ToolDTO;
 import com.project.emrs.service.ToolService;
 
@@ -31,6 +32,10 @@ public class ToolController {
 			i.setCategory_name(toolService.selectCate(i.getCategory_id()));
 		}
 		model.addAttribute("toolList", toolList);
+		
+		ArrayList<ToolCategoryDTO> categoryList = toolService.getAllCategory();
+		model.addAttribute("categoryList", categoryList);
+		
 		
 		model.addAttribute("user_id", session.getAttribute("user_id"));
 		model.addAttribute("user_name", session.getAttribute("user_name"));
@@ -54,6 +59,9 @@ public class ToolController {
 		for(ToolDTO i: toolList) {
 			i.setCategory_name(toolService.selectCate(i.getCategory_id()));
 		}
+		
+		ArrayList<ToolCategoryDTO> categoryList = toolService.getAllCategory();
+		model.addAttribute("categoryList", categoryList);
 		model.addAttribute("toolList", toolList);
 		model.addAttribute("category", category);
 		
@@ -66,6 +74,10 @@ public class ToolController {
 		for(ToolDTO i: toolList) {
 			i.setCategory_name(toolService.selectCate(i.getCategory_id()));
 		}
+		
+		ArrayList<ToolCategoryDTO> categoryList = toolService.getAllCategory();
+		model.addAttribute("categoryList", categoryList);
+		
 		model.addAttribute("toolList", toolList);
 		model.addAttribute("category", category);
 		

@@ -15,6 +15,10 @@ public class ToolDTO {
 	private String tool_image;
 	private String tool_comment;
 	private Integer category_id;
+	
+	// 화면 표시용	
 	private String category_name;
+	private Integer totalReservationNum;	// 총 예약자 수
+	
 	
 } // tool

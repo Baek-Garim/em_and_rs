@@ -143,6 +143,7 @@ header .nav .left-content .main-btn {
 }
 
 header .nav .left-content .list-btn {
+  position: relative;
   cursor: pointer;
   min-width: 6rem;
   margin-left: 4rem;
@@ -151,6 +152,34 @@ header .nav .left-content .list-btn {
   color: var(--black);
   font-weight: 600;
 }
+
+header .nav .left-content .menu-box:hover .sub-nav{
+	visibility: visible;
+}
+
+header .nav .left-content .sub-nav{
+	text-align: center;
+	position: absolute;
+	top: 7rem;
+	left: 20%;	
+	background-color: var(--white);
+	font-size: 2rem;
+	border-radius: 1rem;
+	visibility: hidden;
+}
+
+
+header .nav .left-content .sub-nav ul li{
+	padding: 2rem 4.5rem;
+	cursor: pointer;
+}
+
+header .nav .left-content .sub-nav ul li:hover{
+	background-color: #6c6c86;
+	color: var(--white);
+}
+
+
 
 /* == */
 

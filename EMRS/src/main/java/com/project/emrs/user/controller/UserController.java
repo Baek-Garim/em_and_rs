@@ -1,5 +1,7 @@
 package com.project.emrs.user.controller;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.project.emrs.dto.ToolCategoryDTO;
+import com.project.emrs.service.ToolService;
 import com.project.emrs.user.dto.UserDTO;
 import com.project.emrs.user.service.UserService;
 
@@ -22,11 +26,18 @@ public class UserController {
 	@Autowired
 	UserService userService;
 	
+	@Autowired
+	ToolService toolService;
+	
 	@GetMapping("/login")
-	public String showLoginPage(HttpSession session) {
+	public String showLoginPage(Model model, HttpSession session) {
 		if (session.getAttribute("user_id") != null) {
 			return "redirect:/";
 		}
+		
+		ArrayList<ToolCategoryDTO> categoryList = toolService.getAllCategory();
+		model.addAttribute("categoryList", categoryList);
+		
 		return "login/login";
 	}
 	

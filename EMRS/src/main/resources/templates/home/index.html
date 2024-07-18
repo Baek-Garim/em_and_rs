@@ -113,6 +113,53 @@
 
 				</div>
 			</section>
+		
+			<section class="tool-list">
+				<h1 class="title">최신 등록 장비</h1>
+				<p class="sub-title"></p>
+				<div class="con">
+					<table>
+						<tr class="container">
+							<td th:each="tool, tool_state : ${toolList}" th:if="${tool_state.index} < 8">
+								<div class="card">
+									<img th:src="${tool.tool_image}" class="card-img-top">
+						    		<table class="card-table">
+						    			<tr>
+						    				<th class="card-th">
+						    					<h5 class="card-title" th:text="${tool.category_name}">카테고리</h5>
+						    				</th>
+						    				<td class="card-td">
+						    					<p class="card-name" th:text="${tool.tool_name}">장비명</p>
+						    				</td>
+						    			</tr>
+										<tr>
+											<td class="card-td" colspan="2">
+												<p class="card-text" th:text="${tool.tool_comment}">장비 설명</p>
+											</td>
+										</tr>
+										<tr>
+											<td class="card-td" colspan="2">
+												<p class="card-text">대여상태</p>
+											</td>
+										</tr>
+										<tr>
+											<td class="card-td" colspan="2">
+												<p class="card-text">대여일수</p>
+											</td>
+										</tr>
+										<tr>
+											<td class="card-td" colspan="2">
+												<a th:href="|@{/reserve/}${tool.tool_code}|" class="rebtn" th:text="|예약 (대기 ${tool.totalReservationNum}인)|">예약 (대기 0인)</a>
+											</td>
+										</tr>
+						    		</table>
+								</div>
+							</td>
+						</tr>
+					</table>			
+				</div>
+			</section>
+
 
 			<section class="eq-list">
 				<div class="container">
