@@ -22,6 +22,9 @@ public interface ReservationDAO {
 	Integer duplicateCheck(ReservationDTO reserve);
 
 
+
+	ArrayList<ReservationDTO> reservationList(Integer user_id);
+
 	ArrayList<ReservationDTO> getActivateReserveList();
 
 
@@ -34,5 +37,6 @@ public interface ReservationDAO {
 	ReservationDTO getFirstReservation(String tool_code);
 
 	void updateActivateReservation(ReservationDTO reservation);
+
 
 }

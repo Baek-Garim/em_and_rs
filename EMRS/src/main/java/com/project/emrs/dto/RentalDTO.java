@@ -17,7 +17,15 @@ public class RentalDTO {
 	
 	// 화면 출력용
 	private String tool_name;
+
+	private Integer tool_id;
+	private String tool_image;
+	private String rental_date_String;
+	private String return_date_String;
+	
+
 	private String user_name;
 	private String email;
 	private String phone;
+
 }

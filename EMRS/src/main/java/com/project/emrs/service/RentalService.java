@@ -10,11 +10,15 @@ public interface RentalService {
 
 	ArrayList<RentalDTO> rentalList(Integer user_id);
 
+
+	void rentalRenew(Integer rental_id);
+
 	void insertRental(Integer reserve_id);
 
 	ArrayList<RentalDTO> getActivateRentalList();
 
 	void toolReturn(String tool_code, Integer rental_id, Integer user_id);
+
 
 
 }

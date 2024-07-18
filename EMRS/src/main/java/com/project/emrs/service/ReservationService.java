@@ -17,6 +17,9 @@ public interface ReservationService {
 
 	Integer duplicateCheck(Integer user_id, String tool_code);
 
+	ArrayList<ReservationDTO> reservationList(Integer user_id);
+
 	ArrayList<ReservationDTO> getActivateReserveList();
+
 	
 }

@@ -78,10 +78,19 @@ public class ReservationServiceImpl implements ReservationService{
 		return temp;
 	}
 
+
+	@Override
+	public ArrayList<ReservationDTO> reservationList(Integer user_id) {
+		ArrayList<ReservationDTO> reservationList = reservationDAO.reservationList(user_id);
+		
+		return reservationList;
+  }
+  
 	// 대여 가능인 예약 목록 불러오기
 	@Override
 	public ArrayList<ReservationDTO> getActivateReserveList() {
 		return reservationDAO.getActivateReserveList();
+
 	}
 	
 	

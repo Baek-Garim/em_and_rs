@@ -10,10 +10,15 @@ import com.project.emrs.dao.RentalDAO;
 import com.project.emrs.dao.ReservationDAO;
 import com.project.emrs.dto.RentalDTO;
 import com.project.emrs.dto.ReservationDTO;
+
+import lombok.extern.slf4j.Slf4j;
+
 import com.project.emrs.user.dao.UserDAO;
 import com.project.emrs.user.dto.UserDTO;
 
+
 @Service
+@Slf4j
 public class RentalServiceImpl implements RentalService{
 
 	@Autowired
@@ -35,7 +40,13 @@ public class RentalServiceImpl implements RentalService{
 	@Override
 	public ArrayList<RentalDTO> rentalList(Integer user_id) {
 		ArrayList<RentalDTO> rentalList = rentalDAO.rentalList(user_id);
+		
 		return rentalList;
+	}
+
+	@Override
+	public void rentalRenew(Integer rental_id) {
+		rentalDAO.rentalRenew(rental_id);
 	}
 
 	@Override
@@ -100,6 +111,6 @@ public class RentalServiceImpl implements RentalService{
 	}
 
 	
-	
+
 	
 }

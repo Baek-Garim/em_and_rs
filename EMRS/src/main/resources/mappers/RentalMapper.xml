@@ -26,11 +26,19 @@
 	</select>
 	
 	<select id="rentalList" resultType="RentalDTO" parameterType="Integer">
-		select r.*, t.tool_name 
+		select r.*, t.tool_name, t.tool_image, t.tool_id
 		    from rental r, tool t 
 		    where r.tool_code = t.tool_code
 		    and user_id = #{user_id}
 	</select>
+
+
+	<update id="rentalRenew" parameterType="Integer">
+	   UPDATE RENTAL
+	      SET RETURN_DATE = RETURN_DATE + INTERVAL '4' DAY,
+	          RENEW = RENEW + 1
+	   WHERE RENTAL_ID = #{rental_id}
+	</update>
 
 	<!-- 어드민에서 현재 대여중인 대여 목록 불러올 때 사용 -->
 	<select id="getActivateRentalList" resultType="RentalDTO">
@@ -46,7 +54,6 @@
 			from rental 
     		where rental_id = #{rental_id}
 	</select>
-
 
 
 

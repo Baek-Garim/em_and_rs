@@ -18,6 +18,8 @@ public interface RentalDAO {
 
 	Integer duplicateCheck(ReservationDTO reserve);
 
+	void rentalRenew(Integer rental_id);
+
 	void insertRental(RentalDTO rental);
 
 	ArrayList<RentalDTO> getActivateRentalList();
@@ -25,6 +27,7 @@ public interface RentalDAO {
 	void toolReturn(Integer rental_id);
 
 	Integer returnDateChk(Integer rental_id);
+
 
 
 }
