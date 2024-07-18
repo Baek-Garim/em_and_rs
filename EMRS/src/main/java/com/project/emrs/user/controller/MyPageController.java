@@ -50,7 +50,7 @@ public class MyPageController {
 	public String myPageReserve(Model model, HttpSession session) {
 		model.addAttribute("user_id", session.getAttribute("user_id"));
 		
-		model.addAttribute("barType", "user");
+		model.addAttribute("barType", "reserve");
 		return "myPage/myPage_reserve";
 	}
 	
@@ -66,8 +66,8 @@ public class MyPageController {
 		model.addAttribute("user_id", session.getAttribute("user_id"));
 		UserDTO user = myPageService.selectUser((Integer)session.getAttribute("user_id"));
 		String currentPw = user.getUser_pw();
-		if (currentPw.equals(user_pw)) {
-			
+		if (!currentPw.equals(user_pw)) {
+			return "redirect:/myPage/myPage_updateUser";
 		}
 		
 		return "myPage/myPage_updateUser_form";
