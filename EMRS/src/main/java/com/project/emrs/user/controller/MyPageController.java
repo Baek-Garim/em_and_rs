@@ -21,6 +21,7 @@ import com.project.emrs.dto.ToolDTO;
 import com.project.emrs.service.RentalService;
 import com.project.emrs.service.ReservationService;
 import com.project.emrs.user.service.MyPageService;
+import com.project.emrs.user.service.UserService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -39,6 +40,9 @@ public class MyPageController {
 	
 	@Autowired
 	ReservationService reservationService;
+	
+	@Autowired
+	UserService userService;
 	
 	@GetMapping("/updateUser")
 	public String myPageUpadateUser(Model model, HttpSession session) {
@@ -97,15 +101,26 @@ public class MyPageController {
 	}
 	
 	@PostMapping("/updateUser_checkForm")
-	public String check(Model model, @RequestParam("user_pw") String user_pw, HttpSession session) {
-		model.addAttribute("user_id", session.getAttribute("user_id"));
+	public String check(Model model, @RequestParam("user_pw") String user_pw, HttpSession session, HttpServletRequest request) {
 		UserDTO user = myPageService.selectUser((Integer)session.getAttribute("user_id"));
-		String currentPw = user.getUser_pw();
-		if (!currentPw.equals(user_pw)) {
-			return "redirect:/myPage/myPage_updateUser";
+		model.addAttribute("user", user);
+		// 이전 페이지 URL
+		String prevURL = request.getHeader("referer").substring(22);
+		if (!user.getUser_pw().equals(user_pw)) {
+			request.setAttribute("msg", "비밀번호가 다릅니다.");
+	        request.setAttribute("url", "/"+prevURL);
+	        return "fragments/alert";
 		}
 		
 		return "myPage/myPage_updateUser_form";
+	}
+	
+	@PostMapping("/updateUser")
+	public String updateUser(@ModelAttribute UserDTO user, HttpSession session) {
+		user.setUser_id((Integer)session.getAttribute("user_id"));
+		userService.updateUser(user);
+
+		return "redirect:/myPage/updateUser";
 	}
 	
 	@GetMapping("/rental_renew{rental_id}")

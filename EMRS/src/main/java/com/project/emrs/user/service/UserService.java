@@ -14,4 +14,6 @@ public interface UserService {
 
 	UserDTO getUserInfo(Integer user_id);
 
+	void updateUser(UserDTO user);
+
 }

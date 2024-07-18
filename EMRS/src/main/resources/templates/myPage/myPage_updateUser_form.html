@@ -1,10 +1,75 @@
 <!DOCTYPE html>
-<html>
+<html layout:decorate="~{layout/myPage_layout}" lang="en">
 <head>
-<meta charset="EUC-KR">
-<title>Insert title here</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" th:href="@{/css/myPage_style.css}">
+   <title>내 정보</title>
+   
+   <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+   <script src="/js/update_check.js"></script>
 </head>
 <body>
+	
+  <div class="content" layout:fragment="content">
+    <h1 class="title">내 정보</h1>
+    <hr>
+    <br>
+    	<form method="post" th:action="@{/myPage/updateUser}">
+    		<table>
+    			<tr>
+					<td>
+			        	<span>아이디</span>
+			        </td>
+			        <td>
+				    	<span th:text="${user.email}"></span>
+					</td>
+    			</tr>
+    			<tr>
+					<td>
+			            <span>비밀번호</span>
+			        </td>
+			        <td>
+			            <input type="password" id="user_pw" name="user_pw" placeholder="비밀 번호" class="boxin"><br>
+			            <p id="pwchk" >영문과 숫자를 포함한 6~16자</p>
+					</td>
+    			</tr>
+    			<tr>
+					<td>
+			            <span>비밀번호 확인</span>
+			        </td>
+			        <td>
+			            <input type="password" id="password2" name="password2" placeholder="비밀 번호 확인" class="boxin"><br>
+			            <p id="pw2chk">비밀 번호를 한 번 더 입력해 주세요.</p>
+					</td>
+    			</tr>
+    			<tr>
+					<td>
+		        		<span>이름</span>
+		        	</td>
+		        	<td>
+		        		<input type="text" id="user_name" name="user_name" placeholder="이름" class="boxin"><br>
+		        		<p id="namechk">이름을 입력해 주세요.(2~6자)</p>
+					</td>
+    			</tr>
+    			<tr>
+					<td>
+			            <span>전화번호</span>
+			        </td>
+			        <td>
+			            <input type="text" id="phone" maxlength="11" name="phone" placeholder="010-xxxx-xxxx" class="boxin"><br>
+			            <p id="phonechk">하이픈(-)을 제외한 전화번호를 입력해 주세요.</p>
+					</td>
+    			</tr>
+    			<tr>
+					<td>
+						<input type="submit" value="내 정보 수정" class="btn" id="s-submit-btn" disabled>
+					</td>
+    			</tr>
+    		</table>
 
+          </form>
+  </div>
+	
 </body>
 </html>

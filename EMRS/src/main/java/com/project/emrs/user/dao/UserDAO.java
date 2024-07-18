@@ -19,4 +19,6 @@ public interface UserDAO {
 
 	void setOverdue(UserDTO user);
 
+	void updateUser(UserDTO user);
+
 }
