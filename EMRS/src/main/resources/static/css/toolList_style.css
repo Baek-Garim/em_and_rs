@@ -8,7 +8,7 @@
 
 .container {
 	display: flex;
-	width: 110rem;
+	width: 80vw;
 	flex-wrap: wrap;
 }
 

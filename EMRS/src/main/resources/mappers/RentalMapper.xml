@@ -15,6 +15,13 @@
 		    and user_id = #{user_id}
 		    and rental_state != '반납'
 	</select>
+	
+	<select id="rentalList" resultType="RentalDTO" parameterType="Integer">
+		select r.*, t.tool_name 
+		    from rental r, tool t 
+		    where r.tool_code = t.tool_code
+		    and user_id = #{user_id}
+	</select>
 
 
 	

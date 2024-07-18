@@ -19,6 +19,12 @@ public class RentalServiceImpl implements RentalService{
 		return rentalDAO.getAllRental(user_id);
 	}
 
+	@Override
+	public ArrayList<RentalDTO> rentalList(Integer user_id) {
+		ArrayList<RentalDTO> rentalList = rentalDAO.rentalList(user_id);
+		return rentalList;
+	}
+
 	
 	
 	
