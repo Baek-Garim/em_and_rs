@@ -1,6 +1,6 @@
 package com.project.emrs.dao;
 
-import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -11,6 +11,12 @@ public interface ReservationDAO {
 
 	Integer chkReserveState(ReservationDTO reservation);
 
+	
 	void insertReserve(ReservationDTO reservation);
+
+	ArrayList<ReservationDTO> getAllReservation(Integer user_id);
+
+
+	Integer countMyReservation(Integer user_id);
 
 }

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import com.project.emrs.service.ReservationService;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -16,13 +17,25 @@ public class ReservationController {
 	ReservationService reserService;
 
 	@GetMapping("/reserve/{tool_code}")
-	public String reserveTool(HttpSession session, @PathVariable("tool_code") String tool_code) {
-	
-		if(session.getAttribute("user_id") == null) {
+	public String reserveTool(HttpServletRequest request, HttpSession session, @PathVariable("tool_code") String tool_code) {
+		Integer user_id = (Integer) session.getAttribute("user_id");
+		
+		if(user_id == null) {
 			return "redirect:/login";
 		}
 		
-		reserService.insertReserve((Integer)session.getAttribute("user_id"), tool_code);
+		
+		Integer myReservationNum = reserService.countMyReservation(user_id);
+		if(myReservationNum >= 5) {
+			String prevURL = request.getHeader("referer").substring(22);
+			
+			// 5건을 넘으면 안됨!
+	    	request.setAttribute("msg", "예약 횟수를 초과할 수 없습니다.");
+	        request.setAttribute("url", "/"+prevURL);
+	        return "fragments/alert";
+		}
+		
+		reserService.insertReserve(user_id, tool_code);
 		
 		
 		return "redirect:/";

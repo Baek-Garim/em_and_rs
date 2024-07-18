@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<input id="msg" type="text" th:value="${msg}" hidden>
+<input id="url" type="text" th:value="${url}" hidden>
+
+<script>
+    var msg = document.querySelector('#msg').value;
+    var url = document.querySelector('#url').value;
+    alert(msg);
+    location.href = url;
+</script>

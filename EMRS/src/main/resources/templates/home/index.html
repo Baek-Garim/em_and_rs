@@ -29,10 +29,16 @@
 	
 					<div class="sub-con">
 
-						<div class="my-con">
+						<!--로그인 안 했을 때-->
+						<div class="my-con" th:if="${user_id} == null">
+							<h2 class="request-login"><a th:href="@{/login}">로그인</a> 후 확인 가능 합니다.</h2>
+						</div>
+
+						<!--로그인 했을 때-->
+						<div class="my-con" th:if="${user_id} != null and ${#strings.equals(user_grant, 'USER')}">
 							<div class="con">
 								<div class="text-list">
-									<a href="" id="user-name">이름 <span>님</span></a>
+									<a href="" id="user-name" th:text="${user_name}">이름 <span>님</span></a>
 									<p id="overdue">대여 불가</p>
 									<p>2023년 2월 23일 <span>까지</span></p>	
 								</div>
@@ -40,16 +46,17 @@
 
 							<div class="con">
 								<div>
-									<a href="">진행중인 대여 <span>5건</span></a><br/>
-									<a href="">진행중인 예약 <span>3건</span></a>	
+									<a href="">진행중인 대여 <span th:text="|${rentalList.size}건|">5건</span></a><br/>
+									<a href="">진행중인 예약 <span th:text="|${reservationList.size}건|">3건</span></a>	
 								</div>
 							</div>
 						</div>
-
-						<div class="box-container">
+						
+						
+						<div class="box-container" th:if="${user_id} != null and ${#strings.equals(user_grant, 'USER')}">
 							<div class="box">
 								<div class="top">
-									<p class="sub-title">대여<span class="eq-count">5</span></p>
+									<p class="sub-title">대여<span class="eq-count" th:text="${rentalList.size}">0</span></p>
 								</div>
 								<div class="content">
 									<table>
@@ -59,35 +66,11 @@
 											<col width="30%" />
 											<col width="15%" />
 										</colgroup>
-										<tr>
-											<td>1.</td>
-											<td>장비이름</td>
-											<td>2023/12/31까지</td>
-											<td>정상</td>
-										</tr>
-										<tr>
-											<td>2.</td>
-											<td>장비이름</td>
-											<td>2023/12/31까지</td>
-											<td>정상</td>
-										</tr>
-										<tr>
-											<td>3.</td>
-											<td>장비이름3333333333333333333333333</td>
-											<td>2023/12/31까지</td>
-											<td id="overdue">연체</td>
-										</tr>
-										<tr>
-											<td>4.</td>
-											<td>장비이름</td>
-											<td>2023/12/31까지</td>
-											<td>정상</td>
-										</tr>
-										<tr>
-											<td>1.</td>
-											<td>장비이름</td>
-											<td>2023/12/31까지</td>
-											<td>정상</td>
+										<tr th:each="rental, rental_state : ${rentalList}">
+											<td th:text="${rental_state.index}+1">1.</td>
+											<td th:text="${rental.tool_name}">장비이름</td>
+											<td th:text="${#temporals.format(rental.return_date, 'yyyy-MM-dd 까지')}">0000-00-00까지</td>
+											<td th:text="${rental.rental_state}">상태</td>
 										</tr>
 									</table>
 								</div>
@@ -96,7 +79,7 @@
 	
 							<div class="box">
 								<div class="top">
-									<p class="sub-title">예약<span class="eq-count">3</span></p>
+									<p class="sub-title">예약<span class="eq-count" th:text="${reservationList.size}">0</span></p>
 								</div>
 	
 								<div class="content">
@@ -106,21 +89,12 @@
 											<col width="40%" />
 											<col width="15%" />
 										</colgroup>
-										<tr>
-											<td>1.</td>
-											<td>장비이름22222222222222222222222222222</td>
-											<td>대기중</td>
+										<tr th:each="rsv, rsv_state : ${reservationList}">
+											<td th:text="${rsv_state.index}+1">1.</td>
+											<td th:text="${rsv.tool_name}">장비이름</td>
+											<td th:text="${rsv.reserve_state}">상태</td>
 										</tr>
-										<tr>
-											<td>2.</td>
-											<td>장비이름</td>
-											<td id="available">대여가능</td>
-										</tr>
-										<tr>
-											<td>3.</td>
-											<td>장비이름</td>
-											<td>대기중</td>
-										</tr>
+		
 									</table>
 	
 								</div>

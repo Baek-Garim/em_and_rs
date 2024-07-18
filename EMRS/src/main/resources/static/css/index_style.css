@@ -112,6 +112,16 @@
   width: 90%;
 }
 
+
+.myinfo .container .sub-con .my-con .request-login{
+	font-size: 2.5rem;
+	font-weight: 600;
+}
+
+.myinfo .container .sub-con .my-con .request-login a{
+	color: var(--main-color);
+}
+
 .myinfo .container .sub-con .my-con .con{
   width: 50%;
   display: flex;
