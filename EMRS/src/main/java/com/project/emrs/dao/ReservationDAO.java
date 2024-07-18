@@ -19,4 +19,7 @@ public interface ReservationDAO {
 
 	Integer countMyReservation(Integer user_id);
 
+
+	Integer duplicateCheck(ReservationDTO reserve);
+
 }

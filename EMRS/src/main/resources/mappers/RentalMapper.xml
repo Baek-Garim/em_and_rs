@@ -7,6 +7,15 @@
 	<select id="chkRentalState" resultType="int">
 		select count(*) from rental where tool_code = #{tool_code} and rental_state != '반납'
 	</select>
+
+	<select id="duplicateCheck" resultType="int">
+		SELECT count(*)
+	    from rental
+	    where user_id = #{user_id}
+	    	and tool_code = #{tool_code}
+	        and rental_state != '반납'
+	</select>
+
 	
 	<select id="getAllRental" resultType="RentalDTO">
 		select r.*, t.tool_name 
@@ -15,6 +24,8 @@
 		    and user_id = #{user_id}
 		    and rental_state != '반납'
 	</select>
+
+
 
 
 	
