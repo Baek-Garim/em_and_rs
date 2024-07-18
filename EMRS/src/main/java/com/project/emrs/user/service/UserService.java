@@ -12,4 +12,6 @@ public interface UserService {
 
 	UserDTO login(UserDTO user);
 
+	UserDTO getUserInfo(Integer user_id);
+
 }

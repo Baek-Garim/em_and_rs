@@ -31,6 +31,19 @@
 		where phone = #{phone}
 	</select>
 	
+	<select id="getUserInfo" resultType="UserDTO">
+		select *
+			from USER_TB
+			where user_id = #{user_id}
+	</select>
 	
+	
+	
+	<update id="setOverdue">
+		update user_tb
+			set user_rentable = #{user_rentable},
+				unavailable_date = #{unavailable_date}
+			where user_id = #{user_id}
+	</update>
 	
 </mapper>

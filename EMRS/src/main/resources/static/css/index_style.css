@@ -62,12 +62,12 @@
 /* ===== myinfo ===== */
 
 /* 대여 불가, 연체 */
-#overdue{
+.overdue{
   color: var(--red);
 }
 
 /* 대여 가능 */
-#available{
+.available{
   color: var(--green);
 }
 

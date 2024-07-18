@@ -17,7 +17,7 @@
 	</select>
 
 	
-	<select id="getAllRental" resultType="RentalDTO">
+	<select id="getUserAllRental" resultType="RentalDTO">
 		select r.*, t.tool_name 
 		    from rental r, tool t 
 		    where r.tool_code = t.tool_code
@@ -32,6 +32,7 @@
 		    and user_id = #{user_id}
 	</select>
 
+
 	<update id="rentalRenew" parameterType="Integer">
 	   UPDATE RENTAL
 	      SET RETURN_DATE = RETURN_DATE + INTERVAL '4' DAY,
@@ -39,6 +40,38 @@
 	   WHERE RENTAL_ID = #{rental_id}
 	</update>
 
+	<!-- 어드민에서 현재 대여중인 대여 목록 불러올 때 사용 -->
+	<select id="getActivateRentalList" resultType="RentalDTO">
+		select r.*, u.user_name, u.email, u.phone
+			from rental r, user_tb u
+	    	where r.user_id = u.user_id
+        		and rental_state != '반납'
+	</select>
+
+	<!-- 반납일예정일 - 반납일 (양수가 나오면 해당만큼 연체일)-->
+	<select id="returnDateChk" resultType="int">
+		select TO_DATE(sysdate, 'YYYY-MM-DD') - TO_DATE(return_date, 'YYYY-MM-DD') 
+			from rental 
+    		where rental_id = #{rental_id}
+	</select>
+
+
+
+	<insert id="insertRental">
+		INSERT INTO RENTAL(rental_id, user_id, tool_code, rental_date, return_date, renew, rental_state)
+		VALUES (RENTAL_SEQ.NEXTVAL, #{user_id}, #{tool_code}, #{rental_date}, #{return_date}, #{renew}, #{rental_state})		
+
+	</insert>
+	
+	
+	<!-- UPDATE  -->
+	<update id="toolReturn">
+		update rental
+			set rental_state = '반납'
+			where rental_id = #{rental_id}
+	</update>
+
+	
 
 	
 	

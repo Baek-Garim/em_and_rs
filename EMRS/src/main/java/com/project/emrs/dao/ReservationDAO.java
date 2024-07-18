@@ -11,10 +11,9 @@ public interface ReservationDAO {
 
 	Integer chkReserveState(ReservationDTO reservation);
 
-	
 	void insertReserve(ReservationDTO reservation);
 
-	ArrayList<ReservationDTO> getAllReservation(Integer user_id);
+	ArrayList<ReservationDTO> getUserAllReservation(Integer user_id);
 
 
 	Integer countMyReservation(Integer user_id);
@@ -23,6 +22,21 @@ public interface ReservationDAO {
 	Integer duplicateCheck(ReservationDTO reserve);
 
 
+
 	ArrayList<ReservationDTO> reservationList(Integer user_id);
+
+	ArrayList<ReservationDTO> getActivateReserveList();
+
+
+	ReservationDTO findById(Integer reserve_id);
+
+
+	void completeReservation(Integer reserve_id);
+
+
+	ReservationDTO getFirstReservation(String tool_code);
+
+	void updateActivateReservation(ReservationDTO reservation);
+
 
 }
