@@ -46,13 +46,14 @@ hr{
 .container .left-nav{
   background-color: var(--white);
   height: 100%;
+  width: 20rem;
 }
 
 .container .left-nav ul .menu{
   cursor: pointer;
   font-size: 2rem;
   text-align: center;
-  padding: 2rem 6rem;
+  padding: 2rem 4rem;
 }
 
 .container .left-nav ul .menu.active{
@@ -86,4 +87,84 @@ hr{
 .container .content .title span{
   cursor: pointer;
 }
+
+/* 내정보 */
+.container .content .list {
+	border: 0.1rem solid #c8c8c8;
+	width: 40rem;
+	height: 32rem;
+	padding: 0 1rem 1rem 1rem;
+}
+
+.container .content .list .listable {
+	margin: 1rem;
+	width: 37rem;
+	height: 30rem;
+	padding: 0.5rem;
+	font-size: 2rem;
+}
+
+.container .content .list .listable th {
+	border-bottom: 0.2rem solid #c8c8c8;
+	font-weight: bold;
+	text-align: left;
+	padding: 2rem;
+}
+
+.container .content .list .listable td {
+	border-bottom: 0.2rem solid #c8c8c8;
+	text-align: left;
+	padding: 2rem;
+}
+/* 내정보 끝 */
+
+
+
+.container .content .listRe {
+	border: 0.1rem solid #c8c8c8;
+	padding: 0 1rem 1rem 1rem;
+}
+
+
+
+
+
+
+
+.container .content .listForm {
+	border: 0.1rem solid #c8c8c8;
+	width: 40rem;
+	height: 15rem;
+	padding: 2rem;
+}
+
+.container .content .listForm .check{
+	padding-top: 2rem;
+}
+
+.container .content .listForm .check span{
+	padding: 1.3rem;
+	font-size: 2rem;
+}
+
+.container .content .listForm .check .checkInput{
+	border: 0.1rem solid gray;
+	border-radius: 0.4rem;
+	width: 20rem;
+	height: 1.8rem;
+	padding: 1.3rem;
+}
+
+.container .content .listForm .check .btn{
+	margin-left: 9rem;
+	padding: 2rem;
+	width: 20rem;
+	font-size: 2rem;
+}
+
+
+
+
+
+
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html layout:decorate="~{layout/admin_layout}" lang="en">
+<html layout:decorate="~{layout/myPage_layout}" lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,10 +9,32 @@
 <body>
 	
   <div class="content" layout:fragment="content">
-    <h1 class="title">대여 관리</h1>
-    <hr/>  
+    <h1 class="title">내 정보</h1>
+    <hr>
+    <button class="btn" th:onclick="|location.href='@{/myPage/updateUser_checkForm}'|" >내 정보 수정</button>
+    <br>
+    <div class="list">
+	    <table class="listable">
+	    	<tr>
+	    		<th>아이디</th>
+	    		<td th:text="${user.email}"></td>
+	    	</tr>
+	    	<tr>
+	    		<th>이름</th>
+	    		<td th:text="${user.user_name}"></td>
+	    	</tr>
+	    	<tr>
+	    		<th>전화번호</th>
+	    		<td th:text="${user.phone}"></td>
+	    	</tr>
+	    	<tr>
+	    		<th>상태</th>
+	    		<td th:text="${user.user_rentable}"></td>
+	    	</tr>
+	    </table>
+    </div>
+    
   </div>
-
 
 </body>
 </html>
