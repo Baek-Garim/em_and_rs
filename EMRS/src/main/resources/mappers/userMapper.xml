@@ -46,4 +46,21 @@
 			where user_id = #{user_id}
 	</update>
 	
+	<!-- 회원정보 수정 -->
+	<update id="updateUser" parameterType="UserDTO">
+	    UPDATE USER_TB
+	    <set>
+	        <if test="user_name != null and user_name != ''">
+	            USER_NAME = #{user_name},
+	        </if>
+	        <if test="user_pw != null and user_pw != ''">
+	            USER_PW = #{user_pw},
+	        </if>
+	        <if test="phone != null and phone != ''">
+	            PHONE = #{phone},
+	        </if>
+	    </set>
+	    WHERE USER_ID = #{user_id}
+	</update>
+	
 </mapper>

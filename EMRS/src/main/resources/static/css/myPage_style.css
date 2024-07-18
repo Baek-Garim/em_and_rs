@@ -200,4 +200,33 @@ hr{
 }
 
 
+/* 회원정보수정 */
+
+.container .content table {
+	padding: 2rem;
+	font-size: 2rem;
+	font-weight: bold;
+}
+
+.container .content table td {
+	padding: 2rem;
+	font-size: 2rem;
+	font-weight: bold;
+	border-bottom: 0.2rem solid #c8c8c8;
+}
+
+.container .content table .boxin {
+	font-size: 1.5rem;
+	font-weight: bold;
+}
+
+.container .content table p {
+	padding: 1rem 1rem 1rem 0;
+	font-size: 1rem;
+}
+
+
+
+
+
 

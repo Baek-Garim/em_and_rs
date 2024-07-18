@@ -4,22 +4,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" th:href="@{/css/myPage_style.css}">
-   <title>내 정보</title>
+  <title>내 정보</title>
 </head>
 <body>
-	
+  
   <div class="content" layout:fragment="content">
     <h1 class="title">내 정보</h1>
     <hr>
     <br>
     <div class="listForm">
-    	<form class="check" method="post" th:action="@{/myPage/updateUser_checkForm}">
-		    <span>비밀번호 입력</span>
-		        
-		    <input class="checkInput" name="userPw" id="userPw">
-			<br><br><br>
-    		<button class="btn" onclick="form_submit();">내 정보 수정</button>
-    	</form>
+      <form class="check" method="post" th:action="@{/myPage/updateUser_checkForm}">
+        <span>비밀번호 입력</span>
+        
+        <input type="password" class="checkInput" name="user_pw" id="user_pw" required>
+        <br><br><br>
+        <button class="btn" type="submit">내 정보 수정</button>
+      </form>
     </div>
     
   </div>
