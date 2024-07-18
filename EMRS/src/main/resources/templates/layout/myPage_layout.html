@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/reset.css}">
+    <title>EMRS - My Page</title>
+</head>
+<body>
+    <section th:replace="~{fragments/myPage_header :: myPage_header_frg}"></section>
+    <div class="container">
+        <div th:replace="~{fragments/myPage_sidebar :: myPage_sidebar_frg}"></div>
+        <div th:layout:fragment="content">
+        	
+        </div>
+    </div>
+    <script src="https://kit.fontawesome.com/194e6948f1.js" crossorigin="anonymous"></script>
+</body>
+</html>
