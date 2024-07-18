@@ -12,7 +12,7 @@ public class ReservationDTO {
 	private Integer user_id; 			// 예약자 유저 ID
 	private LocalDateTime reserve_date;		// 예약 날짜
 	private LocalDateTime deadline_date;	// 예약 가능 후부터 대여가능한 마감일
-	private Character reserve_state;	// 예약 가능 상태 (Y(대여 가능), N(대여 불가))
+	private String reserve_state;	// 예약 가능 상태 ('대기중', '대여가능', '대여완료')
 	
 	
 	// 화면 출력용

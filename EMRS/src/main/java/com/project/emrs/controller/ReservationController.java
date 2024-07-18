@@ -24,12 +24,21 @@ public class ReservationController {
 			return "redirect:/login";
 		}
 		
+		// 동일 제품을 대여중이거나 예약중(대기중, 대여가능)이면 안됨.
+		Integer duplicateCheck = reserService.duplicateCheck(user_id, tool_code);
+		if(duplicateCheck > 0) {
+			String prevURL = request.getHeader("referer").substring(22);
+			
+	    	request.setAttribute("msg", "이미 대여중이거나 예약중인 장비는 예약할 수 없습니다.");
+	        request.setAttribute("url", "/"+prevURL);
+	        return "fragments/alert";
+		}
 		
+		// 5건을 넘으면 안됨!
 		Integer myReservationNum = reserService.countMyReservation(user_id);
 		if(myReservationNum >= 5) {
 			String prevURL = request.getHeader("referer").substring(22);
 			
-			// 5건을 넘으면 안됨!
 	    	request.setAttribute("msg", "예약 횟수를 초과할 수 없습니다.");
 	        request.setAttribute("url", "/"+prevURL);
 	        return "fragments/alert";

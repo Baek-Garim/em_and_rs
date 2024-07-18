@@ -11,36 +11,43 @@
 		    	and TO_CHAR(reserve_date, 'yyyy-MM-dd HH24MISS') < #{reserve_date}			 
 		]]>
 	</select>
+
+	<select id="duplicateCheck" resultType="int">
+		SELECT count(*)
+	    from reservation
+	    where user_id = #{user_id}
+	    	and tool_code = #{tool_code}
+	        and reserve_state != '대여완료'
+	</select>
+
 	
 	<select id="countMyReservation" resultType="int">
 		select count(*) from reservation
     		where user_id = #{user_id}
-	    	and reserve_state != 'D'
+	    	and reserve_state != '대여완료'
 	</select>
-	
-	
+
+
 	<select id="getAllReservation" resultType="ReservationDTO">
 		select rsv.*, t.tool_name 
 			from reservation rsv, tool t
 	    	where rsv.tool_code = t.tool_code
 	    		and user_id = #{user_id}
-        		and reserve_state != 'D'
+        		and reserve_state != '대여완료'
 	</select>
-	
-	
+
 	
 	<insert id="insertReserve">
-		<if test="deadline_date != null and deadline_date != ''">
+		<if test="deadline_date != null">
 			INSERT INTO RESERVATION(reserve_id, tool_code,  user_id, reserve_date, deadline_date, reserve_state)
 			VALUES (RESERVATION_SEQ.NEXTVAL, #{tool_code}, #{user_id}, #{reserve_date}, #{deadline_date}, #{reserve_state})		
 		</if>
 		
-		<if test="deadline_date == null or deadline_date == ''">
+		<if test="deadline_date == null">
 			INSERT INTO RESERVATION(reserve_id, tool_code,  user_id, reserve_date, reserve_state)
 			VALUES (RESERVATION_SEQ.NEXTVAL, #{tool_code}, #{user_id}, #{reserve_date}, #{reserve_state})		
 		</if>
 	</insert>
-	
 	
 	
 </mapper>
