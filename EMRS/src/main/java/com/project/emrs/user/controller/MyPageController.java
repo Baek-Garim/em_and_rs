@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.project.emrs.user.dto.UserDTO;
+import com.project.emrs.dto.RentalDTO;
 import com.project.emrs.dto.ToolDTO;
+import com.project.emrs.service.RentalService;
 import com.project.emrs.user.service.MyPageService;
 
 import jakarta.servlet.http.HttpSession;
@@ -24,6 +26,9 @@ public class MyPageController {
 	
 	@Autowired
 	MyPageService myPageService;
+	
+	@Autowired
+	RentalService rentalService;
 	
 	@GetMapping("/updateUser")
 	public String myPageUpadateUser(Model model, HttpSession session) {
@@ -39,7 +44,9 @@ public class MyPageController {
 	
 	@GetMapping("/rental")
 	public String myPageRental(Model model, HttpSession session) {
-		model.addAttribute("user_id", session.getAttribute("user_id"));
+		ArrayList<RentalDTO> rentalList = rentalService.rentalList((Integer)session.getAttribute("user_id"));
+		model.addAttribute("rental", rentalList);
+		log.debug("FFFFFFFFFFFFFFF{}", rentalList);
 		
 		model.addAttribute("barType", "rental");
 		

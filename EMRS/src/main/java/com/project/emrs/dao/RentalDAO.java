@@ -14,6 +14,9 @@ public interface RentalDAO {
 	
 	ArrayList<RentalDTO> getAllRental(Integer user_id);
 
+	ArrayList<RentalDTO> rentalList(Integer user_id);
+
 	Integer duplicateCheck(ReservationDTO reserve);
+
 
 }

@@ -8,4 +8,7 @@ public interface RentalService {
 
 	ArrayList<RentalDTO> getAllRental(Integer user_id);
 
+	ArrayList<RentalDTO> rentalList(Integer user_id);
+
+
 }
