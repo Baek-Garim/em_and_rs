@@ -55,6 +55,12 @@
     		where rental_id = #{rental_id}
 	</select>
 
+
+	<select id="selectRental" resultType="RentalDTO" parameterType="Integer">
+		select * from RENTAL 
+	    where RENTAL_ID = #{rental_id}
+	</select>
+
 	<!-- 어드민>대여내역 전체 대여 목록 불러올 때 사용 -->
 	<select id="getAllList" resultType="RentalDTO">
 		select r.*, u.user_name, u.email, u.phone, TO_DATE(r.expected_return_date, 'YYYY-MM-DD') - TO_DATE(sysdate, 'YYYY-MM-DD') as d_day
@@ -82,9 +88,6 @@
 		    
 		    order by ${sort}
    	</select>
-
-
-
 
 
 

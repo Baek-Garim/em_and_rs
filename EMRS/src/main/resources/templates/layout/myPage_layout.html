@@ -7,6 +7,7 @@
     <title>EMRS - My Page</title>
 </head>
 <body>
+	<header th:replace="~{fragments/header :: headerFragment}"></header>
     <section th:replace="~{fragments/myPage_header :: myPage_header_frg}"></section>
     <div class="container">
         <div th:replace="~{fragments/myPage_sidebar :: myPage_sidebar_frg}"></div>

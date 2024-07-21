@@ -1,5 +1,57 @@
 <section class="myPage-top" th:fragment="myPage_header_frg">
-  <a class="main-btn" th:href="@{|/|}">
-    EMRS
-  </a>
+	<a class="main-btn" th:href="@{|/|}">
+    	EMRS
+    </a>
+
+     <div class="menu-box">
+      <a class="list-btn" th:href="@{|/tool/toolList|}">장비 목록</a>
+      <div class="sub-nav">
+   	<ul>
+	   <li th:each="cate : ${categoryList}" th:onclick="|location.href='@{/tool/sortCategory/}${cate.category_id}'|" th:text="${cate.category_name}">카테1</li>
+   	</ul>
+  	  </div>
+     </div>
+
+   <div class="right-content">
+     <div class="search-box">
+       <form th:action="@{/tool/toolList}" method="get" name="search" class="search-from">
+         <input type="text" name="content" id="content" th:value="${content}" placeholder="이곳에 장비를 검색해보세요." />
+         <i id="submit-btn" class="fa fa-search fa-3x" aria-hidden="true"></i>
+       </form>
+     </div>
+  
+  
+     <a th:if="${user_id} != null and ${#strings.equals(user_grant, 'USER')}" class="mypage-btn" th:href="@{|/myPage/reserve|}">
+       <i class="fa-solid fa-user fa-4x"></i>
+       <p>My</p>
+     </a>
+
+     <a th:if="${user_id} != null and ${#strings.equals(user_grant, 'ADMIN')}" class="mypage-btn" th:href="@{|/admin/tool|}">
+       <i class="fa-solid fa-user fa-4x"></i>
+       <p>관리</p>
+     </a>
+     
+     <a th:if="${user_id} == null" class="mypage-btn" th:href="@{|/login|}">
+       <i class="fa-regular fa-user fa-4x"></i>
+       <p>로그인</p>
+     </a>
+
+ 	<a th:if="${user_id} != null" class="mypage-btn" th:href="@{|/logout|}">
+      	<p th:text="|${user_name} 님|"></p>
+		<p>로그아웃</p>
+  	</a>
+   </div>
+   
+   <script>
+     const searchBtn = document.querySelector(".search-box");
+     searchBtn.addEventListener("click", function () {
+       document.querySelector("#content").focus();
+     });
+
+     const submitButton = document.querySelector("#submit-btn");
+     submitButton.addEventListener("click", function () {
+       const form = document.forms.search;
+       form.submit();
+     });
+   </script>
 </section>

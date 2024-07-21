@@ -30,9 +30,12 @@ public interface RentalDAO {
 
 	Integer returnDateChk(Integer rental_id);
 
+	RentalDTO selectRental(Integer rental_id);
+
 	ArrayList<RentalDTO> getAllList();
 
 	List<RentalDTO> getFilterData(Map<String, String> filterMap);
+
 
 
 

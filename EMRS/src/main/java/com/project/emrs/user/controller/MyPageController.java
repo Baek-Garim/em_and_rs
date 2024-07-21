@@ -47,7 +47,13 @@ public class MyPageController {
 	@GetMapping("/updateUser")
 	public String myPageUpadateUser(Model model, HttpSession session) {
 		model.addAttribute("user_id", session.getAttribute("user_id"));
+		model.addAttribute("user_name", session.getAttribute("user_name"));
+		model.addAttribute("user_grant", session.getAttribute("user_grant"));
 		
+		if(session.getAttribute("user_id") == null) {
+			return "redirect:/login";
+		}
+
 		UserDTO user = myPageService.selectUser((Integer)session.getAttribute("user_id"));
 		model.addAttribute("user", user);
 		
@@ -58,11 +64,19 @@ public class MyPageController {
 	
 	@GetMapping("/rental")
 	public String myPageRental(Model model, HttpSession session) {
+		model.addAttribute("user_id", session.getAttribute("user_id"));
+		model.addAttribute("user_name", session.getAttribute("user_name"));
+		model.addAttribute("user_grant", session.getAttribute("user_grant"));
+		if(session.getAttribute("user_id") == null) {
+			return "redirect:/login";
+		}
+		
 		ArrayList<RentalDTO> rentalList = rentalService.rentalList((Integer)session.getAttribute("user_id"));
 
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy년MM월dd일");
 		for(RentalDTO i: rentalList) {
 			i.setRental_date_String(i.getRental_date().format(formatter));
+			i.setExpected_return_date_String(i.getExpected_return_date().format(formatter));
 			i.setReturn_date_String(i.getReturn_date().format(formatter));
         }
 		
@@ -75,6 +89,14 @@ public class MyPageController {
 
 	@GetMapping("/reserve")
 	public String myPageReserve(Model model, HttpSession session) {
+		model.addAttribute("user_id", session.getAttribute("user_id"));
+		model.addAttribute("user_name", session.getAttribute("user_name"));
+		model.addAttribute("user_grant", session.getAttribute("user_grant"));
+		
+		if(session.getAttribute("user_id") == null) {
+			return "redirect:/login";
+		}
+		
 		ArrayList<ReservationDTO> reservationList = reservationService.reservationList((Integer)session.getAttribute("user_id"));
 		
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy년MM월dd일");
@@ -96,12 +118,25 @@ public class MyPageController {
 	@GetMapping("/updateUser_checkForm")
 	public String checkForm(Model model, HttpSession session) {
 		model.addAttribute("user_id", session.getAttribute("user_id"));
+		model.addAttribute("user_name", session.getAttribute("user_name"));
+		model.addAttribute("user_grant", session.getAttribute("user_grant"));
+		model.addAttribute("user_id", session.getAttribute("user_id"));
+		
+		if(session.getAttribute("user_id") == null) {
+			return "redirect:/login";
+		}
 		
 		return "myPage/myPage_updateUser_checkForm";
 	}
 	
 	@PostMapping("/updateUser_checkForm")
 	public String check(Model model, @RequestParam("user_pw") String user_pw, HttpSession session, HttpServletRequest request) {
+		model.addAttribute("user_id", session.getAttribute("user_id"));
+		model.addAttribute("user_name", session.getAttribute("user_name"));
+		model.addAttribute("user_grant", session.getAttribute("user_grant"));
+		if(session.getAttribute("user_id") == null) {
+			return "redirect:/login";
+		}
 		UserDTO user = myPageService.selectUser((Integer)session.getAttribute("user_id"));
 		model.addAttribute("user", user);
 		// 이전 페이지 URL
@@ -116,7 +151,14 @@ public class MyPageController {
 	}
 	
 	@PostMapping("/updateUser")
-	public String updateUser(@ModelAttribute UserDTO user, HttpSession session) {
+	public String updateUser(@ModelAttribute UserDTO user, HttpSession session, Model model) {
+		model.addAttribute("user_id", session.getAttribute("user_id"));
+		model.addAttribute("user_name", session.getAttribute("user_name"));
+		model.addAttribute("user_grant", session.getAttribute("user_grant"));
+		if(session.getAttribute("user_id") == null) {
+			return "redirect:/login";
+		}
+		
 		user.setUser_id((Integer)session.getAttribute("user_id"));
 		userService.updateUser(user);
 
@@ -124,11 +166,29 @@ public class MyPageController {
 	}
 	
 	@GetMapping("/rental_renew{rental_id}")
-	public String rental_renew(HttpServletRequest request, HttpSession session, @PathVariable("rental_id") Integer rental_id) {
+	public String rental_renew(HttpServletRequest request, HttpSession session, @PathVariable("rental_id") Integer rental_id, Model model) {
+		model.addAttribute("user_id", session.getAttribute("user_id"));
+		model.addAttribute("user_name", session.getAttribute("user_name"));
+		model.addAttribute("user_grant", session.getAttribute("user_grant"));
+		
 		Integer user_id = (Integer) session.getAttribute("user_id");
 		
 		if(user_id == null) {
 			return "redirect:/login";
+		}
+		
+		// 이전 페이지 URL
+		String prevURL = request.getHeader("referer").substring(22);
+		RentalDTO rental = rentalService.selectRental(rental_id);
+		if (rental.getRental_state().equals("반납")) {
+			request.setAttribute("msg", "이미 반납되었습니다.");
+	        request.setAttribute("url", "/"+prevURL);
+	        return "fragments/alert";
+		}
+		if (rental.getRenew() >= 1) {
+			request.setAttribute("msg", "연장 횟수를 초과했습니다.");
+	        request.setAttribute("url", "/"+prevURL);
+	        return "fragments/alert";
 		}
 		
 		rentalService.rentalRenew(rental_id);

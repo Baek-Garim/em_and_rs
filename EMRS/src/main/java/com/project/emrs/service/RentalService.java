@@ -21,11 +21,13 @@ public interface RentalService {
 
 	void toolReturn(String tool_code, Integer rental_id, Integer user_id);
 
-	// 어드민에서 정렬
+	RentalDTO selectRental(Integer rental_id);
 
+  // 어드민에서 정렬
 	ArrayList<RentalDTO> getAllList();
 
 	List<RentalDTO> getFilterData(String filterType, String sortType, String email, String tool_code);
+
 
 
 

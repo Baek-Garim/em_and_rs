@@ -125,6 +125,12 @@ public class RentalServiceImpl implements RentalService{
 		
 	}
 
+	@Override
+	public RentalDTO selectRental(Integer rental_id) {
+		RentalDTO rental = rentalDAO.selectRental(rental_id);
+		
+		return rental;
+	}
 
 	@Override
 	public List<RentalDTO> getFilterData(String filterType, String sortType, String email, String tool_code) {
@@ -150,14 +156,10 @@ public class RentalServiceImpl implements RentalService{
 		filterMap.put("email", email);
 		filterMap.put("tool_code", tool_code);
 		
-
-		
 		return rentalDAO.getFilterData(filterMap);
 	}
 
 
-
-	
 
 	
 }
