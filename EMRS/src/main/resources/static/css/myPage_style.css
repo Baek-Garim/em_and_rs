@@ -79,6 +79,7 @@ hr{
 .container .content{
   background-color: #fff;
   width: 80%;
+  min-height: 70vh;
 }
 
 .container .content{

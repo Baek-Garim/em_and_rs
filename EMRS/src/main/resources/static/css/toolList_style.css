@@ -4,6 +4,7 @@
 	margin: 15rem;
 	font-size: 2rem;
 	line-height: 4rem;
+	min-height: 30vh;
 }
 
 .container {

@@ -25,6 +25,7 @@
 		
 		<table>
 			<tr class="container">
+				<tr th:if="${toolList.size == 0}" class="item no-data"><td>일치하는 장비가 없습니다.</td></tr>
 				<td th:each="tool : ${toolList}">
 						<div class="card">
 							<img th:src="${tool.tool_image}" class="card-img-top">

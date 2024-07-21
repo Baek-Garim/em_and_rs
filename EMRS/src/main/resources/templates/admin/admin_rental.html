@@ -65,6 +65,8 @@
             </tr>
           </thead>
           <tbody class="list-con">
+			<tr th:if="${rentalList.size == 0}" class="item no-data"><td>결과가 없습니다.</td></tr>
+			  
             <tr class="item" th:each="rental, r_state : ${rentalList}">
               <td th:text="${r_state.index}+1">1</td>
               <td th:text="${rental.user_name}">이름1</td>
