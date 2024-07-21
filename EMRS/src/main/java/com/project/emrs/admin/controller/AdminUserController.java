@@ -64,8 +64,14 @@ public class AdminUserController {
 			return "redirect:/"+ loginCheck();
 		}
 		
-		model.addAttribute("barType", "user");
-		return "admin/admin_user";
+		// 이전 페이지 URL
+		String prevURL = request.getHeader("referer").substring(22);
+    	request.setAttribute("msg", "미구현 페이지 입니다.");
+        request.setAttribute("url", "/"+prevURL);
+        return "fragments/alert";			
+		
+		//model.addAttribute("barType", "user");
+		//return "admin/admin_user";
 	}
 
 	

@@ -42,7 +42,7 @@ public class ReservationController {
 		
 		// 대여 가능 상태여야 함
 		UserDTO user = userService.getUserInfo(user_id);
-		if(!user.getUser_rentable().equals("대여 가능")) {
+		if(!user.getUser_rentable().equals("대여가능")) {
 	    	request.setAttribute("msg", "대여 가능 상태일 경우에만 예약할 수 있습니다.");
 	        request.setAttribute("url", "/"+prevURL);
 	        return "fragments/alert";			

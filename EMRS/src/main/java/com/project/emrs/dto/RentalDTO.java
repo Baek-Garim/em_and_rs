@@ -19,7 +19,6 @@ public class RentalDTO {
 	// 화면 출력용	
 	private String tool_name;
 	private Integer d_day;		// 반납예정일까지 남은 일수 (연체시 +4일 이런식으로 '+' + 일수 + '일')
-
 	
 	private Integer tool_id;
 	private String tool_image;

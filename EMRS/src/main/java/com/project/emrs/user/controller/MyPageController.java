@@ -17,9 +17,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.project.emrs.user.dto.UserDTO;
 import com.project.emrs.dto.RentalDTO;
 import com.project.emrs.dto.ReservationDTO;
+import com.project.emrs.dto.ToolCategoryDTO;
 import com.project.emrs.dto.ToolDTO;
 import com.project.emrs.service.RentalService;
 import com.project.emrs.service.ReservationService;
+import com.project.emrs.service.ToolService;
 import com.project.emrs.user.service.MyPageService;
 import com.project.emrs.user.service.UserService;
 
@@ -42,6 +44,9 @@ public class MyPageController {
 	ReservationService reservationService;
 	
 	@Autowired
+	ToolService toolService;	
+	
+	@Autowired
 	UserService userService;
 	
 	@GetMapping("/updateUser")
@@ -54,6 +59,10 @@ public class MyPageController {
 			return "redirect:/login";
 		}
 
+		// 카테고리		
+		ArrayList<ToolCategoryDTO> categoryList = toolService.getAllCategory();
+		model.addAttribute("categoryList", categoryList);
+		
 		UserDTO user = myPageService.selectUser((Integer)session.getAttribute("user_id"));
 		model.addAttribute("user", user);
 		
@@ -79,6 +88,10 @@ public class MyPageController {
 			i.setExpected_return_date_String(i.getExpected_return_date().format(formatter));
 			i.setReturn_date_String(i.getReturn_date().format(formatter));
         }
+		
+		// 카테고리		
+		ArrayList<ToolCategoryDTO> categoryList = toolService.getAllCategory();
+		model.addAttribute("categoryList", categoryList);
 		
 		model.addAttribute("rentalList", rentalList);
 		
@@ -109,6 +122,10 @@ public class MyPageController {
 	        }
 			i.setWaiting(reservationService.countMyReservation((Integer)session.getAttribute("user_id")));
         }
+		// 카테고리		
+		ArrayList<ToolCategoryDTO> categoryList = toolService.getAllCategory();
+		model.addAttribute("categoryList", categoryList);
+		
 		model.addAttribute("reservationList", reservationList);
 		
 		model.addAttribute("barType", "reserve");
