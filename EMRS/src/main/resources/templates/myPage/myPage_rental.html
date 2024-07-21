@@ -27,9 +27,9 @@
 	    	</tr>
 	    	<tr th:each="rental : ${rentalList}">
 	    		<td th:text="${rental.rental_id}">번호</td>
-	    		<th>
+	    		<td class="img-box">
 					<img th:src="${rental.tool_image}" class="toolImg">
-				</th>
+				</td>
 	    		<td th:text="${rental.tool_name}">장비명</td>
 	    		<td th:text="${rental.rental_date_String}">대여일자</td>
 	    		<td th:text="${rental.expected_return_date_String}">예정반납일</td>

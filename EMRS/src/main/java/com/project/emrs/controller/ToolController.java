@@ -53,6 +53,8 @@ public class ToolController {
 	    return "toolList/toolDetail";
 	}
 	
+	
+	
 	@GetMapping("sortCategory")
 	public String sortCategory(Model model, @RequestParam(name = "category") int category) {
 		ArrayList<ToolDTO> toolList = toolService.sortCategory(category);

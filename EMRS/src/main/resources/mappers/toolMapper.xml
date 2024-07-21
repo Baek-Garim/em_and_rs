@@ -7,12 +7,24 @@
   
 <mapper namespace="com.project.emrs.dao.ToolDAO">
 	<select id="toolList" resultType="ToolDTO">
-	    SELECT t.*, (SELECT COUNT(*) FROM reservation where tool_code = t.tool_code) as totalReservationNum
+	    SELECT t.*, (SELECT COUNT(*) 
+                FROM reservation r
+                where r.tool_code = t.tool_code
+                    and r.reserve_state != '예약취소'
+                    and r.tool_code not in((SELECT tool_code
+                                                FROM rental
+                                                WHERE tool_code = r.tool_code))) as totalReservationNum
     		FROM TOOL t
 	</select>
 	
 	<select id="sortCategory" parameterType="Integer" resultType="ToolDTO">
-	    SELECT t.*, (SELECT COUNT(*) FROM reservation where tool_code = t.tool_code) as totalReservationNum
+	    SELECT t.*, (SELECT COUNT(*) 
+                FROM reservation r
+                where r.tool_code = t.tool_code
+                    and r.reserve_state != '예약취소'
+                    and r.tool_code not in((SELECT tool_code
+                                                FROM rental
+                                                WHERE tool_code = r.tool_code))) as totalReservationNum
     		FROM TOOL t
 	    <where>
 	        <if test="category != null">
