@@ -18,7 +18,7 @@
 			<!--마이페이지 서브바-->		   
 		   <ul th:if="${#strings.equals(user_grant, 'USER')} or ${user_id} == null">
 			   <li th:onclick="|location.href='@{/myPage/reserve}'|">예약 내역</li>
-			   <li th:onclick="|location.href='@{/myPage/rental}'|">대역 내역</li>
+			   <li th:onclick="|location.href='@{/myPage/rental}'|">대여 내역</li>
 			   <li th:onclick="|location.href='@{/myPage/updateUser}'|">나의 정보</li>			   
 		   </ul>
 			<!--관리자 페이지 서브바-->		   

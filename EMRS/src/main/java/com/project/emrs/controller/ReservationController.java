@@ -68,7 +68,7 @@ public class ReservationController {
 		reserService.insertReserve(user_id, tool_code);
 		
 		
-		return "redirect:/";
+		return "redirect:/myPage/reserve";
 		
 		
 	}
