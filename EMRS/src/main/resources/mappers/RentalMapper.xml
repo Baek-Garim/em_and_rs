@@ -55,7 +55,10 @@
     		where rental_id = #{rental_id}
 	</select>
 
-
+	<select id="selectRental" resultType="RentalDTO" parameterType="Integer">
+		select * from RENTAL 
+	    where RENTAL_ID = #{rental_id}
+	</select>
 
 	<insert id="insertRental">
 		INSERT INTO RENTAL(rental_id, user_id, tool_code, rental_date, return_date, renew, rental_state)

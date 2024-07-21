@@ -28,6 +28,8 @@ public interface RentalDAO {
 
 	Integer returnDateChk(Integer rental_id);
 
+	RentalDTO selectRental(Integer rental_id);
+
 
 
 }

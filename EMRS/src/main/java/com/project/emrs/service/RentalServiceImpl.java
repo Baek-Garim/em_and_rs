@@ -110,6 +110,13 @@ public class RentalServiceImpl implements RentalService{
 		
 	}
 
+	@Override
+	public RentalDTO selectRental(Integer rental_id) {
+		RentalDTO rental = rentalDAO.selectRental(rental_id);
+		
+		return rental;
+	}
+
 	
 
 	

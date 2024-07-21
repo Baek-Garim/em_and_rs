@@ -19,6 +19,8 @@ public interface RentalService {
 
 	void toolReturn(String tool_code, Integer rental_id, Integer user_id);
 
+	RentalDTO selectRental(Integer rental_id);
+
 
 
 }
