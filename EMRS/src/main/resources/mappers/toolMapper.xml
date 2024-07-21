@@ -66,6 +66,26 @@
 		where TOOL_CODE = #{code}
 	</select>
 
+	<!-- 어드민>대여내역에서 필터 적용된 장비 리스트 -->
+	<select id="getFilterData" resultType="ToolDTO">
+		 select t.*, c.category_name
+		   from tool t, category c
+		  where t.category_id = c.category_id
+  		  	<if test="tool_code == ''">
+			  	and t.category_id = ${category_id}		  
+		  	</if>
+		  	<if test="tool_code != ''">
+		  		and t.tool_code = #{tool_code}
+		  	</if>
+   	</select>
+
+
+
+
+
+
+
+
 
 	<!-- INSERT -->
 	<!-- 새로운 장비 추가 -->

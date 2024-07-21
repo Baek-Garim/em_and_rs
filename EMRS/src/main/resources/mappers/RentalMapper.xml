@@ -13,7 +13,7 @@
 	    from rental
 	    where user_id = #{user_id}
 	    	and tool_code = #{tool_code}
-	        and rental_state != '반납'
+	        and rental_state != '반납완료'
 	</select>
 
 	
@@ -22,7 +22,7 @@
 		    from rental r, tool t 
 		    where r.tool_code = t.tool_code
 		    and user_id = #{user_id}
-		    and rental_state != '반납'
+		    and rental_state != '반납완료'
 	</select>
 	
 	<select id="rentalList" resultType="RentalDTO" parameterType="Integer">
@@ -42,27 +42,59 @@
 
 	<!-- 어드민에서 현재 대여중인 대여 목록 불러올 때 사용 -->
 	<select id="getActivateRentalList" resultType="RentalDTO">
-		select r.*, u.user_name, u.email, u.phone
+		select r.*, u.user_name, u.email, u.phone, TO_DATE(r.expected_return_date, 'YYYY-MM-DD') - TO_DATE(sysdate, 'YYYY-MM-DD') as d_day
 			from rental r, user_tb u
 	    	where r.user_id = u.user_id
-        		and rental_state != '반납'
+        		and rental_state != '반납완료'
 	</select>
 
 	<!-- 반납일예정일 - 반납일 (양수가 나오면 해당만큼 연체일)-->
 	<select id="returnDateChk" resultType="int">
-		select TO_DATE(sysdate, 'YYYY-MM-DD') - TO_DATE(return_date, 'YYYY-MM-DD') 
+		select TO_DATE(sysdate, 'YYYY-MM-DD') - TO_DATE(expected_return_date, 'YYYY-MM-DD') 
 			from rental 
     		where rental_id = #{rental_id}
 	</select>
+
 
 	<select id="selectRental" resultType="RentalDTO" parameterType="Integer">
 		select * from RENTAL 
 	    where RENTAL_ID = #{rental_id}
 	</select>
 
+	<!-- 어드민>대여내역 전체 대여 목록 불러올 때 사용 -->
+	<select id="getAllList" resultType="RentalDTO">
+		select r.*, u.user_name, u.email, u.phone, TO_DATE(r.expected_return_date, 'YYYY-MM-DD') - TO_DATE(sysdate, 'YYYY-MM-DD') as d_day
+		    from rental r, user_tb u
+		    where r.user_id = u.user_id
+		    order by r.expected_return_date desc
+   	</select>
+
+	<!-- 어드민>대여내역에서 필터 적용된 대여 리스트 -->
+	<select id="getFilterData" resultType="RentalDTO">
+		select r.*, u.user_name, u.email, u.phone, TO_DATE(r.expected_return_date, 'YYYY-MM-DD') - TO_DATE(sysdate, 'YYYY-MM-DD') as d_day
+		    from rental r, user_tb u
+		    where r.user_id = u.user_id
+   		    <if test="email != ''">
+		    	and u.email = #{email}
+		    </if>
+	    
+   		    <if test="tool_code != ''">
+		    	and r.tool_code = #{tool_code}
+		    </if>
+		    
+		    <if test="!filter.equals('all')">
+		    	and rental_state = #{filter}
+		    </if>
+		    
+		    order by ${sort}
+   	</select>
+
+
+
+
 	<insert id="insertRental">
-		INSERT INTO RENTAL(rental_id, user_id, tool_code, rental_date, return_date, renew, rental_state)
-		VALUES (RENTAL_SEQ.NEXTVAL, #{user_id}, #{tool_code}, #{rental_date}, #{return_date}, #{renew}, #{rental_state})		
+		INSERT INTO RENTAL(rental_id, user_id, tool_code, rental_date, expected_return_date, renew, rental_state)
+		VALUES (RENTAL_SEQ.NEXTVAL, #{user_id}, #{tool_code}, #{rental_date}, #{expected_return_date}, #{renew}, #{rental_state})		
 
 	</insert>
 	
@@ -70,7 +102,8 @@
 	<!-- UPDATE  -->
 	<update id="toolReturn">
 		update rental
-			set rental_state = '반납'
+			set rental_state = #{rental_state},
+				return_date = #{return_date}
 			where rental_id = #{rental_id}
 	</update>
 

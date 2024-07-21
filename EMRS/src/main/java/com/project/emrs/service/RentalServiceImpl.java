@@ -2,6 +2,9 @@ package com.project.emrs.service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -62,9 +65,9 @@ public class RentalServiceImpl implements RentalService{
 			rental.setUser_id(rsv.getUser_id());
 			rental.setTool_code(rsv.getTool_code());
 			rental.setRental_date(LocalDateTime.now());
-			rental.setReturn_date(LocalDateTime.now().plusDays(3));
+			rental.setExpected_return_date((LocalDateTime.now().plusDays(3)));
 			rental.setRenew(0);
-			rental.setRental_state("정상");			
+			rental.setRental_state("대여중");			
 
 			// 대여 목록에 넣고
 			rentalDAO.insertRental(rental);
@@ -81,24 +84,36 @@ public class RentalServiceImpl implements RentalService{
 	public ArrayList<RentalDTO> getActivateRentalList() {
 		return rentalDAO.getActivateRentalList();
 	}
+	
+	// 전체 대여 리스트
+	@Override
+	public ArrayList<RentalDTO> getAllList() {
+		return rentalDAO.getAllList();
+	}
 
 	// 반납 하기
 	@Override
 	public void toolReturn(String tool_code, Integer rental_id, Integer user_id) {
 		// 반납때 해야할 일
-		// 대여상태를 반납으로 바꾸기
-		rentalDAO.toolReturn(rental_id);
-
 		// 연체인지 확인하고 연체면 반납 불가 설정하기
 		Integer day = rentalDAO.returnDateChk(rental_id);
+		RentalDTO rental = new RentalDTO();
+
 		if(day > 0) {
 			UserDTO user = new UserDTO();
 			user.setUser_id(user_id);
-			user.setUser_rentable("대여 불가");
+			user.setUser_rentable("대여불가");
 			user.setUnavailable_date(LocalDateTime.now().plusDays(day*2));
-			
+			rental.setRental_state("연체반납");						
 			userDAO.setOverdue(user);
-		}
+		} else {
+			rental.setRental_state("반납완료");			
+		}		
+		// 대여상태를 (반납완료 or 연체반납)으로 바꾸고 실제 반납일 추가하기
+		rental.setRental_id(rental_id);
+		rental.setReturn_date(LocalDateTime.now());
+		rentalDAO.toolReturn(rental);
+
 		
 		// 해당 장비를 예약하고 있는 목록 대기 1번째를 대여 가능으로 바꾸기, 데드라인 오늘+3일 추가하기
 		ReservationDTO reservation = reservationDAO.getFirstReservation(tool_code);
@@ -117,7 +132,34 @@ public class RentalServiceImpl implements RentalService{
 		return rental;
 	}
 
-	
+	@Override
+	public List<RentalDTO> getFilterData(String filterType, String sortType, String email, String tool_code) {
+		Map<String, String> filterMap = new HashMap<String, String>();		
+		filterMap.put("filter", filterType);		
+
+		switch (sortType) {
+		case "ereturn_desc":
+			sortType = "d_day";
+			break;
+		case "ereturn_asc":
+			sortType = "d_day desc";
+			break;
+		case "retal_desc":
+			sortType = "r.rental_date desc";
+			break;
+		case "retal_sac":
+			sortType = "r.rental_date";
+			break;
+		}	
+		
+		filterMap.put("sort", sortType);
+		filterMap.put("email", email);
+		filterMap.put("tool_code", tool_code);
+		
+		return rentalDAO.getFilterData(filterMap);
+	}
+
+
 
 	
 }

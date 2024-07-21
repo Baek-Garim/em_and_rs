@@ -13,7 +13,7 @@ public class ReservationDTO {
 	private LocalDateTime reserve_date;		// 예약 날짜
 	private LocalDateTime deadline_date;	// 예약 가능 후부터 대여가능한 마감일
 	private String reserve_state;	// 예약 가능 상태 ('대기중', '대여가능', '대여완료', '예약취소')
-	
+													// 예약대기중
 	
 	// 화면 출력용
 	private String tool_name;

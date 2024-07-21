@@ -1,6 +1,9 @@
 package com.project.emrs.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -75,6 +78,21 @@ public class ToolServiceImpl implements ToolService{
 	@Override
 	public void deleteTool(Integer tool_id) {
 		toolDAO.deleteTool(tool_id);
+	}
+
+	@Override
+	public List<ToolDTO> getFilterData(String category_id, String tool_code) {
+		Map<String, String> filterMap = new HashMap<String, String>();		
+		filterMap.put("category_id", category_id);		
+		filterMap.put("tool_code", tool_code);		
+		
+		
+		System.out.println(filterMap.get("category_id"));
+		System.out.println(filterMap.get("category_id"));
+		System.out.println(filterMap.get("tool_code"));
+		System.out.println(filterMap.get("tool_code"));
+		
+		return toolDAO.getFilterData(filterMap);
 	}
 
 

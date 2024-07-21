@@ -1,6 +1,8 @@
 package com.project.emrs.dao;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -29,6 +31,8 @@ public interface ToolDAO {
 	void updateTool(ToolDTO toolDTO);
 
 	void deleteTool(Integer tool_id);
+
+	List<ToolDTO> getFilterData(Map<String, String> filterMap);
 
 
 	

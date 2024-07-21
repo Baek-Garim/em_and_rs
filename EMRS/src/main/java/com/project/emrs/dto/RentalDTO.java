@@ -16,15 +16,16 @@ public class RentalDTO {
 	private Integer renew;							// 연장 횟수 
 	private String rental_state;					// 대여 상태 (정상, 연체, 반납)
 	
-	// 화면 출력용
+	// 화면 출력용	
 	private String tool_name;
+	private Integer d_day;		// 반납예정일까지 남은 일수 (연체시 +4일 이런식으로 '+' + 일수 + '일')
 
+	
 	private Integer tool_id;
 	private String tool_image;
 	private String rental_date_String;
 	private String expected_return_date_String;
 	private String return_date_String;
-	
 
 	private String user_name;
 	private String email;
