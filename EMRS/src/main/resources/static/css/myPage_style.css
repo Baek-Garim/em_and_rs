@@ -12,6 +12,13 @@ hr{
   margin-bottom: 2rem;
 }
 
+button:disabled {
+	cursor: not-allowed;
+	border: none;
+	background-color: #aaa;
+	color: #fff;
+}
+
 .myPage_new {
 	width: 100%;
 	height: 10rem;

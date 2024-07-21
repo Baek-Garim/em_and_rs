@@ -20,12 +20,40 @@
 	        and reserve_state != '대여완료'
 	</select>
 
-	
-	<select id="countMyReservation" resultType="int">
-		select count(*) from reservation
+	<select id="countMyTotalReservation" resultType="int">
+	 		select count(*) from reservation
     		where user_id = #{user_id}
 	    	and reserve_state != '대여완료'
 	</select>
+
+	<select id="countMyReservation" resultType="int">
+
+  		<![CDATA[
+	   		SELECT NVL(rc.totalReservationNum, 0) AS totalReservationNum
+			FROM TOOL t
+				JOIN (SELECT tool_code, SUM(total_count) AS totalReservationNum
+		    				FROM (SELECT tool_code, COUNT(*) AS total_count
+		        				FROM RENTAL
+		        				WHERE rental_state NOT IN ('반납완료', '연체반납')
+		        				GROUP BY tool_code
+		
+		        			UNION ALL
+		
+		        			SELECT tool_code, COUNT(*) AS total_count
+		        				FROM RESERVATION
+		        				WHERE reserve_state NOT IN ('대여완료', '예약취소')
+		        					
+		        					AND TO_CHAR(reserve_date, 'yyyy-MM-dd HH24MISS') < #{reserve_date}
+		        				GROUP BY tool_code)
+		        			combined
+		    	GROUP BY tool_code) rc 
+		    ON t.TOOL_CODE = rc.tool_code
+			WHERE t.visibility = 'Y' And t.tool_code = #{tool_code} 
+		]]>	   
+	    	
+	</select>
+
+
 
 	<select id="findById" resultType="ReservationDTO">
 		select *

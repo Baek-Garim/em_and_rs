@@ -57,7 +57,7 @@ public class ReservationController {
 		}
 		
 		// 5건을 넘으면 안됨!
-		Integer myReservationNum = reserService.countMyReservation(user_id);
+		Integer myReservationNum = reserService.countMyTotalReservation(user_id);
 		
 		if(myReservationNum >= 5) {
 	    	request.setAttribute("msg", "예약은 5건을 초과할 수 없습니다.");

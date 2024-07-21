@@ -3,6 +3,8 @@ package com.project.emrs.user.controller;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -113,8 +115,19 @@ public class MyPageController {
 	        } else {
 	            i.setDeadline_date_String(" - ");
 	        }
-			i.setWaiting(reservationService.countMyReservation((Integer)session.getAttribute("user_id")));
+
+			// 수정
+			Map<String, Object> countMap = new HashMap<String, Object>();
+			
+			countMap.put("tool_code", i.getTool_code());
+			countMap.put("reserve_date", i.getReserve_date());
+			int count = (reservationService.countMyReservation(countMap) == null ? 0 : reservationService.countMyReservation(countMap));
+			
+			i.setWaiting(count);
         }
+		
+		
+		
 		// 카테고리		
 		ArrayList<ToolCategoryDTO> categoryList = toolService.getAllCategory();
 		model.addAttribute("categoryList", categoryList);

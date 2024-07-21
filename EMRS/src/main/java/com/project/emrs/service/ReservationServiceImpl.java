@@ -58,8 +58,17 @@ public class ReservationServiceImpl implements ReservationService{
 	}
 
 	@Override
-	public Integer countMyReservation(Integer user_id) {
-		return reservationDAO.countMyReservation(user_id);
+	public Integer countMyTotalReservation(Integer user_id) {
+		return reservationDAO.countMyTotalReservation(user_id);
+	}
+	
+	
+	@Override
+	public Integer countMyReservation(Map<String, Object> countMap) {
+		System.out.println(countMap.get("tool_code"));
+		System.out.println(countMap.get("reserve_date"));
+		
+		return reservationDAO.countMyReservation(countMap);
 	}
 
 	// 한 유저의 장비 중복 체크
@@ -82,6 +91,8 @@ public class ReservationServiceImpl implements ReservationService{
 	@Override
 	public ArrayList<ReservationDTO> reservationList(Integer user_id) {
 		ArrayList<ReservationDTO> reservationList = reservationDAO.reservationList(user_id);
+		//
+		
 		
 		return reservationList;
   }
@@ -92,7 +103,8 @@ public class ReservationServiceImpl implements ReservationService{
 		return reservationDAO.getActivateReserveList();
 
 	}
-	
+
+
 	
 	
 }

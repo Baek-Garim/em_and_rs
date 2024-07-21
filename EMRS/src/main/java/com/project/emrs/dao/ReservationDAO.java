@@ -1,6 +1,7 @@
 package com.project.emrs.dao;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -16,7 +17,7 @@ public interface ReservationDAO {
 	ArrayList<ReservationDTO> getUserAllReservation(Integer user_id);
 
 
-	Integer countMyReservation(Integer user_id);
+	Integer countMyReservation(Map<String, Object> countMap);
 
 
 	Integer duplicateCheck(ReservationDTO reserve);
@@ -37,6 +38,8 @@ public interface ReservationDAO {
 	ReservationDTO getFirstReservation(String tool_code);
 
 	void updateActivateReservation(ReservationDTO reservation);
+
+	Integer countMyTotalReservation(Integer user_id);
 
 
 }

@@ -21,7 +21,7 @@ public class ReservationDTO {
 	private String tool_image;
 	private String reserve_date_String;
 	private String deadline_date_String;
-	private Integer waiting;
+	private Integer waiting;	// 총 예약자 수
 
 	private String user_name;
 	private String email;

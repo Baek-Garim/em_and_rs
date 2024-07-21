@@ -7,27 +7,46 @@
   
 <mapper namespace="com.project.emrs.dao.ToolDAO">
 	<select id="toolList" resultType="ToolDTO">
-	    SELECT t.*, (SELECT COUNT(*) 
-                FROM reservation r
-                where r.tool_code = t.tool_code
-                    and r.reserve_state != '예약취소'
-                    and r.tool_code not in((SELECT tool_code
-                                                FROM rental
-                                                WHERE tool_code = r.tool_code))) as totalReservationNum
-    		FROM TOOL t
-    		WHERE t.visibility = 'Y'
+		SELECT t.*, NVL(rc.totalReservationNum, 0) AS totalReservationNum
+			FROM TOOL t
+				LEFT JOIN (SELECT tool_code, SUM(total_count) AS totalReservationNum
+		    				FROM (SELECT tool_code, COUNT(*) AS total_count
+		        				FROM RENTAL
+		        				WHERE rental_state NOT IN ('반납완료', '연체반납')
+		        				GROUP BY tool_code
+		
+		        			UNION ALL
+		
+		        			SELECT tool_code, COUNT(*) AS total_count
+		        				FROM RESERVATION
+		        				WHERE reserve_state NOT IN ('대여완료', '예약취소')
+		        				GROUP BY tool_code)
+		        			combined
+		    	GROUP BY tool_code) rc 
+		    ON t.TOOL_CODE = rc.tool_code
+			WHERE t.visibility = 'Y'
+			order by TOOL_ID
 	</select>
 	
 	<select id="sortCategory" parameterType="Integer" resultType="ToolDTO">
-	    SELECT t.*, (SELECT COUNT(*) 
-                FROM reservation r
-                where r.tool_code = t.tool_code
-                    and r.reserve_state != '예약취소'
-                    and r.tool_code not in((SELECT tool_code
-                                                FROM rental
-                                                WHERE tool_code = r.tool_code))) as totalReservationNum
-    		FROM TOOL t
-    		WHERE t.visibility = 'Y'
+		SELECT t.*, NVL(rc.totalReservationNum, 0) AS totalReservationNum
+			FROM TOOL t
+				LEFT JOIN (SELECT tool_code, SUM(total_count) AS totalReservationNum
+		    				FROM (SELECT tool_code, COUNT(*) AS total_count
+		        				FROM RENTAL
+		        				WHERE rental_state NOT IN ('반납완료', '연체반납')
+		        				GROUP BY tool_code
+		
+		        			UNION ALL
+		
+		        			SELECT tool_code, COUNT(*) AS total_count
+		        				FROM RESERVATION
+		        				WHERE reserve_state NOT IN ('대여완료', '예약취소')
+		        				GROUP BY tool_code)
+		        			combined
+		    	GROUP BY tool_code) rc 
+		    ON t.TOOL_CODE = rc.tool_code
+			WHERE t.visibility = 'Y'
 	        <if test="category != null">
 	            <if test="category == 1">
 	                AND CATEGORY_ID LIKE '%1%'
@@ -42,6 +61,7 @@
 	                AND CATEGORY_ID LIKE '%4%'
 	            </if>
 	        </if>
+	        order by TOOL_ID
 	</select>
 	
 	<select id="selectCate" parameterType="Integer" resultType="String">
