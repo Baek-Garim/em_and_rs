@@ -3,18 +3,25 @@
 
 /* ===== main-banner ===== */
 .main-banner {
-  padding: 2rem 0 0 0%;
-  width: 100%;
-  height: 50vh;
+	margin-top: 10rem;
+  height: 39.5vh;
 }
 
 .main-banner .container {
   height: 100%;
+  width: 100%;
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  background-color: #fff;
+  background-color: #fff;  
+
+}
+
+.main-banner .container img{
+  height: 100%;
+  width: 100%;
+  object-fit: scale-down;
 }
 
 .main-banner .container .search-box {
@@ -75,7 +82,6 @@
 
 .myinfo {
   padding: 4rem;
-  background-color: var(--white);
 }
 
 .myinfo .container{
@@ -243,6 +249,8 @@
 .tool-list{
 	margin-top: 2rem;
 	padding: 3rem;
+	
+  background-color: var(--white);
 }
 
 .tool-list .title{
@@ -351,7 +359,6 @@
 
 /* ===== eq-list ===== */
 .eq-list {
-	background-color: var(--white);
   padding: 8rem 0;
 }
 
