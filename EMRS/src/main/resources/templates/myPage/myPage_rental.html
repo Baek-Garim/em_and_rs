@@ -31,9 +31,11 @@
 					<img th:src="${rental.tool_image}" class="toolImg">
 				</th>
 	    		<td th:text="${rental.tool_name}">장비명</td>
-	    		<td th:text="${rental.rental_date_String}">대여일자</td>
-	    		<td th:text="${rental.expected_return_date_String}">예정반납일</td>
-	    		<td th:text="${rental.return_date_String}">반납일자</td>
+	    		
+	    		<td th:text="${#temporals.format(rental.rental_date, 'yyyy/MM/dd')}">대여일</td>    
+              	<td th:text="|${#temporals.format(rental.expected_return_date, 'yyyy/MM/dd')}|">반납예정일</td>    
+              	<td th:text="|${#temporals.format(rental.return_date, 'yyyy/MM/dd')}|">반납일</td>
+	    		
 	    		<td th:text="${rental.renew}">연장횟수</td>
 	    		<td th:text="${rental.rental_state}">상태</td>
 	    		<td>
