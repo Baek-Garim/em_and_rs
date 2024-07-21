@@ -15,13 +15,13 @@
     <div>
 	    <table class="listable">
 	    	<tr>
-	    		<td>번호</td>
+	    		<td>예약번호</td>
 	    		<td>사진</td>
 	    		<td>장비명</td>
 	    		<td>예약일자</td>
 	    		<td>만료일자</td>
 	    		<td>대기인수</td>
-	    		<td>상태</td>
+	    		<td>예약상태</td>
 	    	</tr>
 	    	<tr th:each="reservation : ${reservationList}">
 	    		<td th:text="${reservation.reserve_id}">번호</td>
