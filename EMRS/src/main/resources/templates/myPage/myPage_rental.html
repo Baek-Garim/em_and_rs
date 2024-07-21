@@ -15,14 +15,14 @@
     <div>
 	    <table class="listable">
 	    	<tr>
-	    		<td>번호</td>
+	    		<td>대여번호</td>
 	    		<td>사진</td>
 	    		<td>장비명</td>
 	    		<td>대여일자</td>
 	    		<td>반납예정일</td>
 	    		<td>반납일자</td>
 	    		<td>연장횟수</td>
-	    		<td>상태</td>
+	    		<td>대여상태</td>
 	    		<td th:utext="|&nbsp;|"></td>
 	    	</tr>
 	    	<tr th:each="rental : ${rentalList}">
