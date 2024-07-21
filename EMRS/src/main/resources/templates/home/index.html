@@ -23,7 +23,7 @@
 				</div>
 			</section>
 
-			<section class="myinfo" th:if="${#strings.equals(user_grant, 'USER')}">
+			<section class="myinfo" th:if="!${#strings.equals(user_grant, 'ADMIN')}">
 				<div class="container">
 					<h1 class="title">나의 대여·예약 정보</h1>
 					<p class="sub-title">진행중인 대여건과 예약상태를 확인</p>
