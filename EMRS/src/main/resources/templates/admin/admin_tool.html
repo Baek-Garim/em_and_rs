@@ -40,18 +40,22 @@
 	          <input type="text" name="tool_code" id="tool_code" >
 	          <button class="btn" onclick="filter();">검색</button>
 	        </label>
-	          	  	<!--카테고리 별 선택-->
+	        
+		<!--카테고리 별 선택-->
         <label for="">
 		  <p>카테고리별 검색</p>	      
           <select name="category_id" id="category_id">
           	<option value="" selected>카테고리</option>
           	<option th:each="cate : ${category}" th:value="${cate.category_id}" th:text="${cate.category_name}"></option>
-        </select>
+	      </select>
 	    </label>
 
     	</div>    	
 	</div>
 	
+	<label class="delete-tool-list">
+		<input id="visibility" type="checkbox" name="visibility" value="N">삭제된 장비만 표시
+	</label>
     <div class="tool-area">
       <h2>전체 장비 목록</h2>
 		
@@ -101,6 +105,13 @@
 			}
 		}
 	
+		function reviveTool(tool_id){
+			const temp = confirm("장비를 다시 복구하시겠습니까?");
+			if (temp == true){
+				window.location.href = "http://localhost:9899/admin/tool/revive/"+tool_id;
+			}			
+		}
+		
     </script>
   </div>
 

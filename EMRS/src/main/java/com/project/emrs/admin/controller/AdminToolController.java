@@ -172,16 +172,31 @@ public class AdminToolController {
 
 		return "redirect:/admin/tool";
 	}
+	
+	// 장비 삭제
+	@GetMapping("/tool/revive/{id}")
+	public String reviveTool(@PathVariable("id") Integer tool_id) {
+		if(!loginCheck().equals("OK")) {
+			return "redirect:/"+ loginCheck();
+		}
+		
+		toolService.reviveTool(tool_id);
+
+		return "redirect:/admin/tool";
+	}
+	
+	
 
 
 	// 필터 & 정렬
 	@RequestMapping(value = "/tool/list/filter", method = RequestMethod.GET)
 	@ResponseBody
-	public ResponseEntity<?> testCheck(@RequestParam(value="category_id") String category_id, @RequestParam(value="tool_code") String tool_code){	
+	public ResponseEntity<?> testCheck(@RequestParam(value="category_id") String category_id, @RequestParam(value="tool_code") String tool_code,
+										@RequestParam(value="visibility") String visibility){	
 	
 		tool_code = tool_code.trim();
 		
-		List<ToolDTO> rentalList = toolService.getFilterData(category_id, tool_code);
+		List<ToolDTO> rentalList = toolService.getFilterData(category_id, tool_code, visibility);
 		
 		return new ResponseEntity<List<ToolDTO>>(rentalList, HttpStatus.OK);
 	}	

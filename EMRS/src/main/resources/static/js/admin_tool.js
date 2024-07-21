@@ -2,6 +2,7 @@
 
 var tool_code = "";
 var category_id = "";
+var visibility = "Y";
 // 라디오 버튼이 바뀌면
 
 
@@ -10,10 +11,22 @@ $("select[name='category_id']").change(function(){
 	filter();
 });	
 
+$("#visibility").change(function(){
+	$('#tool_code').val("");
+	filter();
+});	
+
+
+
 
 function filter(){
 	category_id = $("select[name='category_id']").val();
 	tool_code = $('#tool_code').val();
+	if($('#visibility').is(':checked')){
+		visibility = 'N';
+	} else {
+		visibility = 'Y';		
+	}
 	
 	console.log(category_id);
 	console.log(tool_code);
@@ -25,7 +38,8 @@ function filter(){
 		contentType: "application/json",
 	    data: {
 			"category_id": category_id,
-			"tool_code": tool_code
+			"tool_code": tool_code,
+			"visibility": visibility
 		},    
 		success : function(data) {
 			// 원래 있던 item 삭제
@@ -47,8 +61,14 @@ function filter(){
 					str += '<p class="item5">'+tool.tool_name+'</p>';
 					str += '<p class="item6">'+tool.tool_comment+'</p></div>';					
 			        str += '<div class="btns">';
-			        str += '<button class="btn" onclick="location.href=\'/admin/tool/form/' + tool.tool_id+ '\'">수정</button>';
-			        str += '<button class="btn" onclick="deleteTool('+tool.tool_id+')">삭제</button>';
+			        
+			        
+			        if(visibility == 'N'){
+				        str += '<button class="btn" onclick="reviveTool('+tool.tool_id+')">복구</button>';												
+					} else {
+				        str += '<button class="btn" onclick="location.href=\'/admin/tool/form/' + tool.tool_id+ '\'">수정</button>';
+				        str += '<button class="btn" onclick="deleteTool('+tool.tool_id+')">삭제</button>';						
+					}
 			        str += '</div></li>';          
           
             

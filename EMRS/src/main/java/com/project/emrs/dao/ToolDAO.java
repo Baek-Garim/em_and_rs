@@ -34,6 +34,8 @@ public interface ToolDAO {
 
 	List<ToolDTO> getFilterData(Map<String, String> filterMap);
 
+	void reviveTool(Integer tool_id);
+
 
 	
 	

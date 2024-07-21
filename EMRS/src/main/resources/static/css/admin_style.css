@@ -430,4 +430,7 @@ button:disabled {
 
 /* ============= 장비 대여 항목 END ============= */
 
-
+.delete-tool-list{
+	cursor: pointer;
+	font-size: 2rem;
+}

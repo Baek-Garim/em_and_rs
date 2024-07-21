@@ -35,7 +35,9 @@ public interface ToolService {
 	void deleteTool(Integer tool_id);
 
 	// 어드민 장비 관리 필터
-	List<ToolDTO> getFilterData(String category_id, String tool_code);
+	List<ToolDTO> getFilterData(String category_id, String tool_code, String visibility);
+
+	void reviveTool(Integer tool_id);
 
 
 	

@@ -15,6 +15,7 @@ public class ToolDTO {
 	private String tool_image;
 	private String tool_comment;
 	private Integer category_id;
+	private Character visibility;	// 'N'(삭제됨) 'Y'(삭제 안됨)
 	
 	// 화면 표시용	
 	private String category_name;

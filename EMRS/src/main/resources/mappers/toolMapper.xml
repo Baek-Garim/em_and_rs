@@ -15,6 +15,7 @@
                                                 FROM rental
                                                 WHERE tool_code = r.tool_code))) as totalReservationNum
     		FROM TOOL t
+    		WHERE t.visibility = 'Y'
 	</select>
 	
 	<select id="sortCategory" parameterType="Integer" resultType="ToolDTO">
@@ -26,7 +27,7 @@
                                                 FROM rental
                                                 WHERE tool_code = r.tool_code))) as totalReservationNum
     		FROM TOOL t
-	    <where>
+    		WHERE t.visibility = 'Y'
 	        <if test="category != null">
 	            <if test="category == 1">
 	                AND CATEGORY_ID LIKE '%1%'
@@ -41,7 +42,6 @@
 	                AND CATEGORY_ID LIKE '%4%'
 	            </if>
 	        </if>
-	    </where>
 	</select>
 	
 	<select id="selectCate" parameterType="Integer" resultType="String">
@@ -55,7 +55,9 @@
 	<select id="toolDetail" resultType="ToolDTO">
 		 select t.*, c.category_name
 		   from tool t, category c
-		  where t.category_id = c.category_id and t.tool_id = #{tool_id}
+		  where t.category_id = c.category_id 
+		  	and t.tool_id = #{tool_id}
+		  	and t.visibility = 'Y'
 	</select>
 	
 	<!-- 모든 장비 가져옴 -->
@@ -63,6 +65,8 @@
 		 select t.*, c.category_name
 		   from tool t, category c
 		  where t.category_id = c.category_id
+  		  	and t.visibility = 'Y'
+		  
 	</select>
 	
 	
@@ -75,7 +79,7 @@
 	<!-- 장비 추가, 장비 코드 체크 -->	
 	<select id="toolCodeCheck" resultType="int">
 		select count(*) from TOOL
-		where TOOL_CODE = #{code}
+			where TOOL_CODE = #{code}
 	</select>
 
 	<!-- 어드민>대여내역에서 필터 적용된 장비 리스트 -->
@@ -83,12 +87,13 @@
 		 select t.*, c.category_name
 		   from tool t, category c
 		  where t.category_id = c.category_id
-  		  	<if test="tool_code == ''">
+  		  	<if test="tool_code == '' and category_id != ''">
 			  	and t.category_id = ${category_id}		  
 		  	</if>
 		  	<if test="tool_code != ''">
 		  		and t.tool_code = #{tool_code}
 		  	</if>
+		  		and t.visibility = #{visibility}
    	</select>
 
 
@@ -119,10 +124,18 @@
 	</update>	
 	
 	
-	<!-- DELETE -->
+	<update id="deleteTool">
+	   UPDATE TOOL
+	      SET visibility = 'N'
+	       WHERE TOOL_ID = #{tool_id}
+	</update>
+
+	<update id="reviveTool">
+	   UPDATE TOOL
+	      SET visibility = 'Y'
+	       WHERE TOOL_ID = #{tool_id}
+	</update>
 	
-	<delete id="deleteTool">
-		delete from tool where tool_id = #{tool_id}
-	</delete>
+	
 	
 </mapper>

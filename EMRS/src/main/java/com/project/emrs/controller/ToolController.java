@@ -56,7 +56,7 @@ public class ToolController {
 	
 	
 	@GetMapping("sortCategory")
-	public String sortCategory(Model model, @RequestParam(name = "category") int category) {
+	public String sortCategory(HttpSession session, Model model, @RequestParam(name = "category") int category) {
 		ArrayList<ToolDTO> toolList = toolService.sortCategory(category);
 		for(ToolDTO i: toolList) {
 			i.setCategory_name(toolService.selectCate(i.getCategory_id()));
@@ -66,12 +66,16 @@ public class ToolController {
 		model.addAttribute("categoryList", categoryList);
 		model.addAttribute("toolList", toolList);
 		model.addAttribute("category", category);
+		
+		model.addAttribute("user_id", session.getAttribute("user_id"));
+		model.addAttribute("user_name", session.getAttribute("user_name"));
+		model.addAttribute("user_grant", session.getAttribute("user_grant"));
 		
 		return "toolList/toolList";
 	}
 	
 	@GetMapping("sortCategory/{category_id}")
-	public String sortCategoryUrl(Model model, @PathVariable("category_id") int category) {
+	public String sortCategoryUrl(HttpSession session, Model model, @PathVariable("category_id") int category) {
 		ArrayList<ToolDTO> toolList = toolService.sortCategory(category);
 		for(ToolDTO i: toolList) {
 			i.setCategory_name(toolService.selectCate(i.getCategory_id()));
@@ -82,7 +86,10 @@ public class ToolController {
 		
 		model.addAttribute("toolList", toolList);
 		model.addAttribute("category", category);
-		
+
+		model.addAttribute("user_id", session.getAttribute("user_id"));
+		model.addAttribute("user_name", session.getAttribute("user_name"));
+		model.addAttribute("user_grant", session.getAttribute("user_grant"));
 		return "toolList/toolList";
 	}
 	

@@ -81,18 +81,20 @@ public class ToolServiceImpl implements ToolService{
 	}
 
 	@Override
-	public List<ToolDTO> getFilterData(String category_id, String tool_code) {
+	public List<ToolDTO> getFilterData(String category_id, String tool_code, String visibility) {
 		Map<String, String> filterMap = new HashMap<String, String>();		
 		filterMap.put("category_id", category_id);		
 		filterMap.put("tool_code", tool_code);		
+		filterMap.put("visibility", visibility);		
 		
-		
-		System.out.println(filterMap.get("category_id"));
-		System.out.println(filterMap.get("category_id"));
-		System.out.println(filterMap.get("tool_code"));
-		System.out.println(filterMap.get("tool_code"));
 		
 		return toolDAO.getFilterData(filterMap);
+	}
+
+	@Override
+	public void reviveTool(Integer tool_id) {
+		toolDAO.reviveTool(tool_id);
+		
 	}
 
 
