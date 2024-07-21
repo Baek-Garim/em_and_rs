@@ -4,12 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" th:href="@{/css/admin_style.css}">
-  <link rel="stylesheet" href="../../static/css/admin_style.css">
    <title>EMRS</title>
 </head>
 <body>
 	
-  <div class="content" layout:fragment="content">
+  <div class="content rental" layout:fragment="content">
     <h1 class="title">장비 관리</h1>
     <hr/>
     <button class="btn" th:onclick="|location.href='@{/admin/tool/form}'|" >새 장비 등록</button>
@@ -34,10 +33,29 @@
       </div>
     </div>
 
+	<div class="sub-nav">
+    	<div class="sub-container renform">
+	    	<label>
+	          <p>장비코드로 검색</p>
+	          <input type="text" name="tool_code" id="tool_code" >
+	          <button class="btn" onclick="filter();">검색</button>
+	        </label>
+	          	  	<!--카테고리 별 선택-->
+        <label for="">
+		  <p>카테고리별 검색</p>	      
+          <select name="category_id" id="category_id">
+          	<option value="" selected>카테고리</option>
+          	<option th:each="cate : ${category}" th:value="${cate.category_id}" th:text="${cate.category_name}"></option>
+        </select>
+	    </label>
+
+    	</div>    	
+	</div>
+	
     <div class="tool-area">
       <h2>전체 장비 목록</h2>
 		
-      <ul>
+      <ul class="list-con">
       	<li>
           <div class="info">
             <p class="item1">No</p>
@@ -49,7 +67,7 @@
           </div>
         </li>
 		  
-        <li th:each="tool, toolStat : ${toolList}">
+        <li class="item" th:each="tool, toolStat : ${toolList}">
           <div class="info">
             <p class="item1" th:text="${toolStat.index+1}">1.</p>
             <div class="item2 imgbox"><img th:src="${tool.tool_image}" alt=""></div>
@@ -70,6 +88,7 @@
     </div>
         
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="/js/admin_tool.js"></script>
 	<script>
 		function modal(){
 		    $('.new-item').toggleClass('active');

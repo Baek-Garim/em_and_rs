@@ -1,8 +1,11 @@
 package com.project.emrs.admin.controller;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,9 +30,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 
+
 @Controller
 @RequestMapping("admin")
-public class AdminController {
+public class AdminToolController {
 
 	@Autowired
 	AdminService adminService;
@@ -43,20 +47,47 @@ public class AdminController {
 	@Autowired
 	RentalService rentalService;
 	
+	@Autowired
+	HttpServletRequest request;
 
+	@Autowired
+	HttpSession session;
+	
+	public String loginCheck() {		
+		// 미로그인 or 어드민이 아닐때
+		if(session.getAttribute("user_id") == null) {		
+			return "login";
+		}
+
+		if(!session.getAttribute("user_grant").equals("ADMIN")) {
+			return "";
+		}
+		
+		return "OK";
+	}
 	
 	@GetMapping("/tool")
 	public String showAdminToolPage(Model model) {
+		if(!loginCheck().equals("OK")) {
+			return "redirect:/"+ loginCheck();
+		}
+			
 		ArrayList<ToolDTO> toolList = toolService.getAllTool();
+		// 카테고리 정보
+		ArrayList<ToolCategoryDTO> category = toolService.getAllCategory();
 		
 		model.addAttribute("barType", "tool");
 		model.addAttribute("toolList", toolList);
-		
+		model.addAttribute("category", category);
 		return "admin/admin_tool";
 	}
 	
 	@GetMapping("/tool/form")
 	public String showAdminToolFormPage(Model model) {
+		if(!loginCheck().equals("OK")) {
+			return "redirect:/"+ loginCheck();
+		}
+		
 		// 카테고리 정보
 		ArrayList<ToolCategoryDTO> category = toolService.getAllCategory();
 		
@@ -68,40 +99,6 @@ public class AdminController {
 		return "admin/admin_tool_form";
 	}
 
-	// 대여 및 반납
-	@GetMapping("/rent-return")
-	public String showAdminRentalAndReturnPage(Model model) {
-		
-		// 대여 가능 상태인 예약 목록 불러오기
-		ArrayList<ReservationDTO> reservationList = reserService.getActivateReserveList();
-
-		// 대여 진행 중인 렌탈 목록 불러오기
-		ArrayList<RentalDTO> rentalList = rentalService.getActivateRentalList();
-		
-		model.addAttribute("reservationList", reservationList);
-		model.addAttribute("rentalList", rentalList);
-
-		model.addAttribute("barType", "rent-return");
-		return "admin/admin_rental_return";
-	}
-
-
-	@GetMapping("/rental")
-	public String showAdminRentalPage(Model model) {
-		
-		model.addAttribute("barType", "rental");
-		return "admin/admin_rental";
-	}
-	
-
-	@GetMapping("/user")
-	public String showAdminUserPage(Model model) {
-		
-		model.addAttribute("barType", "user");
-		return "admin/admin_user";
-	}
-	
-	
 	// 장비 코드 중복 검사
 	@RequestMapping(value="/toolCodeCheck" ,method = RequestMethod.POST)
 	@ResponseBody
@@ -126,6 +123,10 @@ public class AdminController {
 	// 장비 추가
 	@PostMapping("/tool/form/insert")
 	public String insertTool(@ModelAttribute ToolDTO toolDTO) {
+		if(!loginCheck().equals("OK")) {
+			return "redirect:/"+ loginCheck();
+		}
+		
 		toolService.insertTool(toolDTO);
 		return "redirect:/admin/tool";
 	}
@@ -134,6 +135,10 @@ public class AdminController {
 	// 장비 수정 폼
 	@GetMapping("/tool/form/{id}")
 	public String modifyTool(Model model, @PathVariable("id") Integer tool_id) {
+		if(!loginCheck().equals("OK")) {
+			return "redirect:/"+ loginCheck();
+		}
+		
 		ToolDTO tool = toolService.toolDetail(tool_id);
 		ArrayList<ToolCategoryDTO> category = toolService.getAllCategory();
 
@@ -147,6 +152,10 @@ public class AdminController {
 	// 장비 수정 진행
 	@PostMapping("/tool/form/update")
 	public String updateTool(@ModelAttribute ToolDTO toolDTO) {
+		if(!loginCheck().equals("OK")) {
+			return "redirect:/"+ loginCheck();
+		}
+		
 		toolService.updateTool(toolDTO);
 		
 		return "redirect:/admin/tool";
@@ -155,51 +164,27 @@ public class AdminController {
 	// 장비 삭제
 	@GetMapping("/tool/delete/{id}")
 	public String deleteTool(@PathVariable("id") Integer tool_id) {
+		if(!loginCheck().equals("OK")) {
+			return "redirect:/"+ loginCheck();
+		}
+		
 		toolService.deleteTool(tool_id);
 
 		return "redirect:/admin/tool";
 	}
 
-	
-	// 대여 진행(목록에서 선택함)
-	@GetMapping("/rent-return/rent/{reserve_id}")
-	public String toolRental(HttpServletRequest request, HttpSession session, @PathVariable("reserve_id") Integer reserve_id) {
-		// 이전 페이지 URL
-		String prevURL = request.getHeader("referer").substring(22);
-		
-		if(!session.getAttribute("user_grant").equals("ADMIN")) {
-			return "redirect:/login";
-		}
-		
-		rentalService.insertRental(reserve_id);
-		
-    	request.setAttribute("msg", "대여 성공");
-        request.setAttribute("url", "/"+prevURL);
-		
-        return "fragments/alert";
-	}
 
+	// 필터 & 정렬
+	@RequestMapping(value = "/tool/list/filter", method = RequestMethod.GET)
+	@ResponseBody
+	public ResponseEntity<?> testCheck(@RequestParam(value="category_id") String category_id, @RequestParam(value="tool_code") String tool_code){	
 	
-	// 반납 진행(목록에서 선택함)
-	@GetMapping("/rent-return/return/{tool_code}/{rental_id}/{user_id}")
-	public String toolReturn(HttpServletRequest request, HttpSession session, @PathVariable("tool_code") String tool_code , 
-								@PathVariable("rental_id") Integer rental_id, @PathVariable("user_id") Integer user_id) {
-		// 이전 페이지 URL
-		String prevURL = request.getHeader("referer").substring(22);
+		tool_code = tool_code.trim();
 		
-		if(!session.getAttribute("user_grant").equals("ADMIN")) {
-			return "redirect:/login";
-		}
+		List<ToolDTO> rentalList = toolService.getFilterData(category_id, tool_code);
 		
-		rentalService.toolReturn(tool_code, rental_id, user_id);
-		
-    	request.setAttribute("msg", "반납 성공");
-        request.setAttribute("url", "/"+prevURL);
-		
-        return "fragments/alert";
-	}
-
-	
+		return new ResponseEntity<List<ToolDTO>>(rentalList, HttpStatus.OK);
+	}	
 	
 	
 }

@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" th:href="@{/css/admin_style.css}">
-  <link rel="stylesheet" href="../../static/css/admin_style.css">
    <title>EMRS</title>
 </head>
 <body>
@@ -13,8 +12,80 @@
     <h1 class="title">대여 관리</h1>
     <hr/>  
     
+    <div class="sub-nav">
+      <h2>사이트 전체 대여 상황을 확인할 수 있습니다.</h2>			
+
+      <div class="sub-container renform">
+        <label>
+          <p>회원 아이디(이메일)로 검색</p>
+          <input type="text" name="email" id="email" >
+          <button class="btn" onclick="filter();">검색</button>
+        </label>
+        <label>
+          <p>장비 코드로 검색</p>
+          <input type="text" name="tool_code" id="tool_code" >
+	      <button class="btn" onclick="filter();">검색</button>
+        </label>
+      </div>
+      
+      <div id="reserve-title" for="">
+        <h3>대여중인 목록 <span class="point" id="total-num" th:text="${rentalList.size}"></span></h3>
+		<label><input id="all" type="radio" name="listType" value="all" checked>전체</label>
+		<label><input id="cur" type="radio" name="listType" value="대여중">대여중</label>
+		<label><input id="over" type="radio" name="listType" value="연체">연체</label>
+		<label><input id="com" type="radio" name="listType" value="반납완료">반납완료</label>
+		
+  	  	<!--정렬 선택-->
+        <label for="">
+	      <select class="sort" name="sortType" id="">
+	        <option value="ereturn_desc" selected>가까운 예정 반납일 순</option>
+	        <option value="ereturn_asc">먼 예정 반납일 순</option>	        
+	        <option value="retal_desc">최근 대여일 순</option>
+	        <option value="retal_sac">오래된 대여일 순</option>
+	      </select>
+	    </label>
+      </div>
+      
+      
+      
+      <div class="reservation-box">
+        <table class="reservation-list ren">
+          <thead>
+            <tr>
+              <th>번호</th>
+              <th>이름</th>
+              <th>이메일</th>
+              <th>전화번호</th>
+              <th>장비 코드</th>
+              <th>대여일</th>
+              <th>반납 예정일</th>
+              <th>반납일</th>
+              <th>연장횟수</th>
+              <th>대여상태</th>     
+            </tr>
+          </thead>
+          <tbody class="list-con">
+            <tr class="item" th:each="rental, r_state : ${rentalList}">
+              <td th:text="${r_state.index}+1">1</td>
+              <td th:text="${rental.user_name}">이름1</td>
+              <td th:text="${rental.email}">abc@naver.com</td>
+              <td th:text="${rental.phone}">010-1234-1234</td>
+              <td th:text="${rental.tool_code}">AAA-001</td>
+              <td th:text="${#temporals.format(rental.rental_date, 'yyyy/MM/dd')}">대여일</td>    
+              <td th:text="|${#temporals.format(rental.expected_return_date, 'yyyy/MM/dd')}(${rental.d_day}일)|">반납예정일</td>    
+              <td th:text="|${#temporals.format(rental.return_date, 'yyyy/MM/dd')}|">반납일</td>    
+              <td th:text="|${rental.renew}회|">1회</td>              
+              <td th:text="${rental.rental_state}">상태</td>              
+            </tr>
+          </tbody>
+
+        </table>
+      </div>
+    </div>
+    
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="/js/admin_rental.js"></script>
   </div>
-
-
 </body>
 </html>

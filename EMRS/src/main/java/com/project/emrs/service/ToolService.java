@@ -1,6 +1,7 @@
 package com.project.emrs.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.project.emrs.dto.ToolCategoryDTO;
 import com.project.emrs.dto.ToolDTO;
@@ -32,6 +33,9 @@ public interface ToolService {
 
 	// 장비 삭제
 	void deleteTool(Integer tool_id);
+
+	// 어드민 장비 관리 필터
+	List<ToolDTO> getFilterData(String category_id, String tool_code);
 
 
 	

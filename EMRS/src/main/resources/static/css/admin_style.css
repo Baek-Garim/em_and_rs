@@ -50,6 +50,7 @@ button:disabled {
 }
 
 .container .left-nav{
+  min-width: 20rem;
   background-color: var(--white);
 }
 
@@ -60,7 +61,7 @@ button:disabled {
 
 .container .left-nav ul .menu{
   cursor: pointer;
-  font-size: 2rem;
+  font-size: 1.8rem;
   text-align: center;
   padding: 2rem 6rem;
 }
@@ -343,6 +344,14 @@ button:disabled {
   font-size: 1.5rem;
 }
 
+.rental .sub-nav select{
+	margin-left: 1rem;
+	padding: 1rem;
+	font-size: 1.5rem;
+	border-radius: 1rem;
+}
+
+
 .rental .sub-nav .sub-container form{
   display: flex;
   align-items: center;
@@ -360,6 +369,16 @@ button:disabled {
 .rental .sub-nav .sub-container form .btn{
   margin: 0rem;
 }
+
+
+.rental .sub-nav .sub-container.renform{
+	padding: 2rem;
+}
+
+.rental .sub-nav .sub-container.renform label{
+	margin-bottom: 2rem;
+}
+
 
 
 .rental .sub-nav #reserve-title{
@@ -406,6 +425,10 @@ button:disabled {
   padding: 1rem;
 }
 
-
+.rental .sub-nav .reservation-box table.ren{
+	line-height: 4rem;
+}
 
 /* ============= 장비 대여 항목 END ============= */
+
+

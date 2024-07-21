@@ -25,7 +25,7 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public void insertUser(UserDTO user) {
 		user.setUser_grant("USER");
-		user.setUser_rentable("대여 가능");
+		user.setUser_rentable("대여가능");
 		userDAO.insertUser(user);
 	}
 

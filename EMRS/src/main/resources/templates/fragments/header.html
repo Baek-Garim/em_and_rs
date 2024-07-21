@@ -7,13 +7,31 @@
        </a>
 
        <div class="menu-box">
-        <a class="list-btn" th:href="@{|/tool/toolList|}">장비 목록</a>
+        <a class="list-btn " th:href="@{|/tool/toolList|}">장비 목록</a>
+        <a class="list-btn " th:href="@{|${(#strings.equals(user_grant, 'ADMIN')) ? '/admin/rent-return': '/myPage/reserve'}|}" 
+        					 th:text="${(#strings.equals(user_grant, 'ADMIN')) ? '관리페이지': '마이페이지'}">마이페이지</a>
         <div class="sub-nav">
+			<!--장비목록 서브바-->
 		   <ul>
 			   <li th:each="cate : ${categoryList}" th:onclick="|location.href='@{/tool/sortCategory/}${cate.category_id}'|" th:text="${cate.category_name}">카테1</li>
 		   </ul>
+			<!--마이페이지 서브바-->		   
+		   <ul th:if="${#strings.equals(user_grant, 'USER')} or ${user_id} == null">
+			   <li th:onclick="|location.href='@{/myPage/reserve}'|">예약 내역</li>
+			   <li th:onclick="|location.href='@{/myPage/rental}'|">대역 내역</li>
+			   <li th:onclick="|location.href='@{/myPage/updateUser}'|">나의 정보</li>			   
+		   </ul>
+			<!--관리자 페이지 서브바-->		   
+		   <ul th:if="${#strings.equals(user_grant, 'ADMIN')}">
+			   <li th:onclick="|location.href='@{/admin/rent-return}'|">대여 및 반납</li>
+			   <li th:onclick="|location.href='@{/admin/rental}'|">대여 내역</li>
+			   <li th:onclick="|location.href='@{/admin/tool}'|">장비 관리</li>
+			   <li th:onclick="|location.href='@{/admin/user}'|">회원 조회</li>			   
+		   </ul>		   
 	   	</div>
        </div>
+       
+       
      </div>
 
      <div class="right-content">
@@ -24,17 +42,7 @@
          </form>
        </div>
 	   
-	   
-       <a th:if="${user_id} != null and ${#strings.equals(user_grant, 'USER')}" class="mypage-btn" th:href="@{|/myPage/updateUser|}">
-         <i class="fa-solid fa-user fa-4x"></i>
-         <p>My</p>
-       </a>
- 
-       <a th:if="${user_id} != null and ${#strings.equals(user_grant, 'ADMIN')}" class="mypage-btn" th:href="@{|/admin/tool|}">
-         <i class="fa-solid fa-user fa-4x"></i>
-         <p>관리</p>
-       </a>
-       
+
        <a th:if="${user_id} == null" class="mypage-btn" th:href="@{|/login|}">
          <i class="fa-regular fa-user fa-4x"></i>
          <p>로그인</p>

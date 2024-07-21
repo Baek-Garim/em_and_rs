@@ -1,6 +1,8 @@
 package com.project.emrs.dao;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -24,9 +26,13 @@ public interface RentalDAO {
 
 	ArrayList<RentalDTO> getActivateRentalList();
 
-	void toolReturn(Integer rental_id);
+	void toolReturn(RentalDTO rental);
 
 	Integer returnDateChk(Integer rental_id);
+
+	ArrayList<RentalDTO> getAllList();
+
+	List<RentalDTO> getFilterData(Map<String, String> filterMap);
 
 
 

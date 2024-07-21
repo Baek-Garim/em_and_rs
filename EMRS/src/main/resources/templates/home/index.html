@@ -39,7 +39,7 @@
 							<div class="con">
 								<div class="text-list">
 									<a th:href="@{/myPage/updateUser}" id="user-name" th:text="${user_name}">이름 <span>님</span></a>
-									<p th:classappend="${(#strings.equals(user.user_rentable, '대여 가능')) ? 'available': 'overdue'}" th:text="${user.user_rentable}">대여 불가</p>
+									<p th:classappend="${(#strings.equals(user.user_rentable, '대여가능')) ? 'available': 'overdue'}" th:text="${user.user_rentable}">대여불가</p>
 									<p class="overdue" th:if="${user.unavailable_date != null}" th:text="${#temporals.format(user.unavailable_date, 'yyyy년 MM월 dd일까지')}">2023년 2월 23일</p>	
 								</div>
 							</div>

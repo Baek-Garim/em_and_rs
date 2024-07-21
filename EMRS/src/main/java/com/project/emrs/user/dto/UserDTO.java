@@ -13,7 +13,7 @@ public class UserDTO {
 	private String user_name;		// 이름
 	private String phone;			// 전화번호
 	private Character isDelete;			// 탈퇴 여부
-	private String user_rentable;		// 유저 대여 상태
+	private String user_rentable;		// 유저 대여 상태	대여가능, 대여불가
 	private LocalDateTime unavailable_date;		// 대여불가 ~까지
 	private String user_grant;		// 권한(일반유저USER | 관리자ADMIN)
 	
