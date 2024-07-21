@@ -86,7 +86,11 @@ public class MyPageController {
 		for(RentalDTO i: rentalList) {
 			i.setRental_date_String(i.getRental_date().format(formatter));
 			i.setExpected_return_date_String(i.getExpected_return_date().format(formatter));
-			i.setReturn_date_String(i.getReturn_date().format(formatter));
+			if (i.getRental_date() == null) {
+	            i.setRental_date_String(" ");
+	        } else {
+	        	i.setReturn_date_String(i.getReturn_date().format(formatter));
+	        }
         }
 		
 		// 카테고리		
