@@ -47,18 +47,14 @@ hr{
   margin-top: 10rem;
   display: flex;
   width: 100%;
-  height: 100%;
+  background-color: var(--white);
 }
 
 .container .left-nav{
-  background-color: var(--white);
   height: 100%;
-  width: 20rem;
-}
-
-.container .left-nav ul {
-	position: sticky;
-	top: 10rem;
+  min-width: 20rem;
+  position: sticky;
+  top: 10rem;
 }
 
 .container .left-nav ul .menu{
@@ -128,6 +124,8 @@ hr{
 	text-align: left;
 	padding: 2rem;
 }
+
+
 /* 내정보 끝 */
 
 
@@ -177,36 +175,41 @@ hr{
 
 /* 대여 */
 
+
 .container .content .listable {
-	padding: 2rem;
+	width: 100%;
 	font-size: 1.5rem;
+	text-align: center;
+	
 }
 
 .container .content .listable th {
-	padding-top: 3rem;
 	font-size: 2rem;
 	font-weight: bold;
-	height: 1rem;
-	line-height: 0.1rem;
 	border-bottom: 0.2rem solid #c8c8c8;
 }
 
 .container .content .listable td {
 	padding: 2rem;
-	font-size: 2rem;
+	font-size: 1.8rem;
 	font-weight: bold;
-	height: 1rem;
-	line-height: 0.1rem;
 	border-bottom: 0.2rem solid #c8c8c8;
+	vertical-align : middle;
+}
+
+.container .content .listable  .img-box{
+	height: 5rem;
+	width: 5rem;
 }
 
 .container .content .listable .toolImg {
-	width: 6rem;
-	height: 6rem;
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
 }
 
 .container .content .listable .btn {
-	padding: 2rem;
+	margin: 0rem;
 	font-size: 2rem;
 	font-weight: bold;
 }
@@ -238,7 +241,10 @@ hr{
 }
 
 
-/* ===== main-banner ===== */
+
+/*
+
+ ===== main-banner ===== 
 .main-banner {
   padding: 2rem 0 0 0%;
   width: 100%;
@@ -293,7 +299,7 @@ hr{
   cursor: pointer;
 
 }
-/* ===== main-banner end ===== */
+ ===== main-banner end ===== 
 
-
+*/
 

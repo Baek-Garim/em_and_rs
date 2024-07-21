@@ -81,7 +81,7 @@ public class MyPageController {
 		}
 		
 		ArrayList<RentalDTO> rentalList = rentalService.rentalList((Integer)session.getAttribute("user_id"));
-		
+
 		// 카테고리		
 		ArrayList<ToolCategoryDTO> categoryList = toolService.getAllCategory();
 		model.addAttribute("categoryList", categoryList);

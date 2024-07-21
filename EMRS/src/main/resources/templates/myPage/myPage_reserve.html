@@ -12,7 +12,7 @@
     <h1 class="title">예약 내역</h1>
     <hr>
     <br>
-    <div>
+    <div class="con">
 	    <table class="listable">
 	    	<tr>
 	    		<td>예약번호</td>
@@ -25,9 +25,9 @@
 	    	</tr>
 	    	<tr th:each="reservation : ${reservationList}">
 	    		<td th:text="${reservation.reserve_id}">번호</td>
-	    		<th>
+	    		<td class="img-box">
 					<img th:src="${reservation.tool_image}" class="toolImg">
-				</th>
+				</td>
 	    		<td th:text="${reservation.tool_name}">장비명</td>
 	    		<td th:text="${reservation.reserve_date_String}">예약일자</td>
 	    		<td th:text="${reservation.deadline_date_String}">만료일자</td>
