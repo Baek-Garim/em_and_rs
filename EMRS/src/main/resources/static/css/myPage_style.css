@@ -12,10 +12,16 @@ hr{
   margin-bottom: 2rem;
 }
 
+.myPage_new {
+	width: 100%;
+	height: 10rem;
+}
+
 /* top nav */
 .myPage-top {
   padding: 1rem;
   width: 100%;
+  height: 10rem;
   background-color: var(--white);
 
   display: flex;
